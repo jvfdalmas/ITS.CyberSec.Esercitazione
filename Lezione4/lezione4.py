@@ -127,6 +127,7 @@ print("\n")
 short_messages: list = ["Hope you are doing fine!", "Grow strong!", "you can do it!"]
 
 def print_messages(arg: list) -> str:
+    """ Function that prints each text message from a list"""
     for message in arg:
         print(message)
 
@@ -141,6 +142,7 @@ unsent_messages: list = ['Hi, are you ok?', 'Miss you!', 'Let\'s have some fun!'
 sent_messages: list = []
 
 def send_messages(list: list) -> list:
+    """ Function that prints each text message from a list and moves each message to a new list called sent_messages as it’s printed"""
     while unsent_messages:
         for message in unsent_messages:
             current_message = unsent_messages.pop(0)
@@ -167,46 +169,54 @@ print("\n")
 
 """8-12. Sandwiches: Write a function that accepts a list of items a person wants on a sandwich. The function should have one parameter that collects as many items as the function call provides, and it should print a summary of the sandwich that’s being ordered. Call the function three times, using a different number of arguments each time."""
 
-sandwiches:list = ['tunna sandwich', 'pastrami sandwich', 'hamburguer', 'cheeseburger','pastrami sandwich', 'cheddar mc melt']
+def sandwiches(*args: tuple) -> str:
+    """ Function that accepts items a person wants on a sandwich and it should print a summary of the sandwich being ordered."""
+    return f"Your sandwich with {', '.join(args)} has been ordered!"
 
-finished_orders = []
-
-while sandwiches:
-        for sandwich in sandwiches:
-            current_order = sandwiches.pop()
-            finished_orders.append(current_order)
-            if 'pastrami' in current_order:
-                  print('Sorry, but we ran out of pastrami') 
-            else:
-                print(f'I am making you a {current_order}!')
-
-print(sandwiches)
-print(finished_orders)
+print(sandwiches("pomodoro", "mozzarella"))
+print(sandwiches("prosciuto", "mozzarella", "rucula"))
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n")
 
 """8-13. User Profile:  Build a profile of yourself by calling build_profile(), using your first and last names and three other key-value pairs that describe you. All the values must be passed to the function as parameters. The function then must return a string such as "Eric Crow, age 45, hair brown, weight 67"""
 
+def build_profile(first_name: str, last_name: str, param1: dict, param2:dict, param3:dict) -> str:
+    """Function that builds a profile of yourself, using your first and last names and three other key-value pairs that describe you as parameterers"""
+    return f"My name is {first_name.title()} {last_name.title()}, {list(param1.keys())[0]}: {list(param1.values())[0]}, {list(param2.keys())[0]}: {list(param2.values())[0]}, {list(param3.keys())[0]}: {list(param3.values())[0]}."
+
+print(build_profile(first_name="Joao", last_name="Dal Mas", param1={"age": 35}, param2={"hair": "brown and curly"}, param3={"height":"1.83 cm"}))
+
+
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n")
 
 """8-14. Cars: Write a function that stores information about a car in a dictionary. The function should always receive a manufacturer and a model name. It should then accept an arbitrary number of keyword arguments. Call the function with the required information and two other name-value pairs, such as a color or an optional feature. Your function should work for a call like this one: car = make_car('subaru', 'outback', color='blue', tow_package=True) Print the dictionary that’s returned to make sure all the information was stored correctly. """
 
+def make_car(manufacturer: str, car_model: str, **kwargs: dict) -> dict:
+    """ Function that stores information about a car in a dictionary. Function should always receive a manufacturer and a model name and accepts an arbitrary number of dictionary arguments."""
+    risult: dict = {"car model": car_model, "manufacturer": manufacturer}
+    risult.update(kwargs)
+    return risult
+
+car: list = make_car('subaru', 'outback', color='blue', tow_package=True)
+print(car)
+
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n")
 
 """8-15. Printing Models: Put the functions for the example printing_models.py in a separate file called printing_functions.py. Write an import statement at the top of printing_models.py, and modify the file to use the imported functions."""
-
-# -------------------------------------------------------------------------------------------------------------------------------
-print("\n")
-
 """ 8-16. Imports: Using a program you wrote that has one function in it, store that function in a separate file. Import the function into your main program file, and call the function using each of these approaches:
 import module_name
 from module_name import function_name
 from module_name import function_name as fn
 import module_name as mn
 from module_name import * """
+
+from car_printing_function import make_car as mk
+
+car2: list = mk('honda', 'civic', color='gray', tow_package=False)
+print(car2)
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n")
