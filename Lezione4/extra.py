@@ -47,9 +47,9 @@ print("\n")
 
 """3. E-commerce Shopping Cart: Create a function that defines a product with a name, price, and quantity. Create a function that manages the shopping cart, allowing the user to add, remove, and view products in the cart. The function should calculate the cart total and apply any discounts or taxes. Implement a for loop to iterate over the items in the cart and print detailed information about each product and the total."""
 
-def define_product(product_name: str, product_price: float, _product_quantity: int) -> dict:
+def define_product(product_name: str, product_price: float, product_quantity: int) -> dict:
     """ Function that takes a product with a name, price, and quantity, and output as dictionary"""
-    final_dict: dict = {product_name:{"price": product_price, "quantity": _product_quantity}}
+    final_dict: dict = {product_name:{"price": product_price, "quantity":product_quantity}}
     return final_dict
 
 monitor: dict = define_product("Monitor", 99.99, 12)
@@ -65,8 +65,8 @@ def add_product(*args: dict):
         shopping_cart.append(product)
     return shopping_cart
     
-def remove_product(*args: dict):
-    """ Function that removes products in the shopping_cart"""
+def remove_product(*args: str):
+    """ Function that removes products from the shopping_cart"""
     for product in args:
         if product in shopping_cart:
             shopping_cart.remove(product)
@@ -75,8 +75,7 @@ def remove_product(*args: dict):
 def view_cart():
     """ Function that allows user to see the shopping_cart"""
 
-
-def apply_discount(coupon: str) ->:
+def apply_discount(coupon: str) -> float:
     if discount_percent <= 0.30:
         if coupon == "BIRTHDAY10":
             discount_percent += 0.10
@@ -87,12 +86,4 @@ def apply_discount(coupon: str) ->:
     else:
         return f"You have reached the maximum discount percentage"
 
-def apply_taxes():
-
-
-
-
-
-
-               
-
+#def apply_taxes():
