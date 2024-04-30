@@ -1,3 +1,6 @@
+# Joao Victor Figueiredo Dal Mas
+# 30/04/2024
+
 """8-1. Message: Write a function called display_message() that prints one sentence telling everyone what you are learning about in this chapter. Call the function, and make sure the message displays correctly. """
 
 def display_message() -> str:
@@ -105,19 +108,18 @@ print(make_album("Shakira", "She Wolf", 12))
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n")
 
-
 """8-8. User Albums: Start with your program from Exercise 8-7. Write a while loop that allows users to enter an album’s artist and title. Once you have that information, call make_album() with the user’s input and print the dictionary that’s created. Be sure to include a quit value in the while loop."""
 
-#loop: bool = True
-#while loop == True:
-#    message: str = input("Do you want to create a dictionary with your favorite album? [answer \"no\" to leave the app] ")
-#    if message == "no":
-#        break
-#    else:
-#        parameter1: str = input("Please insert the singer\'s name: ")
-#        parameter2: str = input("Please insert the album\'s name: ")
-#        parameter3: int = input("Please insert number of records: ")
-#    print(make_album(artist = parameter1, album_name = parameter2, number_of_songs = parameter3))
+loop: bool = True
+while loop == True:
+    message: str = input("Do you want to create a dictionary with your favorite album? [answer \"no\" to leave the app] ")
+    if message == "no":
+        break
+    else:
+        parameter1: str = input("Please insert the singer\'s name: ")
+        parameter2: str = input("Please insert the album\'s name: ")
+        parameter3: int = input("Please insert number of records: ")
+    print(make_album(artist = parameter1, album_name = parameter2, number_of_songs = parameter3))
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n")
@@ -222,3 +224,28 @@ print(car2)
 print("\n")
 
 """8-17. Styling Functions: Choose any three programs you wrote for this chapter, and make sure they follow the styling guidelines described in this section,."""
+
+def make_car(manufacturer: str, car_model: str, **kwargs: dict) -> dict:
+    """ Function that stores information about a car in a dictionary. Function should always receive a manufacturer and a model name and accepts an arbitrary number of dictionary arguments."""
+    risult: dict = {"car model": car_model, "manufacturer": manufacturer}
+    risult.update(kwargs)
+    return risult
+
+car: list = make_car('subaru', 'outback', color='blue', tow_package=True)
+print(car)
+
+
+def display_message() -> str:
+    """A function that prints one sentence telling everyone what you are learning about in this chapter"""
+    return("I am learning functions!!!")
+
+print(display_message())
+
+def favorite_book(book_title: str) -> str:
+    """A function that accepts one parameter, book title, and print a message"""
+    if isinstance(book_title, str):
+        return(f"The book {book_title.title()} is a wonderful book!!!!")
+    else:
+        return ValueError("requires one str parameter: book_title")
+
+print(favorite_book(book_title="python\'s crash course"))

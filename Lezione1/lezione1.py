@@ -1,3 +1,6 @@
+# Joao Victor Figueiredo Dal Mas
+# 30/04/2024
+
 # Define variables name and age containing a name and an age. Format a string so that it prints out “My name is <NAME> and I am <AGE> years old.” (<...> are placeholders for the name and age)
 
 name = "Victor"
