@@ -2,41 +2,10 @@
 
 def blackjack_hand_total(cards: list[int]) -> int:
     count_card_ace: int = cards.count(1) + cards.count(11)
-    summ_no_ace: int = 0
-    hand: int = 0
-    support_list: list = []
-
-    for card in cards[:]:
-        if  (card == 1) or (card == 11):
-            cards.remove(card)
-        else:
-            summ_no_ace += card
-
-    if count_card_ace == 0:
-        hand = summ_no_ace
-            
-    elif count_card_ace == 1:
-        one_ace_test1 = summ_no_ace + 1
-        one_ace_test11 = summ_no_ace + 11
-        if one_ace_test11 > 21:
-            return one_ace_test1
-        else:
-            return one_ace_test11
-
-    elif count_card_ace == 2:
-        two_ace_test1 = summ_no_ace + 1 + 1
-        two_ace_test2 = summ_no_ace + 11 + 1
-        two_ace_test3 = summ_no_ace + 11 + 11
-        if two_ace_test1 <= 21:
-            support_list.append(two_ace_test1)
-        elif two_ace_test2 <= 21:
-                support_list.append(two_ace_test2)
-        sorted_list = sorted(support_list)
-        hand = sorted_list.pop()
-            
-    elif count_card_ace == 3:
-        hand = 13
-    return hand
+    summ_no_ace: int = sum(card for card in cards if card not in [1, 11])
+    possible_sums: list = [summ_no_ace + count_card_ace + 10 * i for i in range(count_card_ace + 1)]
+    valid_sums: list = [s for s in possible_sums if s <= 21]
+    return max(valid_sums) if valid_sums else False
 
 print(blackjack_hand_total([2, 3, 5])) # 10
 print(blackjack_hand_total([11, 5, 5])) # 21
@@ -107,7 +76,19 @@ def word_frequency(text: str, stopwords: list[str]) -> dict[str, int]:
     
     return word_count
 
+def word_frequency(text, stopwords):
+    # Dividere la stringa in parole e rimuovere la punteggiatura
+    words = ''.join(char.lower() if char.isalnum() else ' ' for char in text).split()
 
+    # Rimuovere le stop words
+    words = [word for word in words if word not in stopwords]
+
+    # Contare le frequenze delle parole rimanenti
+    frequency = {}
+    for word in words:
+        frequency[word] = frequency.get(word, 0) + 1
+
+    return frequency
 stopwords = ['the', 'and', 'is', 'in', 'on', 'of']
 text = "The quick brown fox jumps over the lazy dog. The dog is very lazy."
 print(word_frequency(text, stopwords)) # {'quick': 1, 'brown': 1, 'fox': 1, 'jumps': 1, 'over': 1, 'lazy': 2, 'dog': 2, 'very': 1}"""
@@ -185,6 +166,21 @@ Test 	Result
 print(even_odd_pattern([3, 6, 1, 8, 4, 7]))
 [6, 8, 4, 3, 1, 7]"""
 
+def even_odd_pattern(nums: list[int]) -> list[int]: 
+    lista_pari: list = []
+    lista_dispari: list = []
+
+    for numero in nums:
+        if numero % 2 == 0:
+            lista_pari.append(numero)
+        else:    
+            lista_dispari.append(numero)
+
+    mixed_list: list = lista_pari + lista_dispari
+    return mixed_list
+
+print(even_odd_pattern([3, 6, 1, 8, 4, 7])) #[6, 8, 4, 3, 1, 7]
+
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
 
@@ -195,6 +191,20 @@ Test 	Result
 
 print(prime_factors(4))
 [2, 2]"""
+
+def prime_factors(n: int) -> list[int]:
+    factors: list = []
+    divisor: int = 2
+    while divisor <= n:
+        if n % divisor == 0:
+            factors.append(divisor)
+            n: int = n / divisor
+        else:
+            divisor += 1
+    return factors
+
+print(prime_factors(33))
+
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
