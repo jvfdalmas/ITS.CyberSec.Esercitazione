@@ -77,22 +77,17 @@ def word_frequency(text: str, stopwords: list[str]) -> dict[str, int]:
     return word_count
 
 def word_frequency(text, stopwords):
-    # Dividere la stringa in parole e rimuovere la punteggiatura
     words = ''.join(char.lower() if char.isalnum() else ' ' for char in text).split()
-
-    # Rimuovere le stop words
     words = [word for word in words if word not in stopwords]
-
-    # Contare le frequenze delle parole rimanenti
     frequency = {}
     for word in words:
         frequency[word] = frequency.get(word, 0) + 1
 
     return frequency
+
 stopwords = ['the', 'and', 'is', 'in', 'on', 'of']
 text = "The quick brown fox jumps over the lazy dog. The dog is very lazy."
 print(word_frequency(text, stopwords)) # {'quick': 1, 'brown': 1, 'fox': 1, 'jumps': 1, 'over': 1, 'lazy': 2, 'dog': 2, 'very': 1}"""
-
 
 stopwords = ['the', 'and', 'is', 'in', 'on', 'of']
 text3 = "I am I because I think I am. If I am not I, who am I?"
@@ -193,17 +188,18 @@ print(prime_factors(4))
 [2, 2]"""
 
 def prime_factors(n: int) -> list[int]:
-    factors: list = []
-    divisor: int = 2
-    while divisor <= n:
-        if n % divisor == 0:
-            factors.append(divisor)
-            n: int = n / divisor
+    fattori: list = []
+    divisore: int = 2
+    while divisore <= n:
+        if n % divisore == 0:
+            fattori.append(divisore)
+            n: int = n // divisore
         else:
-            divisor += 1
-    return factors
+            divisore += 1
+    return fattori
 
 print(prime_factors(33))
+print(prime_factors(99999999999999999999)) # [3, 3, 11, 41, 101, 271, 3541, 9091, 27961]
 
 
 # -------------------------------------------------------------------------------------------------------------------------------
@@ -217,9 +213,172 @@ Ma c'è un problema!
 Se non ci sono tre valori distinti (ad esempio, solo due valori univoci o tutti i valori sono uguali), la funzione dovrebbe restituire il valore del gioiello più prezioso nello scrigno.
 For example:
 Test 	Result
-print(third_max([3, 2, 1]))
-1
-print(third_max([1, 2]))
-2
-print(third_max([2, 2, 3, 1]))
-1"""
+print(third_max([3, 2, 1])) #1
+print(third_max([1, 2])) #2
+print(third_max([2, 2, 3, 1])) #1"""
+
+def third_max(nums: list[int]) -> int:
+    number_count = {}
+
+    for numero in nums:
+        if numero not in number_count.keys():
+            number_count[numero] = 1
+        else:
+            number_count[numero] += 1
+    
+    for numero in number_count.keys():
+        while number_count[numero] != 1:
+            number_count[numero] -= 1
+            nums.remove(numero)
+    
+    nums.sort()
+
+
+    if len(nums) >= 3:
+        return nums[-3]
+    else:
+        return max(nums)
+
+print(third_max([3, 2, 1])) #1
+print(third_max([1, 2])) #2
+print(third_max([2, 2, 3, 1])) #1
+print(third_max([2, 2, 3, 2, 2])) #3
+
+# -------------------------------------------------------------------------------------------------------------------------------
+print("\n") 
+
+"""Bonus 1. Immaginiamo di avere un tipo speciale di sistema numerico in cui gli unici elementi costitutivi sono i numeri 2, 3 e 5. Chiamiamo questi elementi costitutivi "fattori primi" perché non possono essere ulteriormente scomposti. Un "numero brutto" in questo sistema è un numero costruito utilizzando solo questi fattori primi (2, 3 o 5). Ad esempio, 6 (che può essere costruito come 2 x 3) è un numero brutto, ma 7 (che ha un fattore primo pari a 7) non lo è.
+
+For example:
+print(ugly_number(6))
+True
+print(ugly_number(1))
+True
+print(ugly_number(14))
+False"""
+
+
+
+# -------------------------------------------------------------------------------------------------------------------------------
+print("\n") 
+
+"""Bonus 2.Immagina di avere una raccolta di note musicali rappresentate da una serie di numeri interi. Queste note possono avere altezze (valori) diversi. Una sequenza armoniosa è come una melodia piacevole in cui la differenza di altezza tra la nota massimale e quella minimale è uguale a 1. Ad esempio, la serie di note [3,2,2,2,3] è armoniosa, perché la differenza fra 3 e 2 è 1.
+Trovare l'armonia perfetta:
+Il tuo compito è scrivere una funzione che prenda come input questa serie di note musicali (numeri). La funzione dovrebbe trovare la sequenza armoniosa più lunga che puoi creare da queste note. Ricorda, una sottosequenza è una selezione di note dalla lista originale che mantiene l'ordine degli elementi.
+Colpire le note giuste:
+Ad esempio, se nums è [1, 3, 2, 2, 5, 2, 3, 7], la sottosequenza armonica più lunga è [3, 2, 2, 2, 3]. La funzione dovrebbe restituire 5 (la lunghezza di questa sottosequenza)."""
+
+def find_lhs(nums: list[int]) -> int:
+    num_counts = {}
+    max_length = 0
+
+    for num in nums:
+        if num in num_counts:
+            num_counts[num] += 1
+        else:
+            num_counts[num] = 1
+
+    for num in num_counts:
+        if num + 1 in num_counts:
+            max_length = max(max_length, num_counts[num] + num_counts[num + 1])
+
+    return num_counts, max_length
+
+print(find_lhs([1, 3, 2, 2, 5, 2, 3, 7])) # 5
+print("\n") 
+print(find_lhs([1,1,1,1])) #0
+print("\n") 
+print(find_lhs([1,1,2,2,3,3,4,4,5,5]))
+
+"""Bonus 3. Date due stringhe note e magazine, restituisci true se note può essere costruita utilizzando le lettere di magazine e false in caso contrario. Ogni lettera nella magazine può essere utilizzata solo una volta in note.
+
+For example:
+
+print(ransom("a","b"))
+False
+
+print(ransom("aa", "ab"))
+False
+
+print(ransom("aa","aab"))
+True"""
+
+def ransom(note: str, magazine: str) -> bool:
+    note: list = [letter for letter in note]
+    magazine: list = [letter for letter in magazine]
+
+    if len(note) > len(magazine):
+        return False
+
+    for letter in magazine:
+        if letter in note:
+            note.remove(letter)
+            
+    if note:
+        return False
+    else:
+        return True
+
+
+print(ransom("a","b")) #False
+
+print(ransom("aa", "ab")) #False
+
+print(ransom("aa","aab")) #True
+
+"""Bonus 4. Dato un numero intero, restituisce una stringa che ne rappresenta la rappresentazione esadecimale. Per gli interi negativi viene utilizzato il metodo del complemento a due.
+
+Tutte le lettere nella stringa di risposta dovrebbero essere caratteri minuscoli e non dovrebbero esserci zeri iniziali nella risposta tranne lo zero stesso.
+
+Nota: non è consentito utilizzare alcun metodo di libreria integrato per risolvere direttamente questo problema.
+
+For example:
+print(to_hex(26))
+1a
+
+print(to_hex(-1))
+ffffffff"""
+
+def to_hex(num: int) -> str:
+    decimal_to_hex = {
+    0: '0',
+    1: '1',
+    2: '2',
+    3: '3',
+    4: '4',
+    5: '5',
+    6: '6',
+    7: '7',
+    8: '8',
+    9: '9',
+    10: 'A',
+    11: 'B',
+    12: 'C',
+    13: 'D',
+    14: 'E',
+    15: 'F'
+    }
+    
+    remainder_list = []
+
+    if num == 0:
+        return 0
+    
+    elif num >= 0:
+        while num > 0:
+            remainder = num % 16
+            remainder_list.append(remainder)
+            num = num // 16
+        for index, item in enumerate(remainder_list):
+            if item in decimal_to_hex:
+                remainder_list[index] = decimal_to_hex[item]
+        return "".join(remainder_list)
+    
+    else:
+        print("banana")
+        
+
+
+print(to_hex(26))
+print(to_hex(0))
+print(to_hex(-1))
