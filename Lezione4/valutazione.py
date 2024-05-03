@@ -363,8 +363,9 @@ def to_hex(num: int) -> str:
 
     if num == 0:
         return 0
-    
-    elif num >= 0:
+    if num < 0:
+        num = num + 2 ** 32
+    if num >= 0:
         while num > 0:
             remainder = num % 16
             remainder_list.append(remainder)
@@ -373,12 +374,8 @@ def to_hex(num: int) -> str:
             if item in decimal_to_hex:
                 remainder_list[index] = decimal_to_hex[item]
         return "".join(remainder_list)
-    
-    else:
-        print("banana")
-        
 
-
+       
 print(to_hex(26))
 print(to_hex(0))
 print(to_hex(-1))
