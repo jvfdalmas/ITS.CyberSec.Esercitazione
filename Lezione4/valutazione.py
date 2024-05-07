@@ -257,7 +257,26 @@ True
 print(ugly_number(14))
 False"""
 
+def ugly_number(num: int) -> bool:
+    divisore2: int = 2
+    divisore3: int = 3
+    divisore5: int = 5
 
+    while num >= 1:
+        if num % divisore2 == 0:
+            num: int = num // divisore2
+        elif num % divisore3 == 0:
+            num: int = num // divisore3
+        elif num % divisore5 == 0:
+            num: int = num // divisore3
+        elif num / 1 == 1:
+            return True
+        else:
+            return False
+
+print(ugly_number(6)) #True
+print(ugly_number(1)) #True
+print(ugly_number(14)) #False
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
@@ -282,7 +301,7 @@ def find_lhs(nums: list[int]) -> int:
         if num + 1 in num_counts:
             max_length = max(max_length, num_counts[num] + num_counts[num + 1])
 
-    return num_counts, max_length
+    return max_length
 
 print(find_lhs([1, 3, 2, 2, 5, 2, 3, 7])) # 5
 print("\n") 
@@ -291,15 +310,11 @@ print("\n")
 print(find_lhs([1,1,2,2,3,3,4,4,5,5]))
 
 """Bonus 3. Date due stringhe note e magazine, restituisci true se note può essere costruita utilizzando le lettere di magazine e false in caso contrario. Ogni lettera nella magazine può essere utilizzata solo una volta in note.
-
 For example:
-
 print(ransom("a","b"))
 False
-
 print(ransom("aa", "ab"))
 False
-
 print(ransom("aa","aab"))
 True"""
 
@@ -351,12 +366,12 @@ def to_hex(num: int) -> str:
     7: '7',
     8: '8',
     9: '9',
-    10: 'A',
-    11: 'B',
-    12: 'C',
-    13: 'D',
-    14: 'E',
-    15: 'F'
+    10: 'a',
+    11: 'b',
+    12: 'c',
+    13: 'd',
+    14: 'e',
+    15: 'f'
     }
     
     remainder_list = []
@@ -365,10 +380,10 @@ def to_hex(num: int) -> str:
         return 0
     if num < 0:
         num = num + 2 ** 32
-    if num >= 0:
+    if num > 0:
         while num > 0:
             remainder = num % 16
-            remainder_list.append(remainder)
+            remainder_list.insert(0, remainder)
             num = num // 16
         for index, item in enumerate(remainder_list):
             if item in decimal_to_hex:
@@ -379,3 +394,4 @@ def to_hex(num: int) -> str:
 print(to_hex(26))
 print(to_hex(0))
 print(to_hex(-1))
+
