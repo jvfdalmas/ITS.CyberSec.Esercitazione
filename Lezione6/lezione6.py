@@ -2,7 +2,7 @@
 
 class Person:
 
-    def __init__(self, name: str, surname: str, taxpayers_id: str, birthday: str, birth_place: str, gender: str) -> None:
+    def __init__(self, name: str, surname: str, birthday: str, birth_place: str, gender: str) -> None:
         ID: int = 1  # come ID non è sotto self, Python non riconosce come attributo della classe e non la stampa 
         self._name: str = name # attributo della classe     # per convenzione, sempre che c'è un "_" significa attributo privato
         self.surname: str = surname # attributo della classe
@@ -11,7 +11,6 @@ class Person:
         self._gender: str = gender
         self._taxpayers_id: None = None
         self.compute_taxpayers_id()
-
 
     def get_name(self): # "get" serve per l'utente esterno aver accesso alla informazione privata
         """This function gets the attribute name.
@@ -39,11 +38,12 @@ class Person:
         input: taxpayers_id: str, the parameter contains the user's taxpayer's id
         return: None"""
         
-        self._taxpayers_id = taxpayers_id
+        raise Exception("You cannot modify taxpayer\'s id")
 
     def compute_taxpayers_id(self) -> str:
-        self._taxpayers_id: str = "calcolare il CF!"
-        pass
+        from set_taxpayers_id import set_taxpayers_id as compute_tax_id
+
+        self._taxpayers_id = compute_tax_id(nome = self._name, cognome = self.surname, data_di_nascita = self._birthday, genere = self._gender, comune_di_nascita = self._brith_place)
     
     def check_taxpayers_id(self, taxpayers_id: str) -> bool:
         """This function checks the taxpayer's id.
@@ -66,7 +66,7 @@ class Person:
 
         return value.hash() == self.hash()
     
-persona_1: Person = Person(name="Flavio", surname="Giorgi", taxpayers_id="DGDFVR", birthday="24/12/1994", birth_place="Roma", gender="Male")
+persona_1: Person = Person(name="Flavio", surname="Giorgi", birthday="24/12/1994", birth_place="Roma", gender="Male")
 #persona_2: Person = Person(name="Joao", surname="Dal Mas", taxpayers_id="DMJVF")
 
 print(persona_1._name, persona_1.surname)
@@ -82,7 +82,7 @@ print(str(persona_1))
 #    persons_tax_id = person.get_taxpayers_id()
 #    print(f"The taxpayers id of {persons_name} is {persons_tax_id}")
 
-persona_1.set_taxpayers_id("FFFF")
+#persona_1.set_taxpayers_id("FFFF")
 print(persona_1.get_taxpayers_id())
 
 
