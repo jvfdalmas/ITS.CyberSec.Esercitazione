@@ -48,5 +48,3 @@ def set_taxpayers_id(nome, cognome, data_di_nascita, genere, comune_di_nascita):
     codice_fiscale = three_consoanti_cognome + three_consoanti_nome + two_numbers_year + one_char_month + two_char_day_of_birth + four_char_place_of_birth + char_control
 
     return codice_fiscale
-
-CF_Michele = set_taxpayers_id(nome = "Michele", cognome = "Fontevecchia", data_di_nascita = "06/10/1967", genere = "Man", comune_di_nascita="Sora")
