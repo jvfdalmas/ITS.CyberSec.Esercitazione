@@ -66,8 +66,8 @@ class Person:
         return value.hash() == self.hash()
     
 persona_1: Person = Person(name="Flavio", surname="Giorgi", birthday="24/12/1994", birth_place="Roma", gender="Male")
-persona_2: Person = Person(name="Joao Victor", surname="Figueiredo", birthday="03/07/1988", birth_place="Campinas", gender="Male")
-persona_3: Person = Person(name="Michele", surname="Fontevecchia", birthday="06/10/1967", birth_place="Sora", gender="Male")
+persona_2: Person = Person(name="Joana", surname="Figueiredo", birthday="04/01/1980", birth_place="Campinas", gender="Female")
+persona_3: Person = Person(name="Michelle", surname="Fontenova", birthday="06/11/1960", birth_place="Milano", gender="Male")
 
 print(persona_1._name, persona_1.surname)
 print(persona_2._name, persona_2.surname)
@@ -76,7 +76,6 @@ print(persona_1.get_name())
 print(str(persona_1))
 print(str(persona_2))
 print(str(persona_3))
-
 
 queue: list = [persona_1, persona_2, persona_3]
 for person in queue:
@@ -101,7 +100,7 @@ class Student:
     def print_info(self):
         return f"The student {self.name.title()} is studying {self.study_program.title()}. He is a {self.gender} and he is {self.age} years old."
 
-student1: Student = Student(name = "Joao Victor", study_program="Cybersecurty", age=35, gender="Male")
+student1: Student = Student(name = "Vitorio", study_program="Cybersecurty", age=30, gender="Male")
 student2: Student = Student(name = "Simone", study_program="Cybersecurty", age=20, gender="Male")
 student3: Student = Student(name = "Angelo", study_program="Cybersecurty", age=19, gender="Male")
 
@@ -109,6 +108,79 @@ print(student1.print_info())
 print(student2.print_info())
 print(student3.print_info())
 
+class Food:
 
+    def __init__(self, name: str, price: float, description: str) -> None:
+        self.name = name
+        self.price = price
+        self.description = description
 
+    def get_name(self) -> str:
+
+        return self.name
+
+    def get_price(self) -> float:
+
+        return self.price
+    
+    def get_description(self) -> str:
+
+        return self.description
+    
+    def print_food(self) -> str:
+
+        return f"food name: {self.name}, food price: {self.price}, food description: {self.description}"
+
+food1: Food = Food(name="pizza", price=3.5, description="round disk made of flour and water with toppings baked in the oven")
+food2: Food = Food(name="bread", price=1.0, description="it is just bread...")
+food3: Food = Food(name="hot dog", price=2.5, description="it is like hamburguer but with sausage")
+
+print(food1.print_food())
+print(food2.print_food())
+print(food3.print_food())
+
+print("\n")
+
+class Menu:
+
+    def __init__(self, food_list: list):
+        self.menu = food_list
+
+    def show_menu(self):
+
+        for food in self.menu:
+            print(food.print_food())
+
+    def add_Food(self, new_food):
+
+        if new_food not in self.menu:
+            self.menu.append(new_food)
+            print(f"{new_food.get_name()} was added to the menu!")
+        else:
+            print(f"{new_food.get_name()}  is already in the menu")
+    
+    def remove_Food(self, existing_food):
+        if existing_food in self.menu:
+            self.menu.remove(existing_food)
+            print(f"{existing_food.get_name()} was removed from the menu!")
+        else:
+            print(f"{existing_food.get_name()} is NOT in the menu")
+
+    def print_prices(self):
+        print(self.menu)
+
+menu1: Menu = Menu(food_list=[food1, food2])
+menu1.show_menu()
+print("\n")
+menu1.add_Food(food3)
+menu1.show_menu()
+print("\n")
+menu1.remove_Food(food2)
+menu1.show_menu()
+print("\n")
+menu1.add_Food(food3)
+menu1.show_menu()
+print("\n")
+menu1.remove_Food(food2)
+menu1.show_menu()
 
