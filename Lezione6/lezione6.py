@@ -66,7 +66,8 @@ class Person:
         return value.hash() == self.hash()
     
 persona_1: Person = Person(name="Flavio", surname="Giorgi", birthday="24/12/1994", birth_place="Roma", gender="Male")
-persona_2: Person = Person(name="Joana", surname="Figueiredo", birthday="03/07/1980", birth_place="Campinas", gender="Female")
+persona_2: Person = Person(name="Joao Victor", surname="Figueiredo", birthday="03/07/1988", birth_place="Campinas", gender="Male")
+persona_3: Person = Person(name="Michele", surname="Fontevecchia", birthday="06/10/1967", birth_place="Sora", gender="Male")
 
 print(persona_1._name, persona_1.surname)
 print(persona_2._name, persona_2.surname)
@@ -74,8 +75,10 @@ print(persona_2._name, persona_2.surname)
 print(persona_1.get_name())
 print(str(persona_1))
 print(str(persona_2))
+print(str(persona_3))
 
-queue: list = [persona_1, persona_2]
+
+queue: list = [persona_1, persona_2, persona_3]
 for person in queue:
     persons_name = person.get_name()
     persons_tax_id = person.get_taxpayers_id()
@@ -83,6 +86,29 @@ for person in queue:
 
 #persona_1.set_taxpayers_id("FFFF")
 print(persona_1.get_taxpayers_id())
+
+# -------------------------------------------------------------------------------------------------------------------------------
+print("\n") 
+"""Lezione 09 / 05 /2024"""
+
+class Student:
+    def __init__(self, name: str, study_program: str, age: int, gender: str):
+        self.name: str = name
+        self.study_program: str = study_program
+        self.age: int = age
+        self.gender: str = gender
+
+    def print_info(self):
+        return f"The student {self.name.title()} is studying {self.study_program.title()}. He is a {self.gender} and he is {self.age} years old."
+
+student1: Student = Student(name = "Joao Victor", study_program="Cybersecurty", age=35, gender="Male")
+student2: Student = Student(name = "Simone", study_program="Cybersecurty", age=20, gender="Male")
+student3: Student = Student(name = "Angelo", study_program="Cybersecurty", age=19, gender="Male")
+
+print(student1.print_info())
+print(student2.print_info())
+print(student3.print_info())
+
 
 
 
