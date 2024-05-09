@@ -41,8 +41,7 @@ class Person:
         raise Exception("You cannot modify taxpayer\'s id")
 
     def compute_taxpayers_id(self) -> str:
-        from set_taxpayers_id import set_taxpayers_id as compute_tax_id
-
+        from compute_taxpayers_id import compute_taxpayers_id as compute_tax_id
         self._taxpayers_id = compute_tax_id(nome = self._name, cognome = self.surname, data_di_nascita = self._birthday, genere = self._gender, comune_di_nascita = self._brith_place)
     
     def check_taxpayers_id(self, taxpayers_id: str) -> bool:
@@ -67,20 +66,20 @@ class Person:
         return value.hash() == self.hash()
     
 persona_1: Person = Person(name="Flavio", surname="Giorgi", birthday="24/12/1994", birth_place="Roma", gender="Male")
-#persona_2: Person = Person(name="Joao", surname="Dal Mas", taxpayers_id="DMJVF")
+persona_2: Person = Person(name="Joana", surname="Figueiredo", birthday="03/07/1980", birth_place="Campinas", gender="Female")
 
 print(persona_1._name, persona_1.surname)
-#print(persona_2._name, persona_2.surname)
+print(persona_2._name, persona_2.surname)
 
 print(persona_1.get_name())
 print(str(persona_1))
-#print(str(persona_2))
+print(str(persona_2))
 
-#queue: list = [persona_1, persona_2]
-#for person in queue:
-#    persons_name = person.get_name()
-#    persons_tax_id = person.get_taxpayers_id()
-#    print(f"The taxpayers id of {persons_name} is {persons_tax_id}")
+queue: list = [persona_1, persona_2]
+for person in queue:
+    persons_name = person.get_name()
+    persons_tax_id = person.get_taxpayers_id()
+    print(f"The taxpayer\'s id of {persons_name} is {persons_tax_id}")
 
 #persona_1.set_taxpayers_id("FFFF")
 print(persona_1.get_taxpayers_id())
