@@ -119,3 +119,11 @@ Example: create_shopping_list("Grocery Store", {"Milk", "Eggs", "Bread"})
 
 Write a function called print_shopping_list() that accepts a dictionary and a store name, then prints each item from that store's shopping list.
 Example: print_shopping_list(dictionary, "Grocery Store")"""
+
+def create_shopping_list(store_name: str, items: list) -> str:
+    for item in items:
+        print(f"{item} is availe in the {store_name}.")
+
+
+shopping_list: str = create_shopping_list("Supermarket", {"Milk", "Eggs", "Bread"})
+print(shopping_list)
