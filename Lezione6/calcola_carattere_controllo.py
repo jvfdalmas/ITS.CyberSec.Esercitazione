@@ -26,7 +26,7 @@ def calcola_carattere_controllo(codice_fiscale: str) -> str:
     4: 'E', 9: 'J', 14: 'O', 19: 'T', 24: 'Y',
     25: 'Z'}
 
-    calculum_list_pari: list = [conversione_pari[char] for i, char in enumerate(list(codice_fiscale))if i in [1, 3, 5, 7, 9, 11, 13]]
+    calculum_list_pari: list = [conversione_pari[char] for i, char in enumerate(list(codice_fiscale)) if i in [1, 3, 5, 7, 9, 11, 13]]
     calculum_list_dispari: list = [conversione_dispari[char] for i, char in enumerate(list(codice_fiscale)) if i in [0, 2, 4, 6, 8, 10, 12, 14]]
 
     char_controllo: str = conversione_check_digit[sum(calculum_list_dispari + calculum_list_pari) % 26]
