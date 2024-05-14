@@ -46,7 +46,9 @@ def turtle_race():
         
         turtle_move: list = choices(turtle_steps, turtle_steps_probability)
         turtle_move: int = int(turtle_move[0])
+
         last_index: int = turtle_track_race.index("turtle")
+        
         turtle_track_race[last_index] = last_index + 1
         turtle_clock += 1
         
@@ -96,7 +98,6 @@ def rabbit_turtle_race():
         return f"Turtle won!!! It took rabbit {clock_rabbit_race} seconds, while the turtle arrived after {clock_turtle_race} seconds."
 
 print(rabbit_turtle_race())
-
 
 
 

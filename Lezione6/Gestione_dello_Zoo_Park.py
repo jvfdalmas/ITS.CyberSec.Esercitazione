@@ -29,13 +29,13 @@ Fra un recinto e l'altro mettete 30 volte il carattere #."""
 class Animal:
     """Questa classe rappresenta un animale nello zoo. Ogni animale ha questi attributi: name, species, age, height, width, preferred_habitat, health che è uguale a round(100 * (1 / age), 3)."""
 
-    def __init__(self, name: str, species: str, age: int, height: float, width: float) -> None:
+    def __init__(self, name: str, species: str, age: int, height: float, width: float, preferred_habitat: str, health = None) -> None:
         self.name: str = name 
         self.species: str = species
         self.age: int = age 
         self.height: float = height
         self.width: float = width
-        self.preferred_habitat: str = self.pick_preferred_habitat()
+        self.preferred_habitat: str = preferred_habitat
         self.size: float = self.calculate_animal_size()
         self.health: float = self.calculate_animal_health()
 
@@ -60,20 +60,6 @@ class Animal:
         self.health: float = round(100 * (1 / self.age), 3)
         return self.health
     
-
-    def pick_preferred_habitat(self, species) -> str:
-        """"Chooses habitat for the animal based on its species"""
-        habitat_per_specie: dict = {"lupus": "forest", "Blabla": "park"}
-        self.preferred_habitat: str = ""
-
-        if species in habitat_per_specie:
-            self.preferred_habitat = habitat_per_specie[species]
-        else:
-            return "specie not available in the list. Please contact administrator!"
-
-        return self.preferred_habitat
-
-
 
 
 class Fence:
