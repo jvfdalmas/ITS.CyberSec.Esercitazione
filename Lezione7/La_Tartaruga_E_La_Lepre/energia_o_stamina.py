@@ -1,5 +1,4 @@
-""" 2. Energia o Stamina:
-Aggiungere una metrica di "energia" o "stamina" che diminuisce con ogni movimento e si ricarica in specifiche condizioni. Fare in modo che le mosse che consumano più energia non possano essere eseguite se l'animale non ha abbastanza energia. L'energia inziale per entrambi gli animali è 100.
+""" 2. Energia o Stamina: Aggiungere una metrica di "energia" o "stamina" che diminuisce con ogni movimento e si ricarica in specifiche condizioni. Fare in modo che le mosse che consumano più energia non possano essere eseguite se l'animale non ha abbastanza energia. L'energia inziale per entrambi gli animali è 100.
 
 Nuove regole di movimento:
 - Tartaruga:
@@ -13,8 +12,8 @@ Nuove regole di movimento:
     - Grande balzo (20% di probabilità): avanza di 9 quadrati  e richiede 15 di energia.
     - Grande scivolata (10% di probabilità): arretra di 12 quadrati e richiede 20 di energia. Non può andare sotto il quadrato 1.
     - Piccolo balzo (30% di probabilità): avanza di 1 quadrato e richiede 5 di energia.
-    - Piccola scivolata (20% di probabilità): arretra di 2 quadrati e richiede 8 di energia. Non può andare sotto il quadrato 1.
-"""
+    - Piccola scivolata (20% di probabilità): arretra di 2 quadrati e richiede 8 di energia. Non può andare sotto il quadrato 1. """
+
 import random
 
 race_track_len: int = 70 # percorso della corsa
@@ -115,13 +114,16 @@ def corsia_di_gara(race_track: list, rabbit: int, rabbit_stamina: int, tortoise:
     print("\n", "\n", " ".join(race_track), end="")
     print(f"\n rabbit position: {rabbit} / rabbit stamina: {rabbit_stamina} / tortoise position: {tortoise} / tortoise stamina: {tortoise_stamina} / weather: {weather} / elapsed time: {clock} sec", end="")
     
-    # prints the winner
+    # prints the winner and final clock
     if rabbit == 70 and tortoise == 70:
         print("\n","IT'S A TIE.", end="")
+        print("\n", f"The race took {clock} seconds")
     elif race_track[69] == "T":
         print("\n","TORTOISE WINS! || VAY!!!", end="")
+        print("\n", f"The race took {clock} seconds")
     elif race_track[69] == "H":
         print("\n","HARE WINS || YUCH!!!", end="")
+        print("\n", f"The race took {clock} seconds")
 
 
 
@@ -133,5 +135,3 @@ while race_track[69] == "_":
     weather = change_weather(weather, clock)
     rabbit, rabbit_stamina = rabbit_move(rabbit, rabbit_stamina, weather)
     tortoise, tortoise_stamina = tortoise_move(tortoise, tortoise_stamina, weather)
-
-print(f"The race took {clock} seconds")
