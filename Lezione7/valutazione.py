@@ -97,7 +97,7 @@ print(filtra_e_mappa({'Penna': 15.0, 'Zaino': 50.0, 'Quaderno': 22.0}))
 print(filtra_e_mappa({'Gomma': 2.0, 'Matita': 1.0})) 
 {}"""
 
-def filtra_e_mappa(prodotti) -> dict:
+def filtra_e_mappa(prodotti: dict) -> dict:
     dict_risultato: dict = {} 
     for key, value in prodotti.items():
         if value > 20:
@@ -106,7 +106,11 @@ def filtra_e_mappa(prodotti) -> dict:
 
     return dict_risultato
 
-    pass
+ # alternativa
+
+def filtra_e_mappa(prodotti: dict) -> dict:
+    return {key: value * 0.9 for key, value in prodotti.items() if value > 20}
+
 
 print(filtra_e_mappa({'Penna': 15.0, 'Zaino': 50.0, 'Quaderno': 22.0})) # {'Zaino': 45.0, 'Quaderno': 19.8}
 print(filtra_e_mappa({'Gomma': 2.0, 'Matita': 1.0})) #{}
@@ -153,6 +157,15 @@ def update_contact(dictionary: dict, name: str, email: str =None, telefono: int=
         updated_dictionary["telefono"] = telefono
 
     return updated_dictionary
+
+# alternativa
+
+def create_contact(name: str, email: str=None, telefono: int=None) -> dict:
+    return {'profile': name,'email': email if email else None, 'telefono': telefono if telefono else None}
+
+def update_contact(dictionary: dict, name: str, email: str =None, telefono: int=None) -> dict:
+    return {'profile': name,'email': email or dictionary.get('email'), 'telefono': telefono or dictionary.get('telefono')}
+
 
 contact = create_contact("Mario Rossi", email="mario.rossi@gmail.com", telefono=788787)
 print(create_contact("Mario Rossi", email="mario.rossi@gmail.com", telefono=788787)) # {'profile': 'Mario Rossi', 'email': 'mario.rossi@gmail.com', 'telefono': 788787}
