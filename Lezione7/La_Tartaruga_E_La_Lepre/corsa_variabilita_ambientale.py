@@ -14,6 +14,7 @@ race_track: list = ["_" for position in range(0, race_track_len)] # corsa
 tortoise: int = 1 # posizione iniziale - tortoise
 rabbit: int = 1 # posizione iniziale - rabbit
 clock: int = 0 # counter di mose | secondi
+weather: str = "soleggiato" # initial weather
 
 def tortoise_move() -> int:
     i: int = random.randint(1,10)
@@ -38,13 +39,32 @@ def rabbit_move():
         return 1 # piccolo balzo: avanza di 1 quadrato
     elif 9 <= i <= 10: # 20% di probabilità
         return -2 # piccola scivolata: arretra di 2 quadrati
+    
+def change_weather(weather: str, clock: int) -> str:
+    # corrects clock to consider time 0 (race start)
+    clock -= 1
 
-def corsia_di_gara(race_track: list, rabbit: int, tortoise: int):
+    # weather changes (each 10 seconds) according to the clock 
+    if clock != 0 and clock % 10 == 0:
+        if weather == 'soleggiato':
+            return "pioggia"
+        else:
+            return 'soleggiato'
+    else:
+        return weather
+
+def corsia_di_gara(race_track: list, rabbit: int, tortoise: int, weather: str) -> str:
+        
     # cleans the last position
     for i in range(len(race_track)):
         if race_track[i] in ['OUCH!!!', 'H', 'T']:
             race_track[i] = '_'
     
+    # rainny weather changes movement value 
+    if weather == 'pioggia':
+        rabbit -= 2
+        tortoise -= 1
+            
     # rabbit stays inside the race track
     rabbit = max(1, rabbit)
     rabbit = min(rabbit, 70)
@@ -61,15 +81,16 @@ def corsia_di_gara(race_track: list, rabbit: int, tortoise: int):
         race_track[tortoise-1] = "T"
 
     # prints updated race track
-    print(" ".join(race_track), f"rabbit position: {rabbit} / tortoise position: {tortoise}")
+    print("\n", "\n", " ".join(race_track), end="")
+    print(f"\n rabbit position: {rabbit} / tortoise position: {tortoise} / weather: {weather}", end="")
     
     # prints the winner
     if rabbit == 70 and tortoise == 70:
-        print("IT'S A TIE.")
+        print("\n","IT'S A TIE.", end="")
     elif race_track[69] == "T":
-        print("TORTOISE WINS! || VAY!!!")
+        print("\n","TORTOISE WINS! || VAY!!!", end="")
     elif race_track[69] == "H":
-        print("HARE WINS || YUCH!!!")
+        print("\n","HARE WINS || YUCH!!!", end="")
 
 print("BANG !!!!! AND THEY'RE OFF !!!!!")
 
@@ -77,7 +98,8 @@ while race_track[69] == "_":
     clock += 1
     rabbit += rabbit_move()
     tortoise += tortoise_move()
-    corsia_di_gara(race_track, rabbit, tortoise)
+    weather = change_weather(weather, clock)
+    corsia_di_gara(race_track, rabbit, tortoise, weather)
 
 print(f"The race took {clock} seconds")
 
