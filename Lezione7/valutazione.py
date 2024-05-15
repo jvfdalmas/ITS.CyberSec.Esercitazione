@@ -37,13 +37,13 @@ def aggrega_voti(voti: list[dict]) -> dict[str:list[int]]:
     if len(voti) == 0:
         return dict_finale
     else:
-        for element in voti:
-            for key, value in element.items():
+        for dizionario in voti:
+            for key, value in dizionario.items():
                 if key == "nome":
                     if value not in dict_finale:
-                        dict_finale[value] = [element["voto"]]
+                        dict_finale[value] = [dizionario["voto"]]
                     elif value in dict_finale:
-                        dict_finale[value].append(element["voto"])
+                        dict_finale[value].append(dizionario["voto"])
 
     return dict_finale
 
