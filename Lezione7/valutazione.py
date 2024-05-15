@@ -47,6 +47,40 @@ def aggrega_voti(voti: list[dict]) -> dict[str:list[int]]:
 
     return dict_finale
 
+# alternativa 1:
+
+def aggrega_voti(voti: list[dict]) -> dict[str:list[int]]:
+    dict_finale: dict = {}
+    
+    if len(voti) == 0:
+        return dict_finale
+    else:
+        for dizionario in voti:
+            nome: str = dizionario['nome']
+            voto: int = dizionario['voto']
+            if nome not in dict_finale:
+                dict_finale[nome] = [voto]
+            elif nome in dict_finale:
+                dict_finale[nome].append(voto)
+
+    return dict_finale
+
+# alternativa 2:
+
+def aggrega_voti(voti: list[dict]) -> dict[str:list[int]]:
+    dict_finale: dict = {}
+    
+    if len(voti) == 0:
+        return dict_finale
+    else:
+        for dizionario in voti:
+            if dizionario['nome'] not in dict_finale:
+                dict_finale[dizionario['nome']] = [dizionario['voto']]
+            elif dizionario['nome'] in dict_finale:
+                dict_finale[dizionario['nome']].append(dizionario['voto'])
+                
+    return dict_finale
+
 print(aggrega_voti([{'nome': 'Alice', 'voto': 90}, {'nome': 'Bob', 'voto': 75}, {'nome': 'Alice', 'voto': 85}])) # {'Alice': [90, 85], 'Bob': [75]}
 print(aggrega_voti([]))  #{}
 
