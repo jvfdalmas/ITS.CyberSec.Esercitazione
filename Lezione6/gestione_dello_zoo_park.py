@@ -27,9 +27,19 @@ Animal(name=Lupo, species=Lupus, age=14)
 Fra un recinto e l'altro mettete 30 volte il carattere #."""
 
 class Animal:
-    """Questa classe rappresenta un animale nello zoo. Ogni animale ha questi attributi: name, species, age, height, width, preferred_habitat, health che è uguale a round(100 * (1 / age), 3)."""
+    """This class represents an animal in the zoo. Each animal has attributes such as name, species, age, height, width, preferred habitat, and health."""
 
     def __init__(self, name: str, species: str, age: int, height: float, width: float, preferred_habitat: str, health = None) -> None:
+        """Initializes an Animal object with specified attributes.
+        Attributes:
+            name (str): The name of the animal.
+            species (str): The species of the animal.
+            age (int): The age of the animal.
+            height (float): The height of the animal.
+            width (float): The width of the animal.
+            preferred_habitat (str): The preferred habitat of the animal.
+            health (float): The health of the animal. Defaults to None because calculated inside the class."""
+        
         self.name: str = name 
         self.species: str = species
         self.age: int = age 
@@ -40,16 +50,17 @@ class Animal:
         self.health: float = self.calculate_animal_health()
 
     def __str__(self) -> str:
-        """This function prints the attributes in the form of a str.
-        input: None
-        return: str with the attributes """
+        """Returns a string representation of the Animal object."""
 
-        return f"Animal(name={self.name}, species={self.species}, age={self.age}"
+        return f"Animal(name={self.name}, species={self.species}, age={self.age})"
     
-
-    def calculate_animal_size(self, fed_animal= None) -> float:
-        """Calculates animal's size (area)"""
-        
+    def calculate_animal_size(self, fed_animal: bool = None) -> float:
+        """Calculates the size (area) of the animal.
+        Args:
+            fed_animal (bool, optional): Flag indicating whether the animal is being fed. Defaults to None.
+        Returns:
+            float: The size of the animal or the new size of the animal if being fed."""
+                
         if fed_animal == None:
             self.size = self.height * self.width
         else:
@@ -59,61 +70,68 @@ class Animal:
 
         return self.size
 
-
-    def calculate_animal_health(self, fed_animal= None) -> float:
-        """Calculates animal's health"""
-
+    def calculate_animal_health(self, fed_animal: bool = None) -> float:
+        """Calculates the health of the animal.
+        Args:
+            fed_animal (bool, optional): Flag indicating whether the animal is being fed. Defaults to None.
+        Returns:
+            float: The health of the animal or the new health of the animal if being fed."""
+        
         if fed_animal == None:
-            self.health: float = round(100 * (1 / self.age), 3)
+            self.health = round(100 * (1 / self.age), 3)
         else:
             self.health = self.health * 1.01
 
         return self.health
     
-
-
 class Fence:
-    """Questa classe rappresenta un recinto dello zoo in cui sono tenuti gli animali. I recinti possono contenere uno o più animali. I recinti possono hanno gli attributi area, temperature e habitat."""
+    """This class represents a fence in the zoo where animals are kept. Fences can contain one or more animals and have attributes such as area, temperature, and habitat."""
 
     def __init__(self, area: float, temperature: float, habitat: str) -> None:
+        """Initializes a Fence object with specified attributes.
+        Attributes:
+            area (float): The area of the fence.
+            temperature (float): The temperature of the fence.
+            habitat (str): The habitat of the fence."""
+        
         self.area: float = area
         self.temperature: float = temperature
         self.habitat: str = habitat
         self.occupied_area: float = 0
         self.available_area: float = self.area
-        self.caged_animals = []
+        self.caged_animals: list = []
     
-
     def __str__(self) -> str:
-        """This function prints the attributes in the form of a str.
-        input: None
-        return: str with the attributes """
+        """Returns a string representation of the Fence object."""
 
-        return f"Fence:\nFence(area={self.area}, temperature={self.temperature}, habitat={self.habitat})"
-
+        return f"Fence(area={self.area}, temperature={self.temperature}, habitat={self.habitat})"
 
     def update_occupied_area(self) -> None:
-        self.occupied_area = sum(animal.size for animal in self.caged_animals)
-        self.available_area: float = self.area - self.occupied_area
+        """Updates the occupied area of the fence."""
 
+        self.occupied_area = sum(animal.size for animal in self.caged_animals)
+        self.available_area = self.area - self.occupied_area
 
     def get_available_area(self) -> float:
         "Shows the available area in the fence"
 
         return self.available_area
 
-
     def get_occupied_area(self) -> float:
         "Shows the occupied area in the fence"
 
         return self.occupied_area
                     
-
-
 class Zookeper:
-    """Questa classe rappresenta un guardiano dello zoo responsabile della gestione dello zoo. I guardiani dello zoo hanno un name, un surname, e un id. Essi possono nutrire gli animali, pulire i recinti e svolgere altri compiti nel nostro zoo virtuale."""
+    """This class represents a zookeeper responsible for managing the zoo. Zookeepers have a name, surname, and ID. They can perform tasks such as feeding animals, cleaning enclosures, and other duties in the zoo."""
 
     def __init__(self, name: str, surname: str, id:int) -> None:
+        """Initializes a Zookeper object with specified attributes.
+        Attributes:
+            name (str): The name of the zookeeper.
+            surname (str): The surname of the zookeeper.
+            id (int): The ID of the zookeeper."""
+        
         self.name: str = name
         self.surname: str = surname
         self.full_name: str = name + " " + surname
@@ -121,22 +139,25 @@ class Zookeper:
         self.tempo: float = None
         self.fence_list: list = []
     
-
     def __str__(self) -> str:
-        """This function prints the attributes in the form of a str.
-        input: None
-        return: str with the attributes """
+        """Returns a string representation of the Zookeper object."""
 
-        print(f"name={self.full_name}, id={self.id}.")
+        return f"Guardian(name={self.name}, surname={self.surname}, id={self.id})"
     
     def add_fence(self, Fence: Fence) -> None:
-
+        """Adds a fence to the zookeeper's list of fences to be managed.
+        Args:
+            Fence (Fence): The fence to be added."""
+        
         self.fence_list.append(Fence)
 
-
     def pick_fence(self, Animal: Animal) -> str:
-        """"Chooses available fence for the animal based on the preferred_habitat"""
-        
+        """Chooses an available fence for the animal based on its preferred habitat.
+        Args:
+            Animal (Animal): The animal to be housed in the fence.
+        Returns:
+            str: A message indicating the selected fence or an error message."""    
+            
         suitable_fence_found: bool = False
 
         for fence in self.fence_list:
@@ -148,10 +169,12 @@ class Zookeper:
         if suitable_fence_found == False:
             raise ValueError(f"There is no fence with the habitat {Animal.preferred_habitat}.")
                 
-                
-    def add_animal(self, Animal: Animal, Fence: Fence):
-        """Consente al guardiano dello zoo di aggiungere un nuovo animale allo zoo. L'animale deve essere collocato in un recinto adeguato in base alle esigenze del suo habitat e se c'è ancora spazio nel recinto, ovvero se l'area del recinto è ancora sufficiente per ospitare questo animale."""
-
+    def add_animal(self, Animal: Animal, Fence: Fence) -> None:
+        """Adds a new animal to the zoo in an appropriate fence.
+        Args:
+            Animal (Animal): The animal to be added to the fence.
+            Fence (Fence): The fence where the animal will be housed."""
+        
         if Animal.preferred_habitat.lower() == Fence.habitat.lower():
             if Animal.size < Fence.available_area:
                 Fence.caged_animals.append(Animal)
@@ -161,69 +184,84 @@ class Zookeper:
         else:
             raise ValueError(f"This is not the right habitat to {Animal.name}. Please pick another fence.")
 
-
-    def remove_animal(self, Animal: Animal, Fence: Fence):
-        """Consente al guardiano dello zoo di rimuovere un animale dallo zoo. L'animale deve essere allontanato dal suo recinto. Nota bene: L'area del recinto deve essere ripristinata dello spazio che l'animale rimosso occupava."""
+    def remove_animal(self, Animal: Animal, Fence: Fence) -> None:
+        """Removes an animal from the fence.
+        Args:
+            Animal (Animal): The animal to be removed from the fence.
+            Fence (Fence): The fence from which the animal will be removed."""
 
         if Animal in Fence.caged_animals:
             Fence.caged_animals.remove(Animal)
             Fence.update_occupied_area()
         else:
-            raise ValueError(f"{Animal.name} not found in the fence")
+            raise ValueError(f"{Animal.name} not in the fence.")
 
-
-    def feed(self, Animal: Animal, Fence: Fence):
-        """Consete al guardiano dello zoo di nutrire tutti gli animali dello zoo. Ogni volta che un animale viene nutrito, la sua salute incrementa di 1% rispetto alla sua salute corrente, ma le dimensioni dell'animale (height e width) vengono incrementate del 2%. Perciò, l'animale si può nutrire soltanto se il recinto ha ancora spazio a sufficienza per ospitare l'animale ingrandito dal cibo."""
-
-        if Animal.size * 0.02 + Fence.occupied_area < Fence.available_area:
-            Animal.calculate_animal_health(fed_animal=True)
-            Animal.calculate_animal_size(fed_animal=True)
-            Fence.update_occupied_area()
-        else:
-            raise ValueError(f"{Animal.name} will be too big for this fence. Please transfer the animal to another fence before feeding it.")
-
+    def feed(self, Animal: Animal) -> None:
+        """Feeds an animal in the zoo.
+        Args:
+            Animal (Animal): The animal to be fed."""
+        
+        animal_in_fence: bool = False
+        
+        for fence in self.fence_list:
+            if Animal in fence.caged_animals:
+                animal_in_fence = True
+                if Animal.size * 0.02 + fence.occupied_area < fence.available_area:
+                    Animal.calculate_animal_health(fed_animal=True)
+                    Animal.calculate_animal_size(fed_animal=True)
+                    fence.update_occupied_area()
+                    animal_in_fence: bool = True
+                else:
+                    raise ValueError(f"{Animal.name} will be too big for this fence. Please transfer the animal to another fence before feeding it.")
+                break
+        
+        if animal_in_fence == False:
+            raise ValueError(f"{Animal.name} not in a fence. Please transfer the animal to a fence before feeding it.")
 
     def clean(self, Fence: Fence) -> float:
-        """Consente al guardiano dello zoo di pulire tutti i recinti dello zoo. Questo metodo restituisce un valore di tipo float che indica il tempo che il guardiano impiega per pulire il recinto. Il tempo di pulizia è il rapporto dell'area occupata dagli animali diviso l'area residua del recinto. Se l'area residua è pari a 0, restituire l'area occupata."""
-        
+        """Cleans a fence in the zoo and returns the time taken.
+        Args:
+            Fence (Fence): The fence to be cleaned.
+        Returns:
+            float: The time taken to clean the fence."""     
+           
         if Fence.available_area <= 0:
             return Fence.get_occupied_area()
         else:
             self.tempo: float = Fence.occupied_area / Fence.available_area
             return f"it took {self.tempo} unit of time to clean the area."
     
-
-    def get_caged_animals(self):
+    def get_caged_animals(self) -> str:
+        """Prints all the animals in each fence managed by the zookeeper."""
         
+        print("Fences:")
         for fence in self.fence_list:
-            print(fence.__str__(), "\n")
-            print(f"Animal:")
+            print(fence)
+            print("with animals:")
             for animal in fence.caged_animals:
-                print(animal.__str__())
-            print("\n", 30 * "#", "\n")
-
-
+                print(animal)
+            print(30 * "#")
 
 class Zoo:
-    """Questa classe rappresenta uno zoo. Lo zoo ha dei recinti fences e dei guardiani dello zoo, zoo_keepers."""
+    """This class represents a zoo. The zoo consists of fences and zookeepers."""
 
     def __init__(self, Fence_list: list[Fence], Zookeeper_list: list[Zookeper]) -> None:
+        """Initializes a Zoo object with specified fences and zookeepers.
+        Attributes:
+            Fence_list (list[Fence]): A list of fences in the zoo.
+            Zookeeper_list (list[Zookeper]): A list of zookeepers managing the zoo."""
+        
         self.fences = Fence_list
         self.zoo_keepers = Zookeeper_list
     
-
-    def describe_zoo(self):
-        """Visualizza informazioni su tutti i guardani dello zoo, sui recinti dello zoo che contengono animali."""
-        for zookepper in self.zoo_keepers:
-            print(f"Guardian:\n{zookepper.__str__()}", "\n", 30 * "#", "\n")
-            for fence in self.fences:
-                print(fence.__str__(), "\n")
-                print(f"Animal:")
-                for animal in fence.caged_animals:
-                    print(animal.__str__())
-                print("\n", 30 * "#", "\n")
+    def describe_zoo(self) -> str:
+        """Prints information about all the zookeepers and the fences with animals."""
+        
+        print("Guardians:")
+        for zookeeper in self.zoo_keepers:
+            print(zookeeper)
+            zookeeper.get_caged_animals()
     
-
 # -------------------------------------------------------------------------------------------------------------------------------
 
 animal1: Animal = Animal(name= "Lion", species ="Leoncio Leonel", age= 10, height = 1.5, width = 3.5, preferred_habitat = "Jungle", health = None)
@@ -234,8 +272,10 @@ fence1: Fence = Fence(area=200, temperature = 27.5, habitat = "Jungle")
 fence2: Fence = Fence(area=100, temperature=25, habitat="Continent")
 
 zookeeper1: Zookeper = Zookeper(name="Lorenzo", surname="Maggi", id=1234)
+zookeeper2: Zookeper = Zookeper(name="Vivi", surname="Juju", id=12121)
 
-zookeper_list: list[Zookeper] = [zookeeper1]
+
+zookeper_list: list[Zookeper] = [zookeeper1, zookeeper2]
 fence_list: list[Fence] = [fence1, fence2]
 animals_list: list[Animal] = [animal1, animal2, animal3]
 
@@ -247,24 +287,17 @@ print("\n")
 
 zookeeper1.add_fence(fence1)
 zookeeper1.add_fence(fence2)
+zookeeper2.add_fence(fence2)
+
 zookeeper1.add_animal(animal1, fence1)
 zookeeper1.add_animal(animal2, fence2)
 zookeeper1.add_animal(animal3, fence2)
 zookeeper1.remove_animal(animal2, fence2)
 zookeeper1.add_animal(animal2, fence2)
-zookeeper1.feed(animal1,fence1)
-zookeeper1.feed(animal2,fence2)
-print(zookeeper1.get_caged_animals())
-print(zookeeper1.pick_fence(animal1))
-print(zoo.describe_zoo())
+zookeeper1.feed(animal1)
+zookeeper1.feed(animal2)
+zoo.describe_zoo()
+zookeeper1.get_caged_animals()
 
 
-print("\n")
 
-for zookeeper in zookeper_list:
-    print(zookeeper.__str__())
-
-print("\n")
-
-for fence in fence_list:
-    print(zookeeper1.clean(fence))
