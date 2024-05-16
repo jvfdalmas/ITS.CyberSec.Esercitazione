@@ -119,6 +119,7 @@ class Zookeper:
         self.full_name: str = name + " " + surname
         self.id: int = id
         self.tempo: float = None
+        self.fence_list: list = []
     
 
     def __str__(self) -> str:
@@ -126,15 +127,19 @@ class Zookeper:
         input: None
         return: str with the attributes """
 
-        return f"name={self.full_name}, id={self.id}."
+        print(f"name={self.full_name}, id={self.id}.")
     
+    def add_fence(self, Fence: Fence) -> None:
 
-    def pick_fence(self, Animal: Animal, Fence_list: list) -> str:
+        self.fence_list.append(Fence)
+
+
+    def pick_fence(self, Animal: Animal) -> str:
         """"Chooses available fence for the animal based on the preferred_habitat"""
         
         suitable_fence_found: bool = False
 
-        for fence in Fence_list:
+        for fence in self.fence_list:
             if Animal.preferred_habitat.lower() == fence.habitat.lower():
                 print(f"{Animal.name}'s perfect habitat is in the fence with the habitat: {fence.habitat}.")
                 suitable_fence_found: bool = True
@@ -188,9 +193,9 @@ class Zookeper:
             return f"it took {self.tempo} unit of time to clean the area."
     
 
-    def get_caged_animals(self, Fence_list: list[Fence]):
+    def get_caged_animals(self):
         
-        for fence in Fence_list:
+        for fence in self.fence_list:
             print(fence.__str__(), "\n")
             print(f"Animal:")
             for animal in fence.caged_animals:
@@ -210,7 +215,14 @@ class Zoo:
     def describe_zoo(self):
         """Visualizza informazioni su tutti i guardani dello zoo, sui recinti dello zoo che contengono animali."""
         for zookepper in self.zoo_keepers:
-            return f"Guardian:\n{zookepper.__str__()}"
+            print(f"Guardian:\n{zookepper.__str__()}", "\n", 30 * "#", "\n")
+            for fence in self.fences:
+                print(fence.__str__(), "\n")
+                print(f"Animal:")
+                for animal in fence.caged_animals:
+                    print(animal.__str__())
+                print("\n", 30 * "#", "\n")
+    
 
 # -------------------------------------------------------------------------------------------------------------------------------
 
@@ -233,6 +245,8 @@ zoo: Zoo = Zoo(Fence_list=fence_list, Zookeeper_list=zookeper_list)
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
 
+zookeeper1.add_fence(fence1)
+zookeeper1.add_fence(fence2)
 zookeeper1.add_animal(animal1, fence1)
 zookeeper1.add_animal(animal2, fence2)
 zookeeper1.add_animal(animal3, fence2)
@@ -240,8 +254,8 @@ zookeeper1.remove_animal(animal2, fence2)
 zookeeper1.add_animal(animal2, fence2)
 zookeeper1.feed(animal1,fence1)
 zookeeper1.feed(animal2,fence2)
-print(zookeeper1.get_caged_animals(fence_list))
-print(zookeeper1.pick_fence(animal1, fence_list))
+print(zookeeper1.get_caged_animals())
+print(zookeeper1.pick_fence(animal1))
 print(zoo.describe_zoo())
 
 
