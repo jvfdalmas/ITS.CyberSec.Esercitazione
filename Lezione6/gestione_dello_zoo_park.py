@@ -44,7 +44,7 @@ class Animal:
         input: None
         return: str with the attributes """
 
-        return f"name: {self.name}, species: {self.species}, age: {self.age} years, health: {self.health}, height: {self.height} m, width: {self.width} m, size: {self.size} m2, preferred habitat: {self.preferred_habitat}."
+        return f"Animal(name={self.name}, species={self.species}, age={self.age}"
     
 
     def calculate_animal_size(self, fed_animal= None) -> float:
@@ -89,7 +89,7 @@ class Fence:
         input: None
         return: str with the attributes """
 
-        return f"area: {self.area} m2, temperature: {self.temperature} *C, habitat: {self.habitat}, available area: {self.available_area} m2, occupied area: {self.occupied_area} m2."
+        return f"Fence:\nFence(area={self.area}, temperature={self.temperature}, habitat={self.habitat})"
 
 
     def update_occupied_area(self) -> None:
@@ -126,7 +126,7 @@ class Zookeper:
         input: None
         return: str with the attributes """
 
-        return f"name: {self.full_name}, id: {self.id}."
+        return f"name={self.full_name}, id={self.id}."
     
 
     def pick_fence(self, Animal: Animal, Fence_list: list) -> str:
@@ -191,11 +191,10 @@ class Zookeper:
     def get_caged_animals(self, Fence_list: list[Fence]):
         
         for fence in Fence_list:
-            print("Caractristics of this fence: " + fence.__str__(), "\n")
-            print(f"The animals in this cage are the following:")
+            print(fence.__str__(), "\n")
+            print(f"Animal:")
             for animal in fence.caged_animals:
-                print("\t- " + animal.__str__())
-            print(f"\nThe animals in this fence occupy {fence.get_occupied_area()} m2 and the fence still has {fence.get_available_area()} m2.") 
+                print(animal.__str__())
             print("\n", 30 * "#", "\n")
 
 
@@ -210,6 +209,8 @@ class Zoo:
 
     def describe_zoo(self):
         """Visualizza informazioni su tutti i guardani dello zoo, sui recinti dello zoo che contengono animali."""
+        for zookepper in self.zoo_keepers:
+            return f"Guardian:\n{zookepper.__str__()}"
 
 # -------------------------------------------------------------------------------------------------------------------------------
 
@@ -226,6 +227,9 @@ zookeper_list: list[Zookeper] = [zookeeper1]
 fence_list: list[Fence] = [fence1, fence2]
 animals_list: list[Animal] = [animal1, animal2, animal3]
 
+zoo: Zoo = Zoo(Fence_list=fence_list, Zookeeper_list=zookeper_list)
+
+
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
 
@@ -237,8 +241,8 @@ zookeeper1.add_animal(animal2, fence2)
 zookeeper1.feed(animal1,fence1)
 zookeeper1.feed(animal2,fence2)
 print(zookeeper1.get_caged_animals(fence_list))
-
 print(zookeeper1.pick_fence(animal1, fence_list))
+print(zoo.describe_zoo())
 
 
 print("\n")
