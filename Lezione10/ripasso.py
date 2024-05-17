@@ -256,10 +256,10 @@ def rimbalzo() -> None:
             altezza = altezza + velocita
             velocita -= 96
             if altezza <= 0:
+                rimbalzi += 1
                 print(f"Tempo: {tempo} Rimbalzo!")
                 altezza = altezza * -0.5
                 velocita = velocita * -0.5
-                rimbalzi += 1
                 tempo += 1
 
 print(rimbalzo())
@@ -290,3 +290,19 @@ memorizza_file([1100, 20000, 1048576, 512, 5000])
 File di 1100 byte compresso in 880.0 byte e memorizzato. Blocchi usati: 2. Blocchi rimanenti: 998.
 File di 20000 byte compresso in 16000.0 byte e memorizzato. Blocchi usati: 31. Blocchi rimanenti: 967.
 Non è possibile memorizzare il file di 1048576 byte. Spazio insufficiente."""
+
+def memorizza_file(files: list[int]) -> str:
+    memorizzazione_disponibile = 1000
+
+    for file in files:
+        file_compresso = file * 0.8
+        file_compresso_in_blocchi = math.ceil(file_compresso / 512)
+        if file_compresso_in_blocchi <= memorizzazione_disponibile:
+            memorizzazione_disponibile -= file_compresso_in_blocchi
+            print(f"File di {file} byte compresso in {file_compresso} byte e memorizzato. Blocchi usati: {file_compresso_in_blocchi}. Blocchi rimanenti: {memorizzazione_disponibile}.")
+        else:
+            print(f"Non è possibile memorizzare il file di {file} byte. Spazio insufficiente..")
+            break
+
+print(memorizza_file([1100, 20000, 1048576, 512, 5000]))
+
