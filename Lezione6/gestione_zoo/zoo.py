@@ -1,31 +1,3 @@
-"""Creaiamo un sistema di gestione di uno zoo virtuale
-Sistema di gestione dello zoo virtuale
-
-Classi:
-1. Zoo: questa classe rappresenta uno zoo. Lo zoo ha dei recinti fences e dei guardiani dello zoo, zoo_keepers.
-2. Animal: questa classe rappresenta un animale nello zoo. Ogni animale ha questi attributi: name, species, age, height, width, preferred_habitat, health che è uguale a round(100 * (1 / age), 3).
-3. Fence: questa classe rappresenta un recinto dello zoo in cui sono tenuti gli animali. I recinti possono contenere uno o più animali. I recinti possono hanno gli attributi area, temperature e habitat.
-4. ZooKeeper: questa classe rappresenta un guardiano dello zoo responsabile della gestione dello zoo. I guardiani dello zoo hanno un name, un surname, e un id. Essi possono nutrire gli animali, pulire i recinti e svolgere altri compiti nel nostro zoo virtuale.
-
-Funzionalità:
-1. add_animal(animal: Animal, fence: Fence) (Aggiungi nuovo animale): consente al guardiano dello zoo di aggiungere un nuovo animale allo zoo. L'animale deve essere collocato in un recinto adeguato in base alle esigenze del suo habitat e se c'è ancora spazio nel recinto, ovvero se l'area del recinto è ancora sufficiente per ospitare questo animale.
-2. remove_animal(animal: Animal, fence: Fence) (Rimuovi animale): consente al guardiano dello zoo di rimuovere un animale dallo zoo. L'animale deve essere allontanato dal suo recinto. Nota bene: L'area del recinto deve essere ripristinata dello spazio che l'animale rimosso occupava.
-3. feed(animal: Animal) (Dai da mangiare agli animali): implementa un metodo che consenta al guardiano dello zoo di nutrire tutti gli animali dello zoo. Ogni volta che un animale viene nutrito, la sua salute incrementa di 1% rispetto alla sua salute corrente, ma le dimensioni dell'animale (height e width) vengono incrementate del 2%. Perciò, l'animale si può nutrire soltanto se il recinto ha ancora spazio a sufficienza per ospitare l'animale ingrandito dal cibo.
-4. clean(fence: Fence) (Pulizia dei recinti): implementare un metodo che consenta al guardiano dello zoo di pulire tutti i recinti dello zoo. Questo metodo restituisce un valore di tipo float che indica il tempo che il guardiano impiega per pulire il recinto. Il tempo di pulizia è il rapporto dell'area occupata dagli animali diviso l'area residua del recinto. Se l'area residua è pari a 0, restituire l'area occupata.
-5. describe_zoo() (Visualizza informazioni sullo zoo): visualizza informazioni su tutti i guardani dello zoo, sui recinti dello zoo che contengono animali. 
-
-E.s.: Se abbiamo un guardiano chiamato Lorenzo Maggi con matricola 1234, e un recinto Fence(area=100, temperature=25, habitat=Continentale) con due animali Animal(name=Scoiattolo, species=Blabla, age=25, ...), Animal(name=Lupo, species=Lupus, age=14,...) ci si aspetta di avere una rappresentazione testuale dello zoo come segue:
-
-Guardians:
-ZooKeeper
-Fences:
-Fence(area=100, temperature=25, habitat=Continent)
-with animals:
-Animal(name=Scoiattolo, species=Blabla, age=25)
-Animal(name=Lupo, species=Lupus, age=14)
-#########################
-Fra un recinto e l'altro mettete 30 volte il carattere #."""
-
 class Animal:
     """This class represents an animal in the zoo. Each animal has attributes such as name, species, age, height, width, preferred habitat, and health."""
 
@@ -123,16 +95,16 @@ class Fence:
         return self.occupied_area
 
 
-class Zookeper:
-    """This class represents a zookeeper responsible for managing the zoo. Zookeepers have a name, surname, and ID. They can perform tasks such as feeding animals, cleaning enclosures, and other duties in the zoo."""
+class ZooKeeper:
+    """This class represents a ZooKeeper responsible for managing the zoo. ZooKeepers have a name, surname, and ID. They can perform tasks such as feeding animals, cleaning enclosures, and other duties in the zoo."""
 
     def __init__(self, name: str, surname: str, id:int) -> None:
-        """Initializes a Zookeper object with specified attributes.
+        """Initializes a ZooKeeper object with specified attributes.
 
         Attributes:
-            name (str): The name of the zookeeper.
-            surname (str): The surname of the zookeeper.
-            id (int): The ID of the zookeeper.
+            name (str): The name of the ZooKeeper.
+            surname (str): The surname of the ZooKeeper.
+            id (int): The ID of the ZooKeeper.
             """
         self.name: str = name
         self.surname: str = surname
@@ -142,11 +114,11 @@ class Zookeper:
         self.fence_list: list = []
     
     def __str__(self) -> str:
-        """Returns a string representation of the Zookeper object."""
+        """Returns a string representation of the ZooKeeper object."""
         return f"Guardian(name={self.name}, surname={self.surname}, id={self.id})"
     
     def add_fence(self, Fence: Fence) -> None:
-        """Adds a fence to the zookeeper's list of fences to be managed.
+        """Adds a fence to the ZooKeeper's list of fences to be managed.
 
         Args:
             Fence (Fence): The fence to be added.
@@ -238,7 +210,7 @@ class Zookeper:
             return f"it took {self.tempo} unit of time to clean the area."
     
     def get_caged_animals(self) -> str:
-        """Prints all the animals in each fence managed by the zookeeper."""
+        """Prints all the animals in each fence managed by the ZooKeeper."""
         print("Fences:")
         for fence in self.fence_list:
             print(fence)
@@ -249,60 +221,21 @@ class Zookeper:
 
 
 class Zoo:
-    """This class represents a zoo. The zoo consists of fences and zookeepers."""
+    """This class represents a zoo. The zoo consists of fences and ZooKeepers."""
     
-    def __init__(self, Fence_list: list[Fence], Zookeeper_list: list[Zookeper]) -> None:
-        """Initializes a Zoo object with specified fences and zookeepers.
+    def __init__(self, Fence_list: list[Fence], ZooKeeper_list: list[ZooKeeper]) -> None:
+        """Initializes a Zoo object with specified fences and ZooKeepers.
 
         Attributes:
             Fence_list (list[Fence]): A list of fences in the zoo.
-            Zookeeper_list (list[Zookeper]): A list of zookeepers managing the zoo.
+            ZooKeeper_list (list[ZooKeeper]): A list of ZooKeepers managing the zoo.
             """
         self.fences = Fence_list
-        self.zoo_keepers = Zookeeper_list
+        self.zoo_keepers = ZooKeeper_list
     
     def describe_zoo(self) -> str:
-        """Prints information about all the zookeepers and the fences with animals."""
+        """Prints information about all the ZooKeepers and the fences with animals."""
         print("Guardians:")
-        for zookeeper in self.zoo_keepers:
-            print(zookeeper)
-            zookeeper.get_caged_animals()
-# -------------------------------------------------------------------------------------------------------------------------------
-
-animal1: Animal = Animal(name= "Lion", species ="Leoncio Leonel", age= 10, height = 1.5, width = 3.5, preferred_habitat = "Jungle", health = None)
-animal2: Animal = Animal(name="Scoiattolo", species="Blabla", age=25, height = 0.1, width = 0.6, preferred_habitat = "Continent", health = None)
-animal3: Animal = Animal(name="Lupo", species="Lupus", age=14, height = 1.0, width = 3.0, preferred_habitat = "continent", health = None)
-
-fence1: Fence = Fence(area=200, temperature = 27.5, habitat = "Jungle")
-fence2: Fence = Fence(area=100, temperature=25, habitat="Continent")
-
-zookeeper1: Zookeper = Zookeper(name="Lorenzo", surname="Maggi", id=1234)
-zookeeper2: Zookeper = Zookeper(name="Vivi", surname="Juju", id=12121)
-
-
-zookeper_list: list[Zookeper] = [zookeeper1, zookeeper2]
-fence_list: list[Fence] = [fence1, fence2]
-animals_list: list[Animal] = [animal1, animal2, animal3]
-
-zoo: Zoo = Zoo(Fence_list=fence_list, Zookeeper_list=zookeper_list)
-
-
-# -------------------------------------------------------------------------------------------------------------------------------
-print("\n") 
-
-zookeeper1.add_fence(fence1)
-zookeeper1.add_fence(fence2)
-zookeeper2.add_fence(fence2)
-
-zookeeper1.add_animal(animal1, fence1)
-zookeeper1.add_animal(animal2, fence2)
-zookeeper1.add_animal(animal3, fence2)
-zookeeper1.remove_animal(animal2, fence2)
-zookeeper1.add_animal(animal2, fence2)
-zookeeper1.feed(animal1)
-zookeeper1.feed(animal2)
-zoo.describe_zoo()
-zookeeper1.get_caged_animals()
-
-
-
+        for ZooKeeper in self.zoo_keepers:
+            print(ZooKeeper)
+            ZooKeeper.get_caged_animals()
