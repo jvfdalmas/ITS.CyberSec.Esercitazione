@@ -129,7 +129,7 @@ class Warehouse:
         product: str = self.find_product(product_name)
 
         for item  in self.product_list:
-            if item.name == product_name:
+            if item.name == product:
                 return item.quantity
             
 prodotto1: Product = Product("shampoo", 3)
