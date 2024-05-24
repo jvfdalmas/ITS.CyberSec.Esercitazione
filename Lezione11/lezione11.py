@@ -89,3 +89,58 @@ print()
 print(sala1.get_available_seats())
 print()
 print(cinema1)
+
+# -------------------------------------------------------------------------------------------------------------------------------
+print("\n") 
+
+"""Gestione di un magazzino. Scrivi un programma in Python che gestisca un magazzino. Il programma deve permettere di aggiungere prodotti al magazzino, cercare prodotti per nome e verificare la disponibilità di un prodotto.
+
+Definisci una classe Prodotto con i seguenti attributi:
+- nome (stringa)
+- quantità (intero)
+ 
+Definisci una classe Magazzino con i seguenti metodi:
+- aggiungi_prodotto(prodotto: Prodotto): aggiunge un prodotto al magazzino.
+- cerca_prodotto(nome: str) -> Prodotto: cerca un prodotto per nome e lo ritorna se esiste.
+- verifica_disponibilità(nome: str) -> str: verifica se un prodotto è disponibile in magazzino."""
+
+class Product:
+
+    def __init__(self, name: str, quantity: int) -> None:
+        self.name = name
+        self.quantity = quantity
+
+class Warehouse:
+
+    def __init__(self):
+        self.product_list = []
+
+    def add_product(self, product: Product) -> None:
+        self.product_list.append(product)
+
+    def find_product(self, product_name: str) -> str:
+        for product in self.product_list:
+            if product_name == product.name:
+                return product.name
+            else:
+                return "product not available!"
+            
+    def check_quantity(self, product_name: str) -> str:
+        product: str = self.find_product(product_name)
+
+        for item  in self.product_list:
+            if item.name == product_name:
+                return item.quantity
+            
+prodotto1: Product = Product("shampoo", 3)
+prodotto2: Product = Product("soap", 10)
+
+warehouse1: Warehouse = Warehouse()
+
+warehouse1.add_product(prodotto1)
+warehouse1.add_product(prodotto2)
+
+print(warehouse1.find_product("shampoo"))
+print(warehouse1.check_quantity("shampoo"))
+print(warehouse1.find_product("banana"))
+print(warehouse1.check_quantity("banana"))
