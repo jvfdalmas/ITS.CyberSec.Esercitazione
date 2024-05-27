@@ -522,7 +522,7 @@ print("\n")
 
 """9-14. Lottery: Make a list or tuple containing a series of 10 numbers and 5 letters. Randomly select 4 numbers or letters from the list and print a message saying that any ticket matching these 4 numbers or letters wins a prize."""
 
-lottery_list: list = [1, 2, 3, 4,5, 6, 7, 8, 9, 10, "a", "b", "c", "d", "e"]
+lottery_list: list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "a", "b", "c", "d", "e"]
 
 random_items = random.sample(lottery_list, 4)
 
@@ -533,13 +533,13 @@ print("\n")
 
 """9-15. Lottery Analysis: You can use a loop to see how hard it might be to win the kind of lottery you just modeled. Make a list or tuple called my_ticket. Write a loop that keeps pulling numbers until your ticket wins. Print a message reporting how many times the loop had to run to give you a winning ticket."""
 
-my_ticket: list =  ['b', 3, 5, 'c']
+my_ticket: list =  ['b', "3", "5", 'c']
 counter = 0
 
-while my_ticket != random_items:
+while sorted(my_ticket) != sorted(random_items):
     counter += 1
     random_items = random.sample(lottery_list, 4)
-    if my_ticket == random_items:
+    if sorted(my_ticket) == sorted(random_items):
         print(f"it took {counter} attempts, {random_items}")
     else:
         print(f"attempt No. {counter}, {random_items}")
