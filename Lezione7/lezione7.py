@@ -1,11 +1,34 @@
 """ Write a function to find all numbers divisible by 7, not a multiple of 5, between 2000 and 3200 (both included). The numbers should be stored in a list and returned as output. """
 
+def divisible7_notmultiple5(numbers: list[int]) -> list[int]:
+    risult: list = []
+    for number in numbers:
+        if number % 7 == 0 and number % 5 != 0:
+            risult.append(number)
+
+    return risult
+
+test_list = [7, 10, 14, 20, 21, 25, 28, 30, 35, 40, 42, 49, 50, 55, 56, 60, 63, 70, 77, 80, 84, 90, 91, 95, 98, 100]
+
+print(divisible7_notmultiple5(test_list))
+
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
 
 """ Write a function to calculate the factorial of a number given as input. The number should be returned as output. For example:
 Input: 8
 Output: 40320"""
+
+def calculate_factorial(number: int) -> int:
+    fattoriale: int = number
+    while number > 1:
+        fattoriale = fattoriale * (number -1)
+        number -= 1
+    
+    return fattoriale
+
+print(calculate_factorial(8))
+
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
