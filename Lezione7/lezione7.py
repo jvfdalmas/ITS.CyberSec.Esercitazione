@@ -78,6 +78,8 @@ def generate_dict(number: int) -> dict:
     return dict
 
 print(generate_dict(8))
+print(generate_dict(20))
+
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
