@@ -14,16 +14,71 @@ Test 	Result
 print(symmetric([1,2,2,3,4,4,3]))
 True"""
 
-class TreeNode:
+class BinaryTree:
     
-    def __init__(self, val=0, left=None, right=None):
+    def __init__(self, val=None, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
+
+    def getLeftChild(self):
+        return self.left
+    
+    def getRightChild(self):
+        return self.right
+    
+    def setNodeValue(self,value):
+        self.val = value
+    
+    def getNodeValue(self):
+        return self.val
+    
+    def insertRight(self,newNode):
+        if self.right == None:
+            self.right = BinaryTree(newNode)
+        else:
+            tree = BinaryTree(newNode)
+            tree.right = self.right
+            self.right = tree
         
+    def insertLeft(self,newNode):
+        if self.left == None:
+            self.left = BinaryTree(newNode)
+        else:
+            tree = BinaryTree(newNode)
+            tree.left = self.left
+            self.left = tree
+
+def buildTree(values):
+    if not values:
+        return None
+    nodes = [BinaryTree(val) if val is not None else None for val in values]
+    for i, node in enumerate(nodes):
+        left_index = 2 * i + 1
+        right_index = 2 * i + 2
+        if left_index < len(nodes):
+            node.left = nodes[left_index]
+        if right_index < len(nodes):
+            node.right = nodes[right_index]
+    return nodes[0]
+
+def isSymmetricHelper(left: BinaryTree, right: BinaryTree) -> bool:
+    if left is None and right is None:
+        return True
+    if left is None or right is None:
+        return False
+    if left.val != right.val:
+        return False
+    return isSymmetricHelper(left.left, right.right) and isSymmetricHelper(left.right, right.left)
+
 def symmetric(tree: list[int]) -> bool:
-    # scrivere qui la vostra funzione
-    pass
+    binaryTree = buildTree(tree)
+    if binaryTree is None:
+        return True
+    return isSymmetricHelper(binaryTree.left, binaryTree.right)
+
+# Test
+print(symmetric([1,2,2,3,4,4,3]))  # True
 
 
 # -------------------------------------------------------------------------------------------------------------------------------
@@ -221,7 +276,7 @@ print("\n")
             is_borrowed: boolean - booleano che indica se il libro è in prestito o meno.
         Metodi:
             borrow()-Contrassegna il libro come preso in prestito se non è già preso in prestito.
-            return_book()- Contrassegna il libro come restituito.
+            return_book()- Contrassegna 8il libro come restituito.
 
     Classe Member:
         Attributi:
