@@ -37,12 +37,47 @@ print("\n")
 Input: [2, 5, 8, 10]
 Output: [2, 120, 40320, 3628800]"""
 
+lista = [2, 5, 8, 10]
+risult = [calculate_factorial(number) for number in lista]
+print(risult)
+
+
+# alternative using existing function: 
+
+def calculate_factorial_list(numbers: list[int]) -> int:
+    risult = [calculate_factorial(number) for number in numbers]
+    return risult
+
+print(calculate_factorial_list(lista))
+
+
+# alternative building a new function: 
+
+def calculate_factorial_list(numbers: list[int]) -> int:
+    risult = []
+    for number in numbers:
+        fattoriale: int = number
+        while number > 1:
+            fattoriale = fattoriale * (number -1)
+            number -= 1
+        risult.append(fattoriale)
+    
+    return risult
+
+print(calculate_factorial_list(lista))
+
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
 
 """Given an integer n as input, write a function to generate a dictionary that contains (i, i*i) as (key, value) pairs such that i is an integer between 1 and n (both included). The function should return the dictionary as output. For example:
 Input: 8
 Output: {1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64}"""
+
+def generate_dict(number: int) -> dict:
+    dict = {i: i*i for i in range(1,number+1)}
+    return dict
+
+print(generate_dict(8))
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
