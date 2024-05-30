@@ -1,3 +1,78 @@
+"""Data una lista di interi, chiamata tree, che rappresenta un albero binario, restituire True se l'albero è simmetrico; False altrimenti.
+
+La lista di interi è formata così:
+
+    L'elemento in posizione 0 corrisponde alla radice
+    Dato un nodo in posizione i, il suo figlio sinistro si trova in posizione 2*i + 1
+    Dato un nodo in posizione i, il suo figlio destro si trova in posizione 2*(i+1)
+    Se, dato un indice i si va fuori bound facendo almeno uno dei calcoli dei punti precedenti, significa che il nodo che corrisponde a quell'indice è una foglia.
+
+Potete utilizzare la classe TreeNode per crearvi prima l'albero - anziché usare la lista tree - e poi visitare l'albero sfruttando gli oggetti di tipo TreeNode.
+
+For example:
+Test 	Result
+print(symmetric([1,2,2,3,4,4,3]))
+True"""
+
+class TreeNode:
+    
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        
+def symmetric(tree: list[int]) -> bool:
+    # scrivere qui la vostra funzione
+    pass
+
+
+# -------------------------------------------------------------------------------------------------------------------------------
+print("\n") 
+"""Determina se una tavola Sudoku 9 x 9 è valida. Solo le celle compilate devono essere convalidate secondo le seguenti regole:
+
+    Ogni riga deve contenere le cifre 1-9 senza ripetizioni.
+    Ciascuna colonna deve contenere le cifre da 1 a 9 senza ripetizioni.
+    Ciascuno dei nove sottoriquadri 3 x 3 della griglia deve contenere le cifre 1-9 senza ripetizione.
+
+Nota:
+
+    Una tavola Sudoku (parzialmente riempita) potrebbe essere valida ma non è necessariamente risolvibile.
+    Solo le celle riempite devono essere convalidate secondo le regole menzionate.
+
+Test 	Result
+board = [["5","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
+print(valid_sudoku(board))
+True
+
+board = [["8","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
+print(valid_sudoku(board))
+False"""
+
+def valid_sudoku(board: list[list[str]]) -> bool:
+    # la tavola del sudo viene rapperentata come una matrice (lista di liste)
+    # con 9 righe e 9 colonne
+    pass
+
+
+# -------------------------------------------------------------------------------------------------------------------------------
+print("\n")
+
 """Data una stringa s e una lista di stringhe wordDict, restituisce True se s può essere segmentato in una sequenza separata da spazi di una o più parole del dizionario; False altrimenti.
 Tieni presente che la stessa parola nel dizionario può essere riutilizzata più volte nella segmentazione.
 For example:
@@ -117,7 +192,21 @@ class ListNode:
         self.next = next
         
 def reverse_list(head: ListNode) -> list[int]:
-    pass
+    current = head
+    risult = []
+    risult.append(current.val)
+    while current.next is not None:
+        current = current.next
+        risult.append(current.val)
+    
+    risult.reverse()
+    return risult
+
+head = ListNode(val=1, next=ListNode(val=2, next=ListNode(val=3, next=ListNode(val=4, next=ListNode(val=5)))))
+print(reverse_list(head)) # expected: [5, 4, 3, 2, 1]
+
+head = ListNode(val=1, next=ListNode(val=2))
+print(reverse_list(head)) # expected: [2, 1]
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n")
@@ -245,51 +334,6 @@ print(library.get_borrowed_books("M002"))  # Expected output: ['1984']
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n")
 
-"""Determina se una tavola Sudoku 9 x 9 è valida. Solo le celle compilate devono essere convalidate secondo le seguenti regole:
-
-    Ogni riga deve contenere le cifre 1-9 senza ripetizioni.
-    Ciascuna colonna deve contenere le cifre da 1 a 9 senza ripetizioni.
-    Ciascuno dei nove sottoriquadri 3 x 3 della griglia deve contenere le cifre 1-9 senza ripetizione.
-
-Nota:
-
-    Una tavola Sudoku (parzialmente riempita) potrebbe essere valida ma non è necessariamente risolvibile.
-    Solo le celle riempite devono essere convalidate secondo le regole menzionate.
-
-Test 	Result
-board = [["5","3",".",".","7",".",".",".","."]
-,["6",".",".","1","9","5",".",".","."]
-,[".","9","8",".",".",".",".","6","."]
-,["8",".",".",".","6",".",".",".","3"]
-,["4",".",".","8",".","3",".",".","1"]
-,["7",".",".",".","2",".",".",".","6"]
-,[".","6",".",".",".",".","2","8","."]
-,[".",".",".","4","1","9",".",".","5"]
-,[".",".",".",".","8",".",".","7","9"]]
-print(valid_sudoku(board))
-True
-
-board = [["8","3",".",".","7",".",".",".","."]
-,["6",".",".","1","9","5",".",".","."]
-,[".","9","8",".",".",".",".","6","."]
-,["8",".",".",".","6",".",".",".","3"]
-,["4",".",".","8",".","3",".",".","1"]
-,["7",".",".",".","2",".",".",".","6"]
-,[".","6",".",".",".",".","2","8","."]
-,[".",".",".","4","1","9",".",".","5"]
-,[".",".",".",".","8",".",".","7","9"]]
-print(valid_sudoku(board))
-False"""
-
-def valid_sudoku(board: list[list[str]]) -> bool:
-    # la tavola del sudo viene rapperentata come una matrice (lista di liste)
-    # con 9 righe e 9 colonne
-    pass
-
-
-# -------------------------------------------------------------------------------------------------------------------------------
-print("\n")
-
 """Date due stringhe s e t, restituire True se t è un anagramma di s, e False altrimenti.
 
 Un anagramma è una parola o una frase formata riorganizzando le lettere di una parola o frase diversa, in genere utilizzando tutte le lettere originali esattamente una volta.
@@ -307,33 +351,3 @@ def anagram(s: str, t: str) -> bool:
         return False
     
 
-
-# -------------------------------------------------------------------------------------------------------------------------------
-print("\n")
-
-"""Data una lista di interi, chiamata tree, che rappresenta un albero binario, restituire True se l'albero è simmetrico; False altrimenti.
-
-La lista di interi è formata così:
-
-    L'elemento in posizione 0 corrisponde alla radice
-    Dato un nodo in posizione i, il suo figlio sinistro si trova in posizione 2*i + 1
-    Dato un nodo in posizione i, il suo figlio destro si trova in posizione 2*(i+1)
-    Se, dato un indice i si va fuori bound facendo almeno uno dei calcoli dei punti precedenti, significa che il nodo che corrisponde a quell'indice è una foglia.
-
-Potete utilizzare la classe TreeNode per crearvi prima l'albero - anziché usare la lista tree - e poi visitare l'albero sfruttando gli oggetti di tipo TreeNode.
-
-For example:
-Test 	Result
-print(symmetric([1,2,2,3,4,4,3]))
-True"""
-
-class TreeNode:
-    
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-        
-def symmetric(tree: list[int]) -> bool:
-    # scrivere qui la vostra funzione
-    pass
