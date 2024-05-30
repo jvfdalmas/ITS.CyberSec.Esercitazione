@@ -88,12 +88,25 @@ print("\n")
 Input: without,hello,bag,world
 Output: bag,hello,without,world"""
 
+def sorting_with_comma(s: str) -> str:
+    s:list = s.split(",")
+    s.sort()
+    s: str = ",".join(s)
+
+    return s
+
+print(sorting_with_comma("without,hello,bag,world")) # expected: "bag,hello,without,world"
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
 
 """Write a function that accepts a list of sentences (string) as input and returns each line as output after capitalising all sentence characters. For example:
 Input: Practice makes perfect
 Output: PRACTICE MAKES PERFECT"""
+
+def capitalise(s: str) -> str:
+    return s.upper()
+
+print(capitalise("Practice makes perfect"))
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
@@ -102,12 +115,38 @@ print("\n")
 Input: hello world and practice makes perfect and hello world again
 Output: again and hello makes perfect practice world"""
 
+def sorting_no_duplicates(s: str) -> str:
+    s: list = s.split()
+    s: set = set(s)
+    s: list = list(s)
+    s.sort()
+    s: str = " ".join(s)
+    return s
+
+print(sorting_no_duplicates("hello world and practice makes perfect and hello world again")) # expected: "again and hello makes perfect practice world"
+
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
 
 """Write a function to check whether a string is a pangram or not. Pangrams are words or sentences containing every letter of the alphabet at least once.
 Input: The quick brown fox jumps over the lazy dog
 Output: True"""
+
+def check_abc(s: str) -> bool:
+    alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    s: str = s.replace(" ", "")
+    s: list = list(s.lower())
+
+    for _ in s:
+        if _ in alphabet:
+            alphabet.remove(_)
+
+    if alphabet == []:
+        return True
+    else:
+        return False
+
+print(check_abc("The quick brown fox jumps over the lazy dog"))
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
