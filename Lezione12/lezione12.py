@@ -127,12 +127,7 @@ class MovieCatalog:
             return self.catalog[director_name]
         
     def search_movies_by_title(self, title) -> str:
-        risult = []
-        
-        for movies_list in self.catalog.values():
-            for movie in movies_list:
-                if title.lower() in movie.lower():
-                    risult.append(movie)
+        risult = [movie for movies_list in self.catalog.values() for movie in movies_list if title.lower() in movie.lower()]
         
         if risult == []:
             raise ValueError("No movie found with this word")
