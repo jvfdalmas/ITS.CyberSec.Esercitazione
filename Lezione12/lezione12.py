@@ -1,3 +1,7 @@
+# Sistema di Gestione Biblioteca
+
+print("Sistema di Gestione Biblioteca - Soluzione: \n")
+
 """Sistema Avanzato di Gestione Biblioteca. Si desidera sviluppare un sistema per la gestione di una biblioteca in Python. Il sistema deve permettere di gestire un inventario di libri e le operazioni di prestito e restituzione degli stessi. Gli utenti del sistema devono essere in grado di aggiungere libri al catalogo, prestarli, restituirli e visualizzare quali libri sono disponibili in un dato momento.
 
 Classi:
@@ -60,7 +64,7 @@ class Library:
         if not available_books:
             raise ValueError("There are no books available")
         else:
-            return available_books
+            return f"available books: {available_books}"
 
     
 """"Test Cases:
@@ -84,6 +88,8 @@ print(library.show_available_books())
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
+# Catalogo Film
+print("Catalogo Film - Soluzione: \n")
 
 """Catalogo Film. Sviluppa un sistema in Python per la gestione di un catalogo film che permetta di aggiungere, rimuovere e cercare film di un particolare regista. Il sistema dovrebbe consentire anche di visualizzare tutti i registi e i loro film.
 
@@ -107,10 +113,13 @@ class MovieCatalog:
         self.catalog: dict = {}
 
     def add_movie(self, movie_title: str, movie_director: str) -> None:
-        if self.catalog.get(movie_director) == None:
+        if movie_director not in self.catalog:
             self.catalog[movie_director] = [movie_title]
         else:
-            self.catalog[movie_director].append(movie_title)
+            if movie_title not in self.catalog[movie_director]:
+                self.catalog[movie_director].append(movie_title)
+            else:
+                raise ValueError("this movie is already in the catalog")
 
     def remove_movie(self, movie_title: str, movie_director: str) -> None:
         if movie_title in self.catalog[movie_director]:
@@ -127,7 +136,15 @@ class MovieCatalog:
             return self.catalog[director_name]
         
     def search_movies_by_title(self, title) -> str:
-        risult = [movie for movies_list in self.catalog.values() for movie in movies_list if title.lower() in movie.lower()]
+        risult = {}
+
+        for director_name, movies_list in self.catalog.items():
+            for movie in movies_list:
+                if title.lower() in movie.lower():
+                    if director_name not in risult:
+                        risult[director_name] = [movie]
+                    else:
+                        risult[director_name].append(movie)
         
         if risult == []:
             raise ValueError("No movie found with this word")
@@ -135,8 +152,8 @@ class MovieCatalog:
             return risult
     
 movie_catalog = MovieCatalog()
-movie_catalog.add_movie("The Godfather", "Francis Ford Coppola")
 movie_catalog.add_movie("Apocalypse Now", "Francis Ford Coppola")
+movie_catalog.add_movie("The Godfather", "Francis Ford Coppola")
 movie_catalog.add_movie("Pulp Fiction", "Quentin Tarantino")
 movie_catalog.add_movie("Jaws", "Steven Spielberg")
 movie_catalog.add_movie("E.T. the Extra-Terrestrial", "Steven Spielberg")
@@ -152,10 +169,12 @@ print("print movie director - Coppola (after del 1 movie):\n",movie_catalog.get_
 print("")
 print(movie_catalog.list_directors())
 print("")
-print("search movies: E \n", movie_catalog.search_movies_by_title("E"))
+print("search movies: A \n", movie_catalog.search_movies_by_title("A"))
 print("")
 print("search movies: fiction \n", movie_catalog.search_movies_by_title("fiction"))
 print("")
-print("search movies: brasil \n", movie_catalog.search_movies_by_title("brasil"))
+#print("search movies: brasil \n", movie_catalog.search_movies_by_title("brasil"))
+#movie_catalog.add_movie("Jaws", "Steven Spielberg")
+
 
 
