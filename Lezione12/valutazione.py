@@ -359,8 +359,9 @@ class Specie:
         return self.popolazione_attuale
 
     def anni_per_superare(self, altra_specie: 'Specie') -> int:  # Metodo per calcolare in quanti anni la popolazione di questa specie supererà quella di un'altra specie.
-        anni_necessari: int = 0
+        anni_necessari: int = 1
         max_anni: int = 1000
+
         print(anni_necessari, self.popolazione_attuale, altra_specie.popolazione_attuale)
         while self.popolazione_attuale < altra_specie.popolazione_attuale and anni_necessari < max_anni:
             anni_necessari += 1
@@ -372,7 +373,7 @@ class Specie:
         if anni_necessari == max_anni:
             return f"Le popolazioni non si incontreranno in {max_anni} anni"
         
-        anni_necessari = anni_necessari+1 # ????
+        anni_necessari = anni_necessari # ????
         return anni_necessari
 
     def getDensita(self, area_kmq: float) -> int:  # Metodo per calcolare in quanti anni la popolazione raggiungerà una densità di 1 individuo per km².
