@@ -155,6 +155,16 @@ print("\n")
 Input: 6
 Output: True"""
 
+def is_perfect(n: int) -> bool:
+    divisors_sum: int = sum([divisior for divisior in range(1,n) if n % divisior == 0])
+
+    if divisors_sum == n:
+        return True
+    else:
+        return False
+
+print(is_perfect(6))
+
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
@@ -162,6 +172,15 @@ print("\n")
 """Using the code implemented in Exercise 8, write a function that, given a number n as input, computes all "Perfect" numbers between 1 and n. For example:
 Input: 500
 Output: [6, 28, 496]"""
+
+def is_perfect_list(n_list: list[int]) -> list:
+    risult: list = [n for n in n_list if is_perfect(n) == True]
+
+    return risult
+
+lista: list = range(1, 501)
+
+print(is_perfect_list(lista))
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
@@ -172,4 +191,18 @@ Then, sort based on age;
 Then, sort by score.
 
 Input: [('Tom',19,80), ('John',20,90), ('Jony',17,91), ('Jony',17,93), ('Json',21,85)]
-Output:  [('John', '20', '90'), ('Jony', '17', '91'), ('Jony', '17', '93'), ('Json', '21', '85'), ('Tom', '19', '80')] """  
+Output:  [('John', '20', '90'), ('Jony', '17', '91'), ('Jony', '17', '93'), ('Json', '21', '85'), ('Tom', '19', '80')] """
+
+def sort(array: list[tuple[str, int, int]]) -> list[tuple[str, str, str]]:
+    n = len(array)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if array[j] > array[j+1]:
+                array[j], array[j+1] = array[j+1], array[j]
+    
+    result = [(name, str(age), str(height)) for name, age, height in array]
+    
+    return result
+
+lista: list = [('Tom',19,80), ('John',20,90), ('Jony',17,91), ('Jony',17,93), ('Json',21,85)]
+print(sort(lista)) # expected:  [('John', '20', '90'), ('Jony', '17', '91'), ('Jony', '17', '93'), ('Json', '21', '85'), ('Tom', '19', '80')]
