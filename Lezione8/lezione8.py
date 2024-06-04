@@ -347,3 +347,100 @@ Enroll students in courses and assign professors to courses.
 Display the state of the university."""
 
 print("Exercise 4 - Soluzione: \n")
+
+class Person(ABC):
+
+    def __init__(self, name: str, age: int) -> None:
+        self.name: str = name
+        self.age: int = age
+
+    @abstractmethod
+    def get_role(self):
+        pass
+
+    def __str__(self):
+        return f"name: {self.name}, age: {self.age}."
+
+
+class Student(Person):
+
+    def __init__(self, name: str, age: int, student_id: str):
+        Person.__init__(self, name, age)
+        self.student_id: str = student_id
+        self.courses: list[Course] = []
+
+    def get_role(self):
+        return "student"
+    
+    def enroll(self, course: str) -> list[str]:
+        self.courses.append(course)
+        return self.courses
+
+    def __str__(self):
+        courses_list: list[str] = [course.course_name for course in self.courses]
+        return f"name: {self.name}, age: {self.age}, id: {self.student_id}, course: {courses_list}"
+
+
+class Professor(Person):
+
+    def __init__(self, name: str, age: int, professor_id: str, department: str):
+        Person.__init__(self, name, age)
+        self.professor_id: str = professor_id
+        self.department: str = department
+        self.courses: list[Course] = []
+
+    def get_role(self):
+        return "professor"
+    
+    def assign_to_course(self, course: str) -> list[str]:
+        self.courses.append(course)
+        return self.courses
+
+    def __str__(self):
+        courses_list: list[str] = [course.course_name for course in self.courses]
+        return f"name: {self.name}, age: {self.age}, id: {self.professor_id}, department: {self.department}, course: {courses_list}"
+
+
+class Course:
+
+    def __init__(self, course_name: str, course_code: str) -> None:
+        self.course_name: str = course_name
+        self.course_code: str = course_code
+        self.professor: Professor = Professor
+        self.students: list[Student] = []
+
+    def add_student(self, student: Student) -> list[Student]:
+        if student not in self.students:
+            self.students.append(student)
+        return self.students
+    
+    def set_professor(self, professor: Professor) -> Professor:
+        if self.professor != professor:
+            self.professor = professor
+        return professor
+    
+    def __str__(self) -> str:
+        students_list: list[str] = [student.name for student in self.students]
+        return f"course name: {self.course_name}, course code: {self.course_code}, professor: {self.professor}, students: {"".join(students_list)}."
+    
+
+class University:
+
+    def __init__(self, name: str) -> None:
+        self.name: str = name
+        self.courses: list[str] = []
+        self.students: list[Student] = []
+    
+    def add_deparment(self, course: Course) -> list[str]:
+        if course not in self.courses:
+            self.courses.append(course)
+        return self.courses
+    
+    def add_student(self, student: Student) -> list[str]:
+        if student not in self.students:
+            self.students.append(student)
+        return self.students
+    
+    def __str__(self):
+        students_list: list[str] = [student.name for student in self.students]
+        return f"Universisty: {self.name}, departments: {self.courses}, students: {"".join(students_list)}."
