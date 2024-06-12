@@ -81,4 +81,4 @@ class Dottore(Persona):
     def doctorGreet(self):
         # Richiama la funzione greet() della classe Persona. Poi, stampa il seguente saluto "Sono un medico {specialization}"
         self.greet()
-        return f"Sono un medico {self.getSpecialization()}"
+        return f"{self.greet()}\nSono un medico {self.getSpecialization()}"

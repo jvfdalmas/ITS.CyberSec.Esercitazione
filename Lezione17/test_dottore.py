@@ -78,7 +78,7 @@ class TestDottore(unittest.TestCase):
   # Scrivere test per greet
   def test_Greet(self):
     self.assertEqual(self.dottore.greet(),"Ciao, sono Michele Fonte! Ho 0 anni!")
-    self.assertEqual(self.dottore.doctorGreet(),"Sono un medico estetico")
+    self.assertEqual(self.dottore.doctorGreet(),"Ciao, sono Michele Fonte! Ho 0 anni!\nSono un medico estetico")
 
 
 if __name__ == "__main__":
