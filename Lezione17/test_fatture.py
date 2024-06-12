@@ -12,4 +12,40 @@ Test della Classe Fattura
   - Il calcolo corretto del salario e del numero di fatture.
   - L'aggiunta e la rimozione di pazienti dalla lista."""
 
+import unittest
+from paziente import Paziente
+from dotttore import Dottore
 from fatture import Fattura
+
+class TestFatture(unittest.TestCase):
+  
+  def setUp(self):
+     self.dottore = Dottore("Michele", "Fonte", "generale", 0.8)
+     self.pazziente1 = Paziente("Simone", "Antonelli", "PZ001")
+     self.pazziente2 = Paziente("Marco", "Cascio", "PZ002")
+     self.pazziente3 = Paziente("Angelo", "Locarini", "PZ003")
+     self.pazzienti = [self.pazziente1, self.pazziente2, self.pazziente3]
+     self.fatture = Fattura(self.pazzienti, self.dottore)
+     self.pazziente4 = Paziente("Giuseppe", "Mosca", "PZ004")
+
+  # Scrivere test per verificar il funzionamento del metodo Getsalary
+  def test_getSalary(self):
+     self.assertAlmostEqual(self.fatture.getSalary(), 2.4)
+
+  # Scrivere test per verificar il funzionamento del metodo Getfatture
+  def test_getFatture(self):
+     self.assertEqual(self.fatture.getFatture(), 3)
+
+  # Scrivere test per verificar il funzionamento del metodo add_patient
+  def test_addPatient(self):
+     self.assertEqual(self.fatture.addPatient(self.pazziente4), "Alla lista del Dottor Fonte è stato aggiunto il paziente PZ004")
+     self.assertEqual(self.pazzienti[-1], self.pazziente4)
+
+  # Scrivere test per verificar il funzionamento del metodo remove_patient
+  def test_removePatient(self):
+     self.fatture.addPatient(self.pazziente4)
+     self.assertEqual(self.fatture.removePatient(self.pazziente4), "Alla lista del Dottor Fonte è stato rimosso il paziente PZ004")
+     self.assertNotIn(self.pazziente4, self.pazzienti)
+
+if __name__ == "__main__":
+    unittest.main()

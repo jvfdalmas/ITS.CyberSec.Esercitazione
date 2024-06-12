@@ -47,42 +47,45 @@ from dotttore import Dottore
 
 class Fattura:
     
-    def __init__(self, patient: list[Paziente], doctor: Dottore) -> None:
+  def __init__(self, patient: list[Paziente], doctor: Dottore) -> None:
         
-        #Verificare se il dottore può esercitare la professione, richiamando la funzione isAValidDoctor()
-        if doctor.isAValidDoctor():
-            self.__patient = patient
-            self.__doctor = doctor
-            self.__fatture = len(self.__patient)
-            self.__salary = 0
-        else:
-            self.__fatture = None
-            self.__salary = None
-            self.__patient = None
-            self.__doctor = None
-            print("Non è possibile creare la classe fattura poichè il dottore non è valido!")
-
-    def getSalary(self):
-        # Deve ritornare il salario guadagnato dal dottore
-        print(self.__salary)
-
-    def getFatture(self): 
-      # Deve ritornare il valore dell'attributo fatture, dopo aver assegnato ad esso il numero dei pazienti che ha il dottore.
+    #Verificare se il dottore può esercitare la professione, richiamando la funzione isAValidDoctor()
+    if doctor.isAValidDoctor():
+      self.__patient = patient
+      self.__doctor = doctor
       self.__fatture = len(self.__patient)
-      print(self.__fatture)
+      self.__salary = len(self.__patient) * doctor.getParcel()
+    else:
+      self.__fatture = None
+      self.__salary = None
+      self.__patient = None
+      self.__doctor = None
+      return "Non è possibile creare la classe fattura poichè il dottore non è valido!"
 
-    def addPatient(self, newPatient: Paziente): 
-      # Consente di aggiungere un paziente alla lista di pazienti di un dottore, aggiornando poi il numero di fatture ed il salario, richiamando il metodo getFatture() e getSalary(). Stampare "Alla lista del Dottor cognome è stato aggiunto il paziente codice_identificativo"
+  def getSalary(self):
+    # Deve ritornare il salario guadagnato dal dottore
+    self.__salary = len(self.__patient) * self.__doctor.getParcel()
+    return self.__salary
+
+  def getFatture(self): 
+    # Deve ritornare il valore dell'attributo fatture, dopo aver assegnato ad esso il numero dei pazienti che ha il dottore.
+    self.__fatture = len(self.__patient)
+    return self.__fatture
+
+  def addPatient(self, newPatient: Paziente): 
+    # Consente di aggiungere un paziente alla lista di pazienti di un dottore, aggiornando poi il numero di fatture ed il salario, richiamando il metodo getFatture() e getSalary(). Stampare "Alla lista del Dottor cognome è stato aggiunto il paziente codice_identificativo"
+    self.__patient.append(newPatient)
+    self.getFatture()
+    self.getSalary()
+    return f"Alla lista del Dottor {self.__doctor.getLastname()} è stato aggiunto il paziente {newPatient.getidCode()}"
+
+  def removePatient(self, oldPatient: Paziente): 
+    # Consente di rimuovere un paziente alla lista di pazienti di un dottore ricevendo in input il codice identificativo del paziente da rimuovere, aggiornando poi il numero di fatture e il salario, richiamando il metodo get Fatture() e getSalary(). Stampare "Alla lista del Dottor cognome è stato rimosso il paziente codice_identificativo""""
+    if oldPatient in self.__patient:
+      self.__patient.remove(oldPatient)
       self.getFatture()
       self.getSalary()
-      print(f"Alla lista del Dottor {self.__doctor.__last_name} è stato aggiunto il paziente {newPatient.__idCode}")
-
-    def removePatient(self, oldPatient: Paziente): 
-      # Consente di rimuovere un paziente alla lista di pazienti di un dottore ricevendo in input il codice identificativo del paziente da rimuovere, aggiornando poi il numero di fatture e il salario, richiamando il metodo get Fatture() e getSalary(). Stampare "Alla lista del Dottor cognome è stato rimosso il paziente codice_identificativo""""
-      if oldPatient in self.__patient:
-        self.getFatture()
-        self.getSalary()
-        print(f"Alla lista del Dottor {self.__doctor.__last_name} è stato rimosso il paziente {oldPatient.__idCode}")
-      else:
-         print(f"il paziente {oldPatient.__idCode} non c'è alla lista del Dottor {self.__doctor.__last_name}")
+      return f"Alla lista del Dottor {self.__doctor.getLastname()} è stato rimosso il paziente {oldPatient.getidCode()}"
+    else:
+      return f"il paziente {oldPatient.getidCode()} non c'è alla lista del Dottor {self.__doctor.getLastname()}"
 
