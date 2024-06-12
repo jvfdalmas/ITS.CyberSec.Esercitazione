@@ -50,7 +50,7 @@ class Pagamento:
         return round(self.__amount,2)
     
     def dettagliPagamento(self) -> str:
-        return f"Importo del pagamento: €{self.getImport()}."
+        return f"Importo del pagamento: €{self.getImport():.2f}."
 
 
 class PagamentoContanti(Pagamento):
@@ -59,16 +59,16 @@ class PagamentoContanti(Pagamento):
         Pagamento.__init__(self)
     
     def dettagliPagamento(self) -> str:
-        return f"Importo del pagamento: €{self.getImport()} in contanti."
+        return f"Importo del pagamento: €{self.getImport():.2f} in contanti."
     
     def inPezzida(self):
         total_amount: float = self.getImport()
-        contanti: dict[int] = {500: 0, 200: 0, 100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 2: 0, 1: 0, 0.50: 0, 0.20: 0, 0.10: 0, 0.05: 0, 0.01: 0}
-        result: list = [f"{self.getImport()} euro da pagare in contanti con:\n"]
+        contanti: dict[float,int] = {500: 0, 200: 0, 100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 2: 0, 1: 0, 0.50: 0, 0.20: 0, 0.10: 0, 0.05: 0, 0.01: 0}
+        result: list = [f"{self.getImport():.2f} euro da pagare in contanti con:\n"]
 
         for amount in contanti.keys():
-            while total_amount >= amount:
-                total_amount -= amount
+            while total_amount >= amount and total_amount > 0:
+                total_amount = round(total_amount - amount, 2)
                 contanti[amount] += 1
         
         for amount, banconote in contanti.items():
@@ -80,6 +80,8 @@ class PagamentoContanti(Pagamento):
                 result.extend(msg) 
         
         return "".join(result)
+    
+    
     
 
 class PagamentoCartaDiCredito(Pagamento):
@@ -110,7 +112,7 @@ class PagamentoCartaDiCredito(Pagamento):
         return self.__numero
     
     def dettagliPagamento(self) -> str:
-        return f"Pagamento di: €{self.getImport()} effettuato con la carta di credito\nNome sulla carta: {self.getName()}\nData di scadenza: {self.getData()}\nNumero della carta: {self.getNumero()}"
+        return f"Pagamento di: €{self.getImport():.2f} effettuato con la carta di credito\nNome sulla carta: {self.getName()}\nData di scadenza: {self.getData()}\nNumero della carta: {self.getNumero()}"
     
 
 pgto_contanti_150 = PagamentoContanti()
