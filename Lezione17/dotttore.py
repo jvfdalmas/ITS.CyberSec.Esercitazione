@@ -30,10 +30,10 @@ from persona import Persona
 
 class Dottore(Persona):
 
-    def __init__(self, __first_name: str, __last_name: str, __age: int, specialization: str, parcel: float):
+    def __init__(self, first_name: str, last_name: str, specialization: str, parcel: float):
         
         # Chiama nome, cognome ed età definiti dalla classe Persona,
-        Persona.__init(self, __first_name, __last_name, __age)
+        Persona.__init__(self, first_name, last_name)
         
         # Controllo se specialization è una stringa
         if isinstance(specialization, str):
@@ -65,16 +65,20 @@ class Dottore(Persona):
 
     def getSpecialization(self) -> str:
         # Consente di ritornare la specializzazione del dottore
-        print(self.__specialization)
+        return self.__specialization
+
+    def getParcel(self) -> str:
+        # Consente di ritornare la parcel del dottore
+        return self.__parcel
 
     def isAValidDoctor(self) -> str:
         # Stabilisce se un dottore è un dottore valido
-        if Persona.getAge() > 30:
-            print(f"Doctor {self.__first_name} {self.__last_name} is valid!")
+        if self.getAge() > 30:
+            return f"Doctor {self.getName()} {self.getLastname()} is valid!"
         else:
-            print(f"Doctor {self.__first_name} {self.__last_name} is not valid!")
+            return f"Doctor {self.getName()} {self.getLastname()} is not valid!"
         
     def doctorGreet(self):
         # Richiama la funzione greet() della classe Persona. Poi, stampa il seguente saluto "Sono un medico {specialization}"
-        Persona.greet()
-        print(f"Sono un medico {self.__specialization}")
+        self.greet()
+        return f"Sono un medico {self.getSpecialization()}"
