@@ -79,7 +79,7 @@ class PagamentoContanti(Pagamento):
                 msg: str = f"{banconote} moneta da {amount} euro.\n"
                 result.extend(msg) 
         
-        return "".join(result)
+        return "".join(result), result[-1]
     
     
     
