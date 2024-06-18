@@ -543,3 +543,4 @@ while sorted(my_ticket) != sorted(random_items):
         print(f"it took {counter} attempts, {random_items}")
     else:
         print(f"attempt No. {counter}, {random_items}")
+
