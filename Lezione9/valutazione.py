@@ -120,9 +120,32 @@ print(valid_sudoku(board))
 False"""
 
 def valid_sudoku(board: list[list[str]]) -> bool:
-    # la tavola del sudo viene rapperentata come una matrice (lista di liste)
-    # con 9 righe e 9 colonne
-    pass
+    
+    # CONTROL ROW
+    def valid_row(row: list[str]) -> bool:
+        control = list(range(1,10))
+        for char in row:
+            if char in control:
+                control.remove(char)
+            else:
+                return False
+        return True
+    
+    for row in board:
+        if valid_row(row):
+            continue
+        else:
+            return False
+        
+    # CONTROL COLUMN
+    def valid_column(column: list[str]) -> bool:
+        control = list(range(1,10))
+        for char in column:
+            if char in control:
+                control.remove(char)
+            else:
+                return False
+        return True
 
 
 # -------------------------------------------------------------------------------------------------------------------------------
