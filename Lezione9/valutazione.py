@@ -123,7 +123,7 @@ def valid_sudoku(board: list[list[str]]) -> bool:
     
     # CONTROL ROW
     def valid_row(row: list[str]) -> bool:
-        control = list(range(1,10))
+        control = list(range(1,len(row) + 1))
         for char in row:
             if char in control:
                 control.remove(char)
@@ -139,7 +139,7 @@ def valid_sudoku(board: list[list[str]]) -> bool:
         
     # CONTROL COLUMN
     def valid_column(column: list[str]) -> bool:
-        control = list(range(1,10))
+        control = list(range(1,len(column) + 1))
         for char in column:
             if char in control:
                 control.remove(char)
