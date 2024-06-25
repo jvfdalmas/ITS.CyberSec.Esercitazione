@@ -83,6 +83,7 @@ print(symmetric([1,2,2,3,4,4,3]))  # True
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
+print("Determina se una tavola Sudoku 9 x 9 è valida:\n")
 """Determina se una tavola Sudoku 9 x 9 è valida. Solo le celle compilate devono essere convalidate secondo le seguenti regole:
 
     Ogni riga deve contenere le cifre 1-9 senza ripetizioni.
@@ -120,35 +121,91 @@ print(valid_sudoku(board))
 False"""
 
 def valid_sudoku(board: list[list[str]]) -> bool:
-    
-    # CONTROL ROW
+    n = len(board)
+
     def valid_row(row: list[str]) -> bool:
-        control = list(range(1,len(row) + 1))
+        control = ["1","2","3","4","5","6","7","8","9"]
         for char in row:
             if char in control:
                 control.remove(char)
+            elif char == ".":
+                continue
             else:
                 return False
         return True
     
+    # CONTROL ROW    
     for row in board:
         if valid_row(row):
             continue
         else:
             return False
-        
+
     # CONTROL COLUMN
-    def valid_column(column: list[str]) -> bool:
-        control = list(range(1,len(column) + 1))
-        for char in column:
-            if char in control:
-                control.remove(char)
-            else:
-                return False
-        return True
+    for i in range(n):
+        column: list = []
+        for j in range(n):
+            column.append(board[j][i])
+        if valid_row(row):
+            continue
+        else:
+            return False
+
+    # CREATE SMALLER BOARDS
+    table1 = board[0:3][0:3]
+    table2 = board[3:6][0:3]
+    table3 = board[6:9][0:3]
+
+    table4 = board[0:3][3:6]
+    table5 = board[3:6][3:6]
+    table6 = board[6:9][3:6]
+
+    table7 = board[0:3][6:9]
+    table8 = board[3:6][6:9]
+    table9 = board[6:9][6:9]
 
 
-# -------------------------------------------------------------------------------------------------------------------------------
+    def smaller_board(board):
+        n_row = len(board)
+        n_column = len(board[0])
+
+        row_chunk_n = 3
+        column_chunk_n = 3
+
+        sub_tables_1d = []
+
+        for i in range(0,n_column, column_chunk_n):
+            for j in range(0, n_row, row_chunk_n):
+                smaller_table = [row[i:column_chunk_n] for row in board[j:column_chunk_n]]
+
+
+
+
+
+board = [["5","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
+print("is valid sodoku board?", valid_sudoku(board)) # True
+
+board = [["8","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]] 
+print("is valid sodoku board?", valid_sudoku(board)) # FALSE
+
+
+# ------------------------------------------------------------------------------------------------------------------------------
 print("\n")
 
 """Data una stringa s e una lista di stringhe wordDict, restituisce True se s può essere segmentato in una sequenza separata da spazi di una o più parole del dizionario; False altrimenti.
@@ -191,7 +248,7 @@ print("\n")
 
     Classe del Account:
         Attributi:
-            account_id: str - identificatore univoco per l'account.
+            account_id: str:identificatore univoco per l'account.
             balance: float - il saldo attuale del conto.
         Metodi:
             deposit(amount: float) - aggiunge l'importo specificato al saldo del conto.
