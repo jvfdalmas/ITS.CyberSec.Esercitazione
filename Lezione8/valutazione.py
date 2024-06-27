@@ -155,10 +155,10 @@ def has_cycle(head: Node) -> bool:
         if current_node.next is None:
             return False
         else:
-            if current_node.value in memo:
+            if current_node in memo:
                 return True
             else:
-                memo.append(current_node.value)
+                memo.append(current_node)
                 current_node = current_node.next
 
 ll1 = LinkedList()
@@ -239,8 +239,8 @@ class LinkedList:
 
 def is_palindrome(head: Node) -> bool:
     memo: dict = {}
-    current = head
-    counter = 0
+    current: Node = head
+    counter: int = 0
 
     while current:
         if current.value in memo:
