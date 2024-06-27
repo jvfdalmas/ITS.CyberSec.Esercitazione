@@ -78,6 +78,7 @@ try:
     with open('example.txt', 'r') as file:
         content = file.read()
         print(content)
+        file.close()
 except IOError as e:
     print(f"An error occurred while handling the file: {e}")
 
