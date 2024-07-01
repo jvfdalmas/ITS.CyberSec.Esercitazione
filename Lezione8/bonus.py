@@ -31,7 +31,38 @@ print("\n")
 
 print("Soluzione - Question 2:")
 
+def combinations(n: int, k: int) -> list[list[int]]:
+    arr: list = [0] * k
+    result: list = []
+    
+    if k == 1:
+        for num in range(1,n+1):
+             result.append([num])
+        return result
+    
+    if k > 2:
+        for num in range(1,n+1):
+            arr = [num] + combinations(n, k-1)
+            if (arr not in result) and (arr[::-1] not in result) and (len(set(arr)) == len(arr)):
+                arr.sort()
+                result.append(arr[:])
+        return result
+    
+    else:
+        for num in range(1,n+1):
+            arr[0] = num
+            for num_p2 in range(1,n+1):
+                if arr[0] != num_p2:
+                    arr[1] = num_p2
+                    return arr[:]
+                else:
+                    arr[1] = 0
 
+
+print(combinations(4, 2)) # [[1,2]]
+print(combinations(1, 1)) # [[1]]
+print(combinations(2, 1)) # [[1],[2]]
+print(combinations(3,3)) # [[1,2,3]]
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n")

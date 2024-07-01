@@ -54,12 +54,34 @@ The final sorted array should not be returned by the function, but instead be st
 
 print("Soluzione - Question 2:")
 
+#def merge(nums1, m, nums2, n):
+#    while 0 in nums1:
+#        nums1.remove(0)
+#        nums1.append(nums2.pop())
+#    nums1.sort()
+
+# Rifare con base algoritmo merge sort
+
 def merge(nums1, m, nums2, n):
-    while 0 in nums1:
-        nums1.remove(0)
-        e = nums2.pop()
-        nums1.append(e)
-    nums1.sort()
+    nums1_tmp = nums1[:]
+    i = 0
+    j = 0
+    k = 0
+
+    while i < len(nums1_tmp) and j < len(nums2):
+        if nums1_tmp[i] < nums2[j]:
+            if nums1_tmp[i] != 0:
+                nums1[k] = nums1_tmp[i]
+                i += 1
+            else:
+                nums1[k] = nums2[j]
+                j += 1
+        else:
+            nums1[k] = nums2[j]
+            j += 1
+        k += 1
+    
+    return nums1
 
 
 nums1 = [1, 2, 3, 0, 0, 0]
@@ -68,6 +90,7 @@ nums2 = [2, 5, 6]
 n = 3
 merge(nums1, m, nums2, n)
 print(nums1)
+
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n")
