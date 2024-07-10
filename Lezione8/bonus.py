@@ -31,44 +31,58 @@ print("\n")
 
 print("Soluzione - Question 2:")
 
-def combinations(n: int, k: int) -> list[list[int]]:
-    arr: list = [0] * k
+# my code
+def combine(n: int, k: int) -> list[list[int]]: 
     result: list = []
-    
+
     if k == 1:
-        for num in range(1,n+1):
-             result.append([num])
-        return result
-    
-    if k > 2:
-        for num in range(1,n+1):
-            arr = [num] + combinations(n, k-1)
-            if (arr not in result) and (arr[::-1] not in result) and (len(set(arr)) == len(arr)):
-                arr.sort()
-                result.append(arr[:])
-        return result
+        for nums in range(1,n+1):
+            arr = [nums]
+            result.append(arr[:])
     
     else:
-        for num in range(1,n+1):
-            arr[0] = num
-            for num_p2 in range(1,n+1):
-                if arr[0] != num_p2:
-                    arr[1] = num_p2
-                    return arr[:]
-                else:
-                    arr[1] = 0
+        for nums in range(1,n+1):
+            for lista in combine(n, k-1):
+                arr = [nums] + lista
+                if (len(arr) == len(set(arr))) and (sorted(arr) not in result):
+                    result.append(arr)
+    
+    return result
 
 
-print(combinations(4, 2)) # [[1,2]]
-print(combinations(1, 1)) # [[1]]
-print(combinations(2, 1)) # [[1],[2]]
-print(combinations(3,3)) # [[1,2,3]]
+# efficient code
+def combine(n: int, k: int) -> list[list[int]]: 
+    result = []  # This will hold all the combinations
+
+    def backtrack(start: int, path: list[int]):
+        # Base case: if the path has reached the desired length, add it to result
+        if len(path) == k:
+            result.append(path[:])  # Make a copy of the current path
+            return
+        
+        # Try each number from 'start' to 'n'
+        for i in range(start, n + 1):
+            path.append(i)  # Add number to the current path
+            backtrack(i + 1, path)  # Recursively build the next part of the combination
+            path.pop()  # Remove the last number to try the next possible number (backtrack)
+
+    backtrack(1, [])  # Start the backtracking process from number 1
+    return result  # Return all found combinations
+
+
+# Example usage
+print(combine(3, 1))
+print(combine(3, 2))
+print(combine(4, 2)) # [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
+print(combine(1, 1)) # [[1]]
+print(combine(2, 1)) # [[1],[2]]
+print(combine(3, 3)) # [[1,2,3]]
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n")
 
 
-"""3. Generate Parentheses: Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+"""3. Generate Parentheses: Given n pairs of parentheses, write a function to generate all combine of well-formed parentheses.
 
     Example 1:
     Input: n = 3
