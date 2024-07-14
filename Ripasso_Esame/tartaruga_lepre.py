@@ -1,4 +1,10 @@
-""" In questo problema ricreerete la classica gara tra la tartaruga e la lepre. Userete la generazione di numeri casuali per sviluppare una simulazione di questo memorabile evento. I contendenti iniziano la gara dal quadrato \#1 di un percorso composto da 70 quadrati. Ogni quadrato rappresenta una posizione lungo il percorso della corsa. Il traguardo è al quadrato 70 e il contendente che raggiunge per primo o supera questa posizione vince la gara. Durante la corsa, i contendenti possono occasionalmente perdere terreno. C'è un orologio che conta i secondi. Ad ogni tick dell'orologio, il vostro programma deve aggiornare la posizione degli animali secondo le seguenti regole:
+# LEPRE E TARTARUGA
+
+""" In questo problema ricreerete la classica gara tra la tartaruga e la lepre. Userete la generazione di numeri casuali per sviluppare una simulazione 
+di questo memorabile evento. I contendenti iniziano la gara dal quadrato #1 di un percorso composto da 70 quadrati. Ogni quadrato rappresenta una 
+posizione lungo il percorso della corsa. Il traguardo è al quadrato 70 e il contendente che raggiunge per primo o supera questa posizione vince la gara. 
+Durante la corsa, i contendenti possono occasionalmente perdere terreno. C'è un orologio che conta i secondi. Ad ogni tick dell'orologio, il vostro 
+programma deve aggiornare la posizione degli animali secondo le seguenti regole:
 
 - Tartaruga:
     - Passo veloce (50% di probabilità): avanza di 3 quadrati.
@@ -48,7 +54,7 @@ Modificatori mossa:
 Nuove regole di movimento:
 - Tartaruga:
     - Per la tartaruga, ogni volta che il numero generato indica una mossa ma non è possibile eseguirla per mancanza di energia, essa guadagna 10 di energia.
-    - Passo veloce (50% di probabilità): avanza di 3 quadrati e richiede 5 di energia.
+    - Passo veloce (50% di probabilità): avanza di 3 quadrati e richiede 3 di energia.
     - Scivolata (20% di probabilità): arretra di 6 quadrati e richiede 10 di energia. Non può andare sotto il quadrato 1.
     - Passo lento (30% di probabilità): avanza di 1 quadrato e richiede 3 di energia.
 
@@ -69,3 +75,112 @@ Posizionati a intervalli regolari sulla pista (es. ai quadrati 15, 30, 45), gli 
 - Bonus:
 Dislocati strategicamente lungo la corsa (es. ai quadrati 10, 25, 50), i bonus aumentano la posizione dell'animale di un numero determinato di quadrati (es: 5, 3, 10). I bonus sono rappresentati da un dizionario che mappa le posizioni dei bonus sul percorso (chiave) ed i relaviti effetti (valore). Consentire agli animali di beneficiare pienamente dei bonus, ma non oltrepassare il traguardo.
 """
+from random import randint as rand
+
+racetrack = ["_"] * 70
+hare_pos = 1
+hare_stamina = 100
+tortoise_pos = 1
+tortoise_stamina = 100
+clock = 0
+meteo = "sollegiatto"
+bonus: dict = {5: 1, 15: 1, 25: 2, 35: 3, 45: 6, 55: 8}
+obstacle: dict = {10: -1, 20: -1, 30: -2, 40: -3, 50: -6, 60: -8}
+
+def tortoise_move(pos, weather, stamina):
+    i = rand(1,10)
+
+    if 1 <= i <= 3 and stamina >= 3: # Passo lento (30% di probabilità): avanza di 1 quadratoe e richiede 3 di energia.
+        pos += 1
+        stamina -= 3
+    elif 4 <= i <= 5 and stamina >= 10: # Scivolata (20% di probabilità): arretra di 6 quadrati e richiede 10 di energia.  
+        pos -= 6
+        stamina -= 10
+    elif 6 <= i <= 10 and stamina >= 3: # Passo veloce (50% di probabilità): avanza di 3 quadrati e richiede 3 di energia.
+        pos += 3
+        stamina -= 3
+    else:
+        stamina += 10
+
+    if weather == "pioggia":
+        pos -= 2
+    
+    if bonus.get(pos):
+        pos += bonus[pos]
+    if obstacle.get(pos):
+        pos += obstacle[pos]
+
+    return min(max(pos,1),70), min(max(stamina,1),100)
+
+def hare_move(pos, weather, stamina):
+    i = rand(1,10)
+
+    if 1 <= i <= 2: # Riposo (20% di probabilità): non si muove e recupera 10 di energia..
+        pos += 0
+        stamina += 10
+    elif 3 <= i <= 4 and stamina >= 15: # Grande balzo (20% di probabilità): avanza di 9 quadrati e richiede 15 di energia..
+        pos += 9
+        stamina -= 15
+    elif 5 <= i <= 7 and stamina >= 5: # Piccolo balzo (30% di probabilità): avanza di 1 quadrato e richiede 5 di energia..
+        pos += 1
+        stamina -= 5
+    elif 8 <= i <= 9 and stamina >= 8: # Piccola scivolata (20% di probabilità): arretra di 2 quadrati e richiede 8 di energia.. 
+        pos -= 2
+        stamina -= 8
+    elif i == 10 and stamina >= 20: # Grande scivolata (10% di probabilità): arretra di 12 quadrati e richiede 20 di energia
+        pos -= 12
+        stamina -= 20
+    
+    if weather == "pioggia":
+        pos -= 2
+
+    if bonus.get(pos):
+        pos += bonus[pos]
+    if obstacle.get(pos):
+        pos += obstacle[pos]
+
+    return min(max(pos,1),70), min(max(stamina,1),100)
+
+def variab_meteo(weather, counter):
+    if counter % 10 == 0:
+        if weather == "sollegiatto":
+            weather = "pioggia"
+        else:
+            weather = "sollegiatto"
+    
+    return weather
+
+def print_racetrack(track, tortoise, hare, counter):
+    
+    track = track[:]
+    
+    if counter == 0:
+        track[0] = "T/H"
+        print("".join(track))
+    
+    elif tortoise == hare and tortoise != 70:
+        track[tortoise - 1] = 'OUCH!!!'
+        print("".join(track))
+    
+    else:
+        track[tortoise - 1] = 'T'
+        track[hare - 1] = 'H'
+        print("".join(track))
+        if tortoise == 70 and hare == 70:
+            print("IT'S A TIE.")
+        elif tortoise == 70:
+            print("TORTOISE WINS! || VAY!!!")
+        elif hare == 70:
+            print("HARE WINS || YUCH!!!")
+
+
+print("BANG !!!!! AND THEY'RE OFF !!!!!\n")
+while True:
+    print_racetrack(racetrack, tortoise_pos, hare_pos, clock)
+    print(f"""REVIEW:hare's position: {hare_pos} | hare's stamina: {hare_stamina} | tortoise's position: {tortoise_pos} | tortoise's stamina: {tortoise_stamina} | weather: {meteo} | clock: {clock} secs\n""")
+    if hare_pos == 70 or tortoise_pos == 70:
+        break
+    clock += 1
+    meteo = variab_meteo(meteo, clock)
+    hare_pos, hare_stamina = hare_move(hare_pos, meteo, hare_stamina)
+    tortoise_pos, tortoise_stamina = tortoise_move(tortoise_pos, meteo, tortoise_stamina)
