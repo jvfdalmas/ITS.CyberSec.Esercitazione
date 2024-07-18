@@ -64,11 +64,27 @@ class CifratoreAScorrimento(CodificatoreMessaggio, DecodificatoreMessaggio):
         self._chiave: int = chiave
         self.alfabeto: list[str] = list(string.ascii_lowercase)
 
-    def _sposta_carattere(c):
-        pass
+    def getChiave(self):
+        return self._chiave
+
+    def _sposta_carattere(self, c):
+        index = self.alfabeto.index(c)
+        index_spost = index + self.getChiave()
+
+        if index_spost > 25:
+            letter = index_spost % len(self.alfabeto)
+        else:
+            letter = self.alfabeto[index_spost]
+    
+        return letter
+
     
     def codifica(testoInChiaro):
         pass
+
+alfabeto: list[str] = list(string.ascii_lowercase)
+print(alfabeto[25])
+
 
 
 """ Si definisca il metodo codifica(testoInChiaro) così che ogni lettera del testo sia spostata dal valore contenuto in chiave.
