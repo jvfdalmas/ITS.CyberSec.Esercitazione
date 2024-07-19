@@ -6,7 +6,17 @@ print(remove_duplicates([1, 2, 3, 1, 2, 4]))
 print(remove_duplicates([4, 5, 'a', 4, 6]))
 [4, 5, 'a', 6]"""
 
+def remove_duplicates(array: list):
+    res = []
+    for item in array:
+        if item not in res:
+            res.append(item)
+    return res
 
+print(remove_duplicates([1, 2, 3, 1, 2, 4]))
+#[1, 2, 3, 4]
+print(remove_duplicates([4, 5, 'a', 4, 6]))
+#[4, 5, 'a', 6]
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
@@ -14,6 +24,10 @@ print("\n")
 """2. Il codice dovrebbe stampare i numeri all'interno di una lista. TROVA L'ERRORE E CORREGGI IL CODICE"""
 
 
+numbers: list[int] = [1, 2, 3, 4, 5]
+
+for number in numbers:
+    print(f"Number: {number}")
 
 
 # -------------------------------------------------------------------------------------------------------------------------------
@@ -28,8 +42,18 @@ Operazione permessa
 print(check_combination(False, True, False))
 Operazione negata"""
 
+def check_combination (a: bool, b: bool, c:bool) -> str:
+    if a == True or b == True and c == True:
+        return "Operazione permessa"
+    else:
+        return "Operazione negata"
 
-
+print(check_combination(True, False, True))
+#Operazione permessa
+print(check_combination(False, True, False))
+#Operazione negata
+print(check_combination(False, True, True))
+#Operazione permessa
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
@@ -40,7 +64,12 @@ Test 	Result
 print(rounded_average([1, 1, 2, 2]))
 2"""
 
+def rounded_average(arr: list[int]) -> int:
+    somma = round(sum(arr) / len(arr))
+    return somma
 
+print(rounded_average([1, 1, 2, 2]))
+#2
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
@@ -56,7 +85,12 @@ countdown(5)
 1
 0
 """
+def countdown(n: int) -> int:
+    while n != -1:
+        print(n)
+        n -= 1
 
+countdown(5)
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
@@ -68,7 +102,11 @@ Test 	Result
 print(list_statistics([1, 2, 3, 4, 5])) 
 (5, 1, 3.0)"""
 
+def list_statistics(arr: list[int]):
+    return (max(arr), min(arr), sum(arr) / len(arr))
 
+print(list_statistics([1, 2, 3, 4, 5])) 
+#(5, 1, 3.0)
 
 
 # -------------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +121,22 @@ True
 print(check_parentheses("(()))("))
 False"""
 
+def check_parentheses(stringa: str) -> bool:
+    control = []
 
+    for item in stringa:
+        if item == "(":
+            control.append(item)
+        else:
+            if control:
+                control.pop(-1)
+            else:
+                return False
+    
+    return len(control) == 0
+
+print(check_parentheses("()()"))
+print(check_parentheses("(()))("))
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
@@ -97,6 +150,32 @@ print(count_isolated([1, 2, 2, 3, 3, 3, 4]))
 print(count_isolated([1, 2, 3, 4, 5]))
 5"""
 
+def count_isolated(arr: list[int]) -> int:
+    counter = 0
+
+    if len(arr) == 0:
+        return counter
+    if len(arr) == 1:
+        return counter + 1
+    
+    if arr[0] != arr[1]: #control first element
+        counter += 1
+
+    for i in range(1,len(arr)-1):
+        if arr[i-1] != arr[i] and arr[1+i] != arr[i]:
+            counter += 1
+    
+    if arr[-1] != arr[-2]: #control last element
+        counter += 1
+    
+    return counter
+
+
+print(count_isolated([1, 2, 2, 3, 3, 3, 4]))
+#2
+print(count_isolated([1, 2, 3, 4, 5]))
+#5
+
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
@@ -108,6 +187,13 @@ Test 	Result
 print(remove_elements({5, 6, 7}, [7, 8, 9]))
 {5, 6}"""
 
+def remove_elements(arr: set[int], remove: list[int]) -> set[int]:
+    arr = arr - set(remove)
+    return arr
+
+print(remove_elements({5, 6, 7}, [7, 8, 9]))
+#{5, 6}
+
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
 
@@ -117,3 +203,14 @@ For example:
 Test 	Result
 print(merge_dictionaries({'x': 5}, {'x': -5}))
 {'x': 0}"""
+
+def merge_dictionaries(dict1: dict, dict2: dict) -> dict:
+    for key, value in dict2.items():
+        if dict1.get(key):
+            dict1[key] += value
+        else:
+            dict1[key] = value
+    return dict1
+
+print(merge_dictionaries({'x': 5}, {'x': -2, "y": 2}))
+#{'x': 3, 'y': 2}
