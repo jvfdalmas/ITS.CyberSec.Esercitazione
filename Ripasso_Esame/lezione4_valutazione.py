@@ -20,6 +20,36 @@ Ma secondo il requisito 2, [1,4] è illegale; secondo il requisito 3, [4,1] non 
 
 print(construct_rectangle(4)) -> [2, 2]"""
 
+def construct_rectangle(n: int) -> list[int]:
+
+    def discoverLandW(l, w, n):
+        memo = []
+
+        if l == 0 or w == 0:
+            return memo
+        
+        if w * l == n:
+            memo.append([l, w])
+
+        memo += discoverLandW(l, w - 1, n)
+        memo += discoverLandW(l -1, w, n)
+
+        return memo
+
+    coord: list = discoverLandW(n, n, n)
+    min_dif = n
+    for item in coord:
+        if item[0] <= item[1]:
+            if abs(item[0] - item[1]) < min_dif:
+                res = item
+                min_dif = abs(item[0] - item[1])
+    
+    return res
+
+print(construct_rectangle(4))
+
+
+
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
@@ -33,7 +63,26 @@ text = "The quick brown fox jumps over the lazy dog. The dog is very lazy."
 print(word_frequency(text, stopwords))
 {'quick': 1, 'brown': 1, 'fox': 1, 'jumps': 1, 'over': 1, 'lazy': 2, 'dog': 2, 'very': 1}"""
 
+def word_frequency(stringa: str, stop: list) -> dict:
+    res = {}
 
+    for char in stringa:
+        if not char.isalpha() and not char.isspace():
+            stringa = stringa.replace(char,"")
+
+    lista = stringa.lower().split()
+
+    for word in lista:
+        if res.get(word):
+            res[word] += 1
+        elif word not in stop:
+            res[word] = 1
+    
+    return res
+
+stopwords = ['the', 'and', 'is', 'in', 'on', 'of']
+text = "The quick brown fox jumps over the lazy dog. The dog is very lazy."
+print(word_frequency(text, stopwords))
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
@@ -48,7 +97,14 @@ print(find_disappeared_numbers([4,3,2,7,8,2,3,1]))
 
 [5, 6]"""
 
+def find_disappeared_numbers(lista: list[int]) -> list[int]:
+    base = set(range(1,len(lista)+1))
+    lista = set(lista)
+    missingNo = list(base - lista)
 
+    return missingNo
+
+print(find_disappeared_numbers([4,3,2,7,8,2,3,1]))
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
@@ -65,7 +121,20 @@ True
 print(is_subsequence("axc", "ahbgdc"))
 False"""
 
+def is_subsequence(s: str, t: str) -> bool:
+    s = list(s)
+    for char in t:
+        if char == s[0]:
+            s.pop(0)
+    
+    return len(s) == 0
 
+
+
+print(is_subsequence("abc", "ahbgdc"))
+#True
+print(is_subsequence("axc", "ahbgdc"))
+#False
 
 
 # -------------------------------------------------------------------------------------------------------------------------------
@@ -78,7 +147,55 @@ Test 	Result
 print(even_odd_pattern([3, 6, 1, 8, 4, 7]))
 [6, 8, 4, 3, 1, 7]"""
 
+def even_odd_pattern(lista: list[int]) -> list[int]:
+    even = []
+    odd = []
+    for n in lista:
+        if n % 2 == 0:
+            even.append(n)
+        else:
+            odd.append(n)
+    res = even + odd
+    return res
 
+print(even_odd_pattern([3, 6, 1, 8, 4, 7]))
+
+#merge sort algorithm
+def mergesort(lista: list[int]) -> list[int]:
+    if len(lista) > 1:
+        left = lista[:len(lista)//2]
+        right = lista[len(lista)//2:]
+
+        mergesort(right)
+        mergesort(left)
+
+        i = 0 # left
+        j = 0 # right
+        k = 0 # main
+
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                lista[k] = left[i]
+                i += 1
+                k += 1
+            else:
+                lista[k] = right[j]
+                j += 1
+                k += 1
+        
+        while i < len(left):
+            lista[k] = left[i]
+            i += 1
+            k += 1
+        
+        while j < len(right):
+            lista[k] = right[j]
+            j += 1
+            k += 1
+
+        return lista
+
+print(mergesort([3, 6, 1, 8, 4, 7]))
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
@@ -91,8 +208,47 @@ Test 	Result
 print(prime_factors(4))
 [2, 2]"""
 
+def prime_factors(n: int) -> list[int]:
+    n = abs(n)
+    res = []
+    divisor = 2
+
+    while n > 1:
+        if n % divisor == 0:
+            n = int(n / divisor)
+            res.append(divisor)
+        else:
+            divisor += 1
+
+    return res
 
 
+def run_tests():
+    # Test case 1: Small number with multiple prime factors
+    print("Test case 1:", prime_factors(4))  # Expected: [2, 2]
+    
+    # Test case 2: Prime number
+    print("Test case 2:", prime_factors(5))  # Expected: [5]
+    
+    # Test case 3: Composite number with multiple prime factors
+    print("Test case 3:", prime_factors(18))  # Expected: [2, 3, 3]
+    
+    # Test case 4: Larger composite number
+    print("Test case 4:", prime_factors(60))  # Expected: [2, 2, 3, 5]
+    
+    # Test case 5: Large prime number
+    print("Test case 5:", prime_factors(101))  # Expected: [101]
+    
+    # Test case 6: Number with no factors except itself (prime)
+    print("Test case 6:", prime_factors(29))  # Expected: [29]
+    
+    # Test case 7: Number 1 (edge case)
+    print("Test case 7:", prime_factors(1))  # Expected: []
+    
+    # Test case 8: Negative number (if you want to handle negatives)
+    print("Test case 8:", prime_factors(-12))  # Expected: [2, 2, 3]
+
+run_tests()
 
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
@@ -109,8 +265,16 @@ print(third_max([3, 2, 1])) #1
 print(third_max([1, 2])) #2
 print(third_max([2, 2, 3, 1])) #1"""
 
+def third_max(arr: list[int]) -> int:
+    arr = sorted(list(set(arr)), reverse= True)
+    if len(arr) >= 3:
+        return arr[2]
+    else:
+        return arr[0]
 
-
+print(third_max([3, 2, 1])) #1
+print(third_max([1, 2])) #2
+print(third_max([2, 2, 3, 1])) #1
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
 

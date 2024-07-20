@@ -55,7 +55,8 @@ board = [["8","3",".",".","7",".",".",".","."]
 print(valid_sudoku(board))
 False"""
 
-
+def valid_sudoku(board: list[list]):
+    pass
 
 # ------------------------------------------------------------------------------------------------------------------------------
 print("\n")
@@ -71,8 +72,28 @@ True
 print(word_break("catsandog",["cats","dog","sand","and","cat"]))
 False"""
 
+def word_break_memo(word: str, wordDict: list[str]) -> bool:
+    memo={}
+    if word in memo: return memo[word]
+    if word in wordDict:
+        memo[word] = True
+        return True
 
+    for i in range(1, len(word)):
+        prefix, suffix = word[:i], word[i:]
+        if prefix in wordDict and word_break_memo(suffix, wordDict, memo):
+            memo[word] = True
+            return True
 
+    memo[word] = False
+    return False
+
+print(word_break_memo("leetcode",["leet","code"]))
+#True
+print(word_break_memo("applepenapple", ["apple","pen"]))
+#True
+print(word_break_memo("catsandog",["cats","dog","sand","and","cat"]))
+#False
 # -------------------------------------------------------------------------------------------------------------------------------
 print("\n") 
 
@@ -110,6 +131,57 @@ print(reverse_list(head))
 head = ListNode(val=1, next=ListNode(val=2))
 print(reverse_list(head))
 [2, 1]"""
+
+class Node:
+
+    def __init__(self, value, next = None):
+        self.value = value
+        self.next = next
+
+class LinkedList:
+
+    def __init__(self, head = None):
+        self.head = head
+
+    def insertNode(self, value):
+        node = Node(value)
+
+        if self.head:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = node
+        else:
+            self.head = node
+    
+    def printLL(self):
+        current = self.head
+        while current:
+            print(current.value, end="")
+            current = current.next
+            if current:
+                print(" -> ", end= "")
+
+    def reverse_list(self):
+        current = self.head
+        res = []
+        while current:
+            res.append(current.value)
+            current = current.next
+        while res:
+            if len(res)> 1:
+                print(res.pop(), " -> ", end= "")
+            else:
+                print(res.pop())
+
+llist = LinkedList()
+llist.insertNode(1)
+llist.insertNode(2)
+llist.insertNode(3)
+llist.insertNode(4)
+llist.reverse_list()
+
+
 
 
 # -------------------------------------------------------------------------------------------------------------------------------
@@ -179,5 +251,8 @@ Test 	Result
 print(anagram("anagram","nagaram"))
 True"""
 
-    
+def anagram(word1, word2) -> bool:
+    return sorted(list(word1)) == sorted(list(word2))
 
+    
+print(anagram("anagram","nagaram"))
