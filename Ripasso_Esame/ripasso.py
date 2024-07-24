@@ -55,7 +55,7 @@ class Bank:
     
     def create_account(self, account_id): #crea un nuovo account con l'ID specificato e un saldo pari a 0.
         if self.accounts.get(account_id):
-            return False
+            print("Account with this ID already exists")
         else:
             account = Account(account_id)
             self.accounts[account_id] = account
@@ -68,6 +68,8 @@ class Bank:
     def get_balance(self, account_id): #restituisce il saldo del conto con l'ID specificato.
         if self.accounts.get(account_id):
             return self.accounts[account_id].get_balance()
+        else:
+            print("Account not found")
 
 
 bank = Bank()
