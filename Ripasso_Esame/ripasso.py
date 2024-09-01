@@ -309,9 +309,143 @@ Classe:
 
     - search_recipe_by_ingredient(ingredient): Trova e restituisce tutte le ricette che contengono un determinato ingrediente. Restituisce un elenco di ricette o un messaggio di errore se nessuna ricetta contiene l'ingrediente."""
 
+class RecipeManager:
+
+    def __init__(self):
+        self.receituario: dict = {}
+
+    def create_recipe(self, name, ingredients): 
+       """ Crea una nuova ricetta con il nome specificato e una lista di ingredienti. Restituisce un nuovo dizionario con la sola ricetta appena creata o un messaggio di errore se la ricetta esiste già."""
+       if not self.receituario.get(name):
+           self.receituario[name] = ingredients
+           return self.receituario
+
+    def add_ingredient(self, recipe_name, ingredient): 
+        """Aggiunge un ingrediente alla ricetta specificata. Restituisce la ricetta aggiornata o un messaggio di errore se l'ingrediente esiste già o la ricetta non esiste."""
+        if self.receituario.get(recipe_name):
+            if ingredient not in self.receituario[recipe_name]:
+                self.receituario[recipe_name].append(ingredient)
+                return self.receituario
+
+    def remove_ingredient(self, recipe_name, ingredient): 
+        """Rimuove un ingrediente dalla ricetta specificata. Restituisce la ricetta aggiornata o un messaggio di errore se l'ingrediente non è presente o la ricetta non esiste."""
+        if self.receituario.get(recipe_name):
+            if ingredient in self.receituario[recipe_name]:
+                self.receituario[recipe_name].remove(ingredient)
+                return self.receituario
+
+    def update_ingredient(self, recipe_name, old_ingredient, new_ingredient): 
+        """Sostituisce un ingrediente con un altro nella ricetta specificata. Restituisce la ricetta aggiornata o un messaggio di errore se l'ingrediente non è presente o la ricetta non esiste."""
+        if self.receituario.get(recipe_name):
+            for index, ingredient in enumerate(self.receituario[recipe_name]):
+                if old_ingredient == ingredient:
+                    self.receituario[recipe_name][index] = new_ingredient
+                    return self.receituario
+                
+    def list_recipes(self): 
+        """Elenca tutte le ricette esistenti."""
+        res = []
+        for key in self.receituario.keys():
+            res.append(key)
+        return res
+
+    def list_ingredients(self, recipe_name):
+        """Mostra gli ingredienti di una specifica ricetta. Restituisce un elenco di ingredienti o un messaggio di errore se la ricetta non esiste."""
+        if self.receituario.get(recipe_name):
+            return self.receituario[recipe_name]
+
+        
+    def search_recipe_by_ingredient(self, ingredient): 
+        """Trova e restituisce tutte le ricette che contengono un determinato ingrediente. Restituisce un elenco di ricette o un messaggio di errore se nessuna ricetta contiene l'ingrediente."""
+        res = {}
+        counter = 0
+        for key, value in self.receituario.items():
+            if ingredient in value:
+                res[key] = value
+                counter += 1
+        if counter == 0:
+            print("None")
+        else:
+            return res
+
 manager = RecipeManager()
 print(manager.create_recipe("Pizza Margherita", ["Farina", "Acqua", "Lievito", "Pomodoro", "Mozzarella"]))
 print(manager.add_ingredient("Pizza Margherita", "Basilico"))
 print(manager.update_ingredient("Pizza Margherita", "Mozzarella", "Mozzarella di Bufala"))
 print(manager.remove_ingredient("Pizza Margherita", "Acqua"))
 print(manager.list_ingredients("Pizza Margherita"))
+
+# -------------------------------------------------------------------------------------------------------------------------------
+print("\n")
+
+"""In questo esercizio, creeremo una gerarchia di classi per rappresentare diversi tipi di veicoli.
+ 
+1. Classe Base: Veicolo
+Crea una classe base chiamata Veicolo con i seguenti attributi e metodi:
+ 
+Attributi:
+- marca (stringa)
+- modello (stringa)
+- anno (intero)
+
+Metodi:
+- __init__(self, marca, modello, anno): metodo costruttore che inizializza gli attributi marca, modello e anno.
+- descrivi_veicolo(self): metodo che stampa una descrizione del veicolo nel formato "Marca: [marca], Modello: [modello], Anno: [anno]".
+
+2. Classe Derivata: Auto
+Crea una classe derivata chiamata Auto che eredita dalla classe Veicolo e aggiunge i seguenti attributi e metodi:
+ 
+Attributi:
+- numero_porte (intero)
+
+Metodi:
+- __init__(self, marca, modello, anno, numero_porte): metodo costruttore che inizializza gli attributi della classe base e numero_porte.
+- descrivi_veicolo(self): metodo che sovrascrive quello della classe base per includere anche il - numero di porte nella descrizione, nel formato "Marca: [marca], Modello: [modello], Anno: [anno], Numero di porte: [numero_porte]".
+
+3. Classe Derivata: Moto
+Crea una classe derivata chiamata Moto che eredita dalla classe Veicolo e aggiunge i seguenti attributi e metodi:
+ 
+Attributi:
+- tipo (stringa, ad esempio "sportiva", "cruiser", ecc.)
+
+Metodi:
+- __init__(self, marca, modello, anno, tipo): metodo costruttore che inizializza gli attributi della classe base e tipo.
+- descrivi_veicolo(self): metodo che sovrascrive quello della classe base per includere anche il tipo di moto nella descrizione, nel formato "Marca: [marca], Modello: [modello], Anno: [anno], Tipo: [tipo]"."""
+
+class Veicolo:
+    
+    def __init__(self, marca, modello, anno): # metodo costruttore che inizializza gli attributi marca, modello e anno.
+        self.marca = marca
+        self.modello = modello
+        self.anno = anno
+
+    def descrivi_veicolo(self): #metodo che stampa una descrizione del veicolo nel formato "Marca: [marca], Modello: [modello], Anno: [anno]".
+        print(f"Marca: {self.marca}, Modello: {self.modello}, Anno: {self.anno}")
+    
+class Auto(Veicolo):
+
+    def __init__(self, marca, modello, anno, numero_porte): 
+        super().__init__(marca, modello, anno)
+        self.numero_porte = numero_porte
+    
+    def descrivi_veicolo(self):
+        print(f"Marca: {self.marca}, Modello: {self.modello}, Anno: {self.anno},  Numero di porte: {self.numero_porte}")
+
+class Moto(Veicolo):
+
+    def __init__(self, marca, modello, anno, tipo): 
+        super().__init__(marca, modello, anno)
+        self.tipo = tipo
+
+    def descrivi_veicolo(self):
+        print(f"Marca: {self.marca}, Modello: {self.modello}, Anno: {self.anno},  Tipo: {self.tipo}")
+
+
+
+veicolo = Veicolo("Generic", "Model", 2020)  # Crea un'istanza della classe Veicolo
+auto = Auto("Toyota", "Corolla", 2021, 4)  # Crea un'istanza della classe Auto
+moto = Moto("Yamaha", "R1", 2022, "sportiva")  # Crea un'istanza della classe Moto
+
+veicolo.descrivi_veicolo()  # Test del metodo descrivi_veicolo per Veicolo
+auto.descrivi_veicolo()  # Test del metodo descrivi_veicolo per Auto
+moto.descrivi_veicolo()  # Test del metodo descrivi_veicolo per Moto
