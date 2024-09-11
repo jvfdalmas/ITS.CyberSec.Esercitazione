@@ -153,7 +153,7 @@ select distinct tipo from AttivitaProgetto;
 
 "10. QUali sono i giorni distinti nei qualli del personale ha effetuato attività non progettuali di tipo 'Didatico'?"
 
-select distinct giorno from AttivitaNonProgettuale where tipo = 'Didattica';
+select distinct giorno from AttivitaNonProgettuale where tipo = 'Didattica' order by giorno asc;
 
    giorno   
 ------------
