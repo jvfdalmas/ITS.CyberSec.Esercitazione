@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!-- Comment si fa con ctrl + shift + 7 -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabelle</title>
+    <style>
+        table {width: 100%}
+        table {border-spacing: 12px}
+        table, th, td{border: 3px solid orange; border-radius: 7%;}
+        th, td {padding: 7px;}
+        #table1 tr:nth-child(even){background-color: aqua;} 
+        #table1 tr:hover{background-color: rgb(15, 189, 52);}
+        #table1 th{background-color: rgba(243, 243, 243, 0.774);}
+    </style>
+</head>
+<body style="background-color: rgb(167, 162, 162);">
+    <table>
+    <tr>
+        <th>int 1</th>
+        <th>int 2</th>
+        <th>int 3</th>
+    </tr>
+    <tr>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore pariatur delectus nam, dolorum saepe nostrum aut sapiente esse, expedita officiis officia praesentium inventore, similique veniam molestias. Omnis dicta ab quaerat?</td>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo architecto cupiditate corrupti ipsum possimus commodi nemo quae dolores officiis reprehenderit? Magnam inventore possimus sed. Ad sit repellendus nulla aliquid doloribus.</td>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo architecto cupiditate corrupti ipsum possimus commodi nemo quae dolores officiis reprehenderit? Magnam inventore possimus sed. Ad sit repellendus nulla aliquid doloribus.</td>
+    </tr>
+    <tr>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore pariatur delectus nam, dolorum saepe nostrum aut sapiente esse, expedita officiis officia praesentium inventore, similique veniam molestias. Omnis dicta ab quaerat?</td>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo architecto cupiditate corrupti ipsum possimus commodi nemo quae dolores officiis reprehenderit? Magnam inventore possimus sed. Ad sit repellendus nulla aliquid doloribus.</td>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo architecto cupiditate corrupti ipsum possimus commodi nemo quae dolores officiis reprehenderit? Magnam inventore possimus sed. Ad sit repellendus nulla aliquid doloribus.</td>
+    </tr>
+</table>
+<br>
+<br>
+<table style="border-color: rgb(28, 2, 53);">
+    <tr>
+        <th>int 1</th>
+        <th>int 2</th>
+        <th>int 3</th>
+    </tr>
+    <tr>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore pariatur delectus nam, dolorum saepe nostrum aut sapiente esse, expedita officiis officia praesentium inventore, similique veniam molestias. Omnis dicta ab quaerat?</td>
+        <td rowspan="3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo architecto cupiditate corrupti ipsum possimus commodi nemo quae dolores officiis reprehenderit? Magnam inventore possimus sed. Ad sit repellendus nulla aliquid doloribus.</td>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo architecto cupiditate corrupti ipsum possimus commodi nemo quae dolores officiis reprehenderit? Magnam inventore possimus sed. Ad sit repellendus nulla aliquid doloribus.</td>
+    </tr>
+    <tr>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore pariatur delectus nam, dolorum saepe nostrum aut sapiente esse, expedita officiis officia praesentium inventore, similique veniam molestias. Omnis dicta ab quaerat?</td>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo architecto cupiditate corrupti ipsum possimus commodi nemo quae dolores officiis reprehenderit? Magnam inventore possimus sed. Ad sit repellendus nulla aliquid doloribus.</td>
+    </tr>
+</table>
+<br>
+<br>
+<table id="table1"> <!-- id per cambiare una lista. Vedere style -->
+    <tr>
+        <th>int 1</th>
+        <th>int 2</th>
+        <th>int 3</th>
+
+    </tr>
+    <tr>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore pariatur delectus nam, dolorum saepe nostrum aut sapiente esse, expedita officiis officia praesentium inventore, similique veniam molestias. Omnis dicta ab quaerat?</td>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo architecto cupiditate corrupti ipsum possimus commodi nemo quae dolores officiis reprehenderit? Magnam inventore possimus sed. Ad sit repellendus nulla aliquid doloribus.</td>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo architecto cupiditate corrupti ipsum possimus commodi nemo quae dolores officiis reprehenderit? Magnam inventore possimus sed. Ad sit repellendus nulla aliquid doloribus.</td>
+    </tr>
+    <tr>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore pariatur delectus nam, dolorum saepe nostrum aut sapiente esse, expedita officiis officia praesentium inventore, similique veniam molestias. Omnis dicta ab quaerat?</td>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo architecto cupiditate corrupti ipsum possimus commodi nemo quae dolores officiis reprehenderit? Magnam inventore possimus sed. Ad sit repellendus nulla aliquid doloribus.</td>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo architecto cupiditate corrupti ipsum possimus commodi nemo quae dolores officiis reprehenderit? Magnam inventore possimus sed. Ad sit repellendus nulla aliquid doloribus.</td>
+    </tr>
+    <tr>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore pariatur delectus nam, dolorum saepe nostrum aut sapiente esse, expedita officiis officia praesentium inventore, similique veniam molestias. Omnis dicta ab quaerat?</td>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo architecto cupiditate corrupti ipsum possimus commodi nemo quae dolores officiis reprehenderit? Magnam inventore possimus sed. Ad sit repellendus nulla aliquid doloribus.</td>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo architecto cupiditate corrupti ipsum possimus commodi nemo quae dolores officiis reprehenderit? Magnam inventore possimus sed. Ad sit repellendus nulla aliquid doloribus.</td>
+    </tr>
+    <tr>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore pariatur delectus nam, dolorum saepe nostrum aut sapiente esse, expedita officiis officia praesentium inventore, similique veniam molestias. Omnis dicta ab quaerat?</td>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo architecto cupiditate corrupti ipsum possimus commodi nemo quae dolores officiis reprehenderit? Magnam inventore possimus sed. Ad sit repellendus nulla aliquid doloribus.</td>
+        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo architecto cupiditate corrupti ipsum possimus commodi nemo quae dolores officiis reprehenderit? Magnam inventore possimus sed. Ad sit repellendus nulla aliquid doloribus.</td>
+    </tr>
+</table>
+<br>
+<br>
+<h1>Lista delle Spese</h1>
+<ul> <!-- ul per lista disordinata -->
+    <li>Pane</li>
+    <li>Latte</li>
+    <li>Banane</li>
+    <li>paste</li>
+</ul>
+<h1>Lista delle Spese</h1>
+<ol> <!-- ol per lista ordinata -->
+    <li>Pane</li>
+    <li>Latte</li>
+    <li>Banane</li>
+    <li>paste</li>
+</ol>
+<h1>Lista delle Spese</h1>
+<ol style="font-style: italic; color: blue;">
+    <li>Pane</li>
+    <ul><li>integrale</li></ul>
+    <li>Latte</li>
+    <li>Banane</li>
+    <li>paste</li>
+</ol>
+<br>
+<hr>
+<br>
+<iframe src="./sottopagina.html"></iframe> 
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1C-ZbhVZ3sI?si=u-Mp6N_fH30-6oLw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<!-- Si evita usare iframe perche era usado per hacker. Alcune situazione ancora hanno bisgono di usare iframe, como youtube -->
+</body>
+</html>

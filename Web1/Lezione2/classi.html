@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/stili.css"> <!-- link per accedere style -->
+</head>
+<body>
+    <h1>Ciao Classe! &lt; &euro;10 &gt; </h1> <!-- codice per usare alcuni simboli -->
+    <p id="par1" class="grassetto">1 - Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem possimus eius deserunt iusto ipsam dicta vel quod temporibus voluptate, animi sapiente delectus omnis cumque itaque doloremque fugiat hic! Aspernatur, obcaecati.</p>
+    <p class="sfondo">2- Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem possimus eius deserunt iusto ipsam dicta vel quod temporibus voluptate, animi sapiente delectus omnis cumque itaque doloremque fugiat hic! Aspernatur, obcaecati.</p>
+    <p>3- Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem possimus eius deserunt iusto ipsam dicta vel quod temporibus voluptate, animi sapiente delectus omnis cumque itaque doloremque fugiat hic! Aspernatur, obcaecati.</p>
+    <p class="grassetto sfondo">4- Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem possimus eius deserunt iusto ipsam dicta vel quod temporibus voluptate, animi sapiente delectus omnis cumque itaque doloremque fugiat hic! Aspernatur, obcaecati.</p>  <!-- classe: grassetto sfondo == sfondo 'grassetto-->
+    <p>5- Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto exercitationem, placeat nulla dolorum dolor nemo officiis voluptatem necessitatibus impedit aliquam excepturi commodi? Ut, laboriosam vero? Omnis soluta illum asperiores? Deserunt?
+    Earum asperiores velit expedita quod impedit, maxime est libero, ipsa laboriosam omnis autem animi quas tempora esse facilis nemo laborum fugit eveniet reprehenderit pariatur quisquam ratione recusandae! Quasi, sapiente voluptate.
+    Pariatur eveniet voluptatibus tempora asperiores maiores necessitatibus nisi odio facilis cum eius? Veniam facere dolorem illum possimus, molestias corrupti temporibus debitis itaque libero sapiente tenetur, ad iste dignissimos placeat eveniet.
+    Nobis ipsum officiis esse aperiam explicabo debitis? Ad quis dolores quod, voluptates velit iure officia libero, ducimus corrupti inventore nostrum a eaque accusamus voluptatum assumenda modi, porro placeat blanditiis aliquid?
+    Perferendis, quo non exercitationem quod tempora molestias sit porro ab eveniet quam facilis nulla, sunt ea. Asperiores eligendi necessitatibus voluptatem expedita eaque unde iusto earum numquam, doloribus alias sed ea.
+    At in quam magni nobis, beatae et iure, accusamus facere deserunt, minima repellendus laudantium reiciendis repudiandae commodi incidunt aut dolores enim neque vero illum aspernatur odit. Libero illo voluptates aut?
+    Eius odit corrupti quibusdam perspiciatis non? Consequatur non mollitia, explicabo quam doloribus molestias esse impedit labore recusandae nihil deleniti ducimus qui. Maxime repudiandae dolores commodi voluptatem dolorem reiciendis aut ut?
+    Quam consequatur earum laboriosam aliquid praesentium omnis rerum repellat sed ipsam, assumenda totam itaque quia sunt, sapiente laborum dolores officia deserunt reprehenderit? Magnam ea nesciunt voluptates molestiae ducimus alias voluptate!</p>
+        <script>
+            // document.getElementById('par1').innerHTML = "Hello World!"; // abbiamo cambiato il primo parafro
+            var x = document.getElementsByClassName('grassetto');
+            for(var i = 0; i < x.length; i++){x[i].innerHTML = 'Elemento ' + i;
+            }
+        </script>
+</body>
+</html>
