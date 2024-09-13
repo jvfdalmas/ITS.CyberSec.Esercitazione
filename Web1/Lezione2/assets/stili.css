@@ -1,5 +1,1 @@
-.sfondo{
-    background-color: aquamarine; color: rgb(60, 50, 205);
-}
-.grassetto{font-weight: bold;}
-.sfondo.grassetto{font-size: 25px;}
+.sfondo{background-color: aquamarine; color: rgb(60, 50, 205); font-weight: bold;}
