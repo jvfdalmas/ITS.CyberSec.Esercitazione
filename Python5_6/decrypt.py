@@ -41,6 +41,5 @@ for p1 in ascii:
                     continue
                 else:
                     str = decrypt(encrypted_text, key)
-                    res.append(str)
-                    print(str)
-print(res)
+                    if str == "Alfa Beta Gamma":
+                        print(key)

@@ -53,3 +53,6 @@ def compute_taxpayers_id(nome, cognome, data_di_nascita, genere, comune_di_nasci
     codice_fiscale: str = codice_fiscale_senza_control + calcola_carattere_controllo(codice_fiscale_senza_control)
 
     return codice_fiscale
+
+cf = compute_taxpayers_id("Mario", "Rossi", "10/10/2010", "FEMALE", "Roma")
+print(cf)
