@@ -67,8 +67,7 @@ for item in instance1, instance2:
 
 print("\n")
 
-# api_url = "https://jsonplaceholder.typicode.com/todos/5"
-api_url = "https://corriere.it"
+api_url = "https://jsonplaceholder.typicode.com/todos/5"
 response = requests.get(api_url)
 print(response.json())
 print(response.status_code)
