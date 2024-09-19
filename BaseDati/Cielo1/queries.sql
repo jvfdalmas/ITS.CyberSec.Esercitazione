@@ -118,7 +118,28 @@ select codice, comp, partenza, arrivo from arrpart where partenza in (select aer
 
 10. Quali sono i possibili piani di volo con esattamente un cambio (utilizzando solo voli della stessa compagnia) da un qualunque aeroporto della città di ‘Roma’ ad un qualunque aeroporto della città di ‘New York’ ? Restituire: nome della compagnia, codici dei voli, e aeroporti di partenza, scalo e arrivo.
 
- 
+SELECT 
+    arrpart1.comp AS compagnia, 
+    arrpart1.codice AS codice_volo_1, 
+    arrpart1.partenza AS aeroporto_partenza, 
+    arrpart1.arrivo AS scalo, 
+    arrpart2.codice AS codice_volo_2, 
+    arrpart2.arrivo AS aeroporto_arrivo
+FROM 
+    arrpart AS arrpart1
+JOIN 
+    arrpart AS arrpart2 ON arrpart1.arrivo = arrpart2.partenza AND arrpart1.comp = arrpart2.comp
+WHERE 
+    arrpart1.partenza IN (select aeroporto from luogoaeroporto where citta = 'Roma')
+    AND arrpart2.arrivo IN (select aeroporto from luogoaeroporto where citta = 'New York')
+    AND arrpart1.arrivo NOT IN (select aeroporto from luogoaeroporto where citta = 'New York');
+    
+  compagnia | codice_volo_1 | aeroporto_partenza | scalo | codice_volo_2 | aeroporto_arrivo 
+-----------+---------------+--------------------+-------+---------------+------------------
+ Caimanair |           263 | CIA                | FCO   |           265 | JFK
+ Apitalia  |          1265 | FCO                | CIA   |           534 | JFK
+(2 rows)
+
 
 ############################################################
 
