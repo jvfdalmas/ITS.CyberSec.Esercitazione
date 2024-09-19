@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        button{
+            border-radius: 50px;
+            min-width: 150px;
+            border: 10px solid rgba(rgb(39, 1, 1), rgb(170, 184, 170), rgb(224, 204, 19));
+            background-color: rgb(51, 177, 25);
+        }   
+    </style>
+    <title>Forms</title>
+    <script>
+        function invioform(){alert("FORM INVIATO!")}
+    </script>
+</head>
+<body>
+    <h1>Form</h1>
+    <hr><br>
+    <form onsubmit=invioform() style="width: 100%;">
+
+        <fieldset style="width:70%">
+            <label for="txtUsername">Inserire username</label>
+            <input style="width: 100%;" type="text" id="txtUsername" name="username" value="username">
+            
+            <label for="psswd">Password: </label>
+            <input style="width: 100%;" type="password" name="password" id="psswd">
+
+            <label for="email">E-mail: </label>
+            <input style="width: 100%;" type="email" name="email" id="email">
+
+            <label for="tel">Telefono: </label>
+            <input style="width: 100%;" type="tel" id="tel" name="telefono" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+        </fieldset>
+        
+        <div style="display: flex; flex-direction:column">
+        <p>Scegliere un linguagio:</p>
+        <label for="js">JavaScript</label>
+            <input id="js" type="radio" name="linguagio" value="JavaScript">
+        <label for="css">CSS</label>
+            <input id="css" type="radio" name="linguagio" value="CSS">
+        <label for="html">HTML</label>
+            <input id="html" type="radio" name="linguagio" value="HTML">
+        <!-- "ID" si riferisce  al label "FOR". "NAME" è quello che arriva al backend come "KEY", e "VALUE" arriva come valore-->
+        </div>
+
+        <br><br>
+        <div style="color: rgb(42, 65, 165); display: flex; flex-direction: column; width: 40%; padding: 0%;">
+        <label for="dnascita">Data di Nascita: </label>
+           <input type="date" name="dnascita" id="dnascita"><br>
+        <p>Prenotazione:</p><input type="datetime-local">
+        </div>
+
+        <br><br>
+
+       <label for="chckbx">Accetta le condizioni di utilizo</label>
+           <input type="checkbox" name="check condizioni" id="chckbx">
+        <!-- label permette di clickare sull testo per accetare le condizioni -->
+           
+        <br><br>
+
+        <label for="documento">Inserire documento: </label><br>
+            <input type="file" name="documento" id="documento">
+
+        <br><br>
+
+        <label for="qta"> Quantit&aacute;: </label>
+            <input style="width: 25%" type="number" name="quantity" id="qta" min="1" max="9" placeholder="Inserire quantit&aacute">
+        <!-- "READONLY" non permite di cambiare. "DISABLED" lo lascia indisponbilie ma visibile -->
+
+        <br><br>
+
+        <select style="width: 25%;" name="modello" id="">
+            <option value="">Seleziona Valore</option>
+            <option value="BWM">BMW</option>
+            <option value="Volkswagen">Volkswagen</option>
+        </select>
+
+        <br><br>
+
+        <label for="commento">Commento: </label><br>
+        <textarea name="comment" id="commento" cols="45" rows="5"></textarea>
+
+        <br><br>
+
+        <input type="hidden">
+        <!-- A cosa serve "HIDDEN"? Posso mettere un'identificativo che non interessa all'utente, per esempio -->
+
+        <button input type="submit" value="Invia">Invia!</button>
+        <!-- "submit deve essere interno il Form" -->
+        <button type="reset">Reset!</button><br>
+        <button type="button" onclick="alert('Hello World!')" value="Cliccami!">Cliccami!</button>
+        <!-- onclick == JavaScript -->
+
+    </form>
+    <!-- programmatori di solito fanno un JavaScript per validare il form -->
+</body>
+</html>
