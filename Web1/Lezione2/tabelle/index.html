@@ -17,9 +17,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Document</title>
+    <title>Esercizi con le tabelle</title>
+    <style>
+        table {width: 100%;}
+        th, td {border: 2px solid black;}
+    </style>
 </head>
 <body>
+    <h1>Esercizi con le tabelle</h1>
+    <p>Creare una pagina web per svolgere i seguenti esercizi:</p>
+    <br>
     <hr>
+    <br>
+    <h2>1: Crea una tabella con 2 righe e 2 colonne. Inserisci del testo nelle celle.</h2>
+    <table>
+        <tr>
+            <td>Cell 1,1</td>
+            <td>Cell 1,2</td>
+        </tr>
+        <tr>
+            <td>Cell 2,1</td>
+            <td>Cell 2,2</td>
+        </tr>
+    </table>
+    <br>
+    <hr>
+    <br>
+    <h2>2: Aggiungi un'intestazione di tabella con 3 colonne e inserisci del testo nelle celle dell'intestazione.</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Header 1</th>
+                <th>Header 2</th>
+                <th>Header 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Row 1, Cell 1</td>
+                <td>Row 1, Cell 2</td>
+                <td>Row 1, Cell 3</td>
+            </tr>
+            <tr>
+                <td>Row 2, Cell 1</td>
+                <td>Row 2, Cell 2</td>
+                <td>Row 2, Cell 3</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <hr>
+    <br>
+    <h2>3: Unisci due celle in una riga e inserisci del testo nella cella risultante.</h2>
+    <table>
+        <tr>
+            <td colspan="2">Merged Cell</td>
+        </tr>
+        <tr>
+            <td>Cell 2,1</td>
+            <td>Cell 2,2</td>
+        </tr>
+    </table>
+    <br>
+    <hr>
+    <br>
+    <h2>4: Aggiungi una cornice alla tabella utilizzando l'attributo border.</h2>
+    <table border="10">
+        <tr>
+            <td>Cell 1,1</td>
+            <td>Cell 1,2</td>
+        </tr>
+        <tr>
+            <td>Cell 2,1</td>
+            <td>Cell 2,2</td>
+        </tr>
+    </table>
+    <br>
+    <hr>
+    <br>
+    <h2>5: Aggiungi spaziatura alle celle della tabella utilizzando l'attributo cellpadding.</h2>
+    <table cellpadding="50">
+        <tr>
+            <td>Cell 1,1</td>
+            <td>Cell 1,2</td>
+        </tr>
+        <tr>
+            <td>Cell 2,1</td>
+            <td>Cell 2,2</td>
+        </tr>
+    </table>
+    <br>
+    <hr>
+    <br>
+    <h2>6: Aggiungi spaziatura tra le celle della tabella utilizzando l'attributo cellspacing.</h2>
+    <table cellspacing="50">
+        <tr>
+            <td>Cell 1,1</td>
+            <td>Cell 1,2</td>
+        </tr>
+        <tr>
+            <td>Cell 2,1</td>
+            <td>Cell 2,2</td>
+        </tr>
+    </table>
+    <br>
+    <hr>
+    <br>
+    <h2>7: Aggiungi una riga di separazione tra le righe della tabella utilizzando l'elemento hr.</h2>
+    <table>
+        <tr>
+            <td>Cell 1,1</td>
+            <td>Cell 1,2</td>
+        </tr>
+        <tr>
+            <td>Cell 2,1</td>
+            <td>Cell 2,2</td>
+        </tr>
+    </table>
+    <hr>
+    <hr>
+    <table>
+        <tr>
+            <td>Cell 3,1</td>
+            <td>Cell 3,2</td>
+        </tr>
+        <tr>
+            <td>Cell 4,1</td>
+            <td>Cell 4,2</td>
+        </tr>
+    </table>
 </body>
 </html>
