@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Feedback Form</title>
+    <style>
+        body {
+            max-width: 600px;
+            margin: 20px center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        select {
+            margin-top: 5px;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button[type="reset"] {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Modulo di Feedback</h1>
+    <form action="submit-feedback" method="post">
+
+        <label for="nome">Nome e Cognome:</label>
+        <input type="text" id="nome" name="nome" placeholder="Inserisci il tuo nome e cognome" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Inserisci il tuo indirizzo email" required>
+
+        <label for="subject">Oggetto:</label>
+        <input type="text" id="subject" name="subject" placeholder="Inserisci l'oggetto del messaggio" required>
+
+        <label for="linguaggio">Linguaggio di programmazione preferito:</label>
+        <select id="linguaggio" name="linguaggio" required>
+            <option value="">Seleziona un linguaggio</option>
+            <option value="Java">Java</option>
+            <option value="Javascript">Javascript</option>
+            <option value="C#">C#</option>
+            <option value="Python">Python</option>
+            <option value="Go">Go</option>
+        </select>
+
+        <label>Sesso:</label>
+        <label><input type="radio" name="sesso" value="maschio" required> Maschio</label>
+        <label><input type="radio" name="sesso" value="femmina" required> Femmina</label>
+
+        <label for="eta">Età:</label>
+        <input type="number" id="eta" name="eta" min="1" max="110" placeholder="Inserisci la tua età" required>
+
+        <label for="descrizione">Descrizione:</label>
+        <textarea id="descrizione" name="descrizione" rows="4" placeholder="Inserisci una descrizione" required></textarea>
+
+        <div>
+            <input type="checkbox" id="privacy" name="privacy" required>
+            <label for="privacy">Accetto la <a href="privacy_policy.html" target="_blank">Privacy Policy</a></label>
+        </div>
+
+        <button type="submit">Invia</button>
+        <button type="reset">Reset</button>
+    </form>
+
+</body>
+</html>
