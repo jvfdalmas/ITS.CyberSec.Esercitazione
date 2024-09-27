@@ -4,9 +4,24 @@
 
 -- 1. Quanti sono gli strutturati di ogni fascia?
 
+SELECT posizione, count(stipendio) as numero
+FROM persona
+GROUP BY posizione;
+
+      posizione       | numero 
+----------------------+--------
+ Professore Associato |      8
+ Ricercatore          |      7
+ Professore Ordinario |      6
+(3 rows)
+
 ############################################################
 
 -- 2. Quanti sono gli strutturati con stipendio ≥ 40000?
+
+SELECT count(*) as numero
+FROM persona
+WHERE stipendio >= 40000;
 
 ############################################################
 
