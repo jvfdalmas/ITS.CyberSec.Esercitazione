@@ -3,36 +3,37 @@ import base64
 
 app = Flask("__name__")
 
-# Sample data
 cittadini = [
-    ["Mario", "Rossi", "RSSMRA10R40H501N", "06/10/2010"],
-    ["Giorgia", "Rossella", "GRRSS67R40H502S", "12/07/1967"],
-    ["Alessia", "Lacerda", "ASSLCD40R40H502A", "09/01/1940"]
+    {"nome": "Mario", "cognome": "Rossi", "cfiscale": "RSSMRA10R40H501N", "dnascita": "06/10/2010"},
+    {"nome": "Giorgia", "cognome": "Rossella", "cfiscale": "GRRSS67R40H502S", "dnascita": "12/07/1967"},
+    {"nome": "Alessia", "cognome": "Lacerda", "cfiscale": "ASSLCD40R40H502A", "dnascita": "09/01/1940"}
 ]
 
-# Username: password dictionary
 utenti = {"mario": "1234", "roberto": "5678"}
 
-# Helper function to check if authentication is valid
-@app.route('/authorization', methods=['POST'])
-def check_auth():
+# funzione per verificare autenticazione
+def is_authenticated():
     auth = request.headers.get('Authorization')
     if not auth:
+        print("Authorization header missing")
         return False
-    auth = auth[6:]  # Remove "Basic " prefix
+    auth = auth[6:]
     security_data = base64.b64decode(auth).decode("utf-8")
     username, password = security_data.split(":")
-    # Check credentials
+    print(f"Username: {username}, Password: {password}")
     if username in utenti and utenti[username] == password:
+        print("Authentication successful")
         return True
+    print("Authentication failed")
     return False
 
-# Route to add a citizen
+
+# Route per aggiungere cittadino -- commando 1
 @app.route('/add_cittadini', methods=['POST'])
 def process_json():
     print("Received request to add citizen")
     
-    if not check_auth():
+    if not is_authenticated():
         return jsonify({"Esito": "error", "Msg": "Unauthorized"}), 401
     
     content_type = request.headers.get('Content-Type')
@@ -44,31 +45,87 @@ def process_json():
     else:
         return 'Content-Type not supported!', 400
 
-# Route to fetch all citizens
+# Route per stampare lista di cittadini -- commando 2
 @app.route('/cittadini', methods=["GET"])
 def get_cittadini():
     print("Received request to get citizens")
-    
-    if not check_auth():
+
+    if not is_authenticated():
         return jsonify({"Esito": "error", "Msg": "Unauthorized"}), 401
     
     return jsonify(cittadini), 200
 
-# Route to delete a citizen (this needs proper logic to delete citizens)
-@app.route('/del_cittadini', methods=['POST'])
-def delete_cittadini():
-    print("Received request to delete citizen")
-    
-    if not check_auth():
+
+# Route per modificare cittadino -- commando 3
+@app.route('/mod_cittadini', methods=['POST'])
+def mod_cittadini():
+    print("Received request to modify citizen")
+
+    if not is_authenticated():
         return jsonify({"Esito": "error", "Msg": "Unauthorized"}), 401
     
     content_type = request.headers.get('Content-Type')
     if content_type == 'application/json':
         json1 = request.json
         print(json1)
-        # Add logic here to find and remove the citizen based on provided data (e.g., CF)
-        return jsonify({"Esito": "ok", "Msg": "Dato eliminato"}), 200
+        cf_id = json1.get("cfiscale_id")
+        tipo_dato = json1.get("tipo_dato")
+        nuovo_dato = json1.get("nuovo_dato")
+
+        global cittadini
+        cittadino_trovato = False
+
+        for cittadino in cittadini:
+            if cittadino["cfiscale"] == cf_id:
+                cittadino[tipo_dato] = nuovo_dato
+                cittadino_trovato = True
+                break
+        
+        if cittadino_trovato:
+            return jsonify({"Esito": "ok", "Msg": "Dato modificato"}), 200
+        else:
+            return jsonify({"Esito": "ok", "Msg": "Cittadino non trovato o campo inesistente"}), 404
+        
     return 'Content-Type not supported!', 400
 
+
+# Route per cancellare cittadino -- commando 4
+@app.route('/del_cittadini', methods=['POST'])
+def delete_cittadini():
+    print("Received request to delete citizen")
+    
+    if not is_authenticated():
+        return jsonify({"Esito": "error", "Msg": "Unauthorized"}), 401
+    
+    content_type = request.headers.get('Content-Type')
+    if content_type == 'application/json':
+        json1 = request.json
+        print(json1)
+        cf_to_delete = json1.get("cfiscale")
+        
+        global cittadini
+        cittadino_trovato = False
+        for cittadino in cittadini:
+            if cittadino["cfiscale"] == cf_to_delete:
+                cittadini.remove(cittadino)
+                cittadino_trovato = True
+                break
+        
+        if cittadino_trovato:
+            return jsonify({"Esito": "ok", "Msg": "Cittadino eliminato"}), 200
+        else:
+            return jsonify({"Esito": "ok", "Msg": "Cittadino non trovato"}), 404
+    return 'Content-Type not supported!', 400
+
+
+# Route per autenticazione -- commando 5
+@app.route('/authorization', methods=['GET'])
+def check_auth():
+    if not is_authenticated():
+        return jsonify({"Esito": "error", "Msg": "Unauthorized"}), 401
+    return jsonify({"Esito": "ok", "Msg": "Authorized"}), 200
+
+
+# Server
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8080, ssl_context="adhoc")
