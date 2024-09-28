@@ -41,7 +41,9 @@ while flag:
         }
         response = requests.post(app_url + "add_cittadini", json=data, verify=False, auth=HTTPBasicAuth(username, password))
         if response.status_code == 401:
-            print("Authentication failed!")
+            print("Autenticazione fallita!")
+        elif response.status_code == 403:
+            print("Utente non autorizato a inserire dato!")
         else:
             print(response.status_code, response.json())
 
@@ -49,7 +51,7 @@ while flag:
     elif istruzione == "2":
         response = requests.get(app_url + "cittadini", verify=False, auth=HTTPBasicAuth(username, password))
         if response.status_code == 401:
-            print("Authentication failed!")
+            print("Autenticazione fallita!")
         else:
             print(response.status_code)
             for item in response.json():
@@ -66,7 +68,9 @@ while flag:
         data = {"cfiscale_id": cfiscale_id, "tipo_dato": tipo_dato, "nuovo_dato": nuovo_dato}
         response = requests.post(app_url + "mod_cittadini", json=data, verify=False, auth=HTTPBasicAuth(username, password))
         if response.status_code == 401:
-            print("Authentication failed!")
+            print("Autenticazione fallita!")
+        elif response.status_code == 403:
+            print("Utente non autorizato a cambiare dati!")
         else:
             print(response.status_code, response.json())
 
@@ -77,7 +81,9 @@ while flag:
         data = {"cfiscale": instr_del}
         response = requests.post(app_url + "del_cittadini", json=data, verify=False, auth=HTTPBasicAuth(username, password))
         if response.status_code == 401:
-            print("Authentication failed!")
+            print("Autenticazione fallita!")
+        elif response.status_code == 403:
+            print("Utente non autorizato a eliminare datto!")
         else:
             print(response.status_code, response.json())
 
