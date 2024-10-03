@@ -156,11 +156,10 @@ having count(distinct c.nome) = 2;
 
 -- 10. Quali sono le città con almeno due aeroporti?
 
-select l.citta
-from luogoAeroporto l, aeroporto a
-where a.codice = l.aeroporto
-group by l.citta
-having count(a.codice) >= 2;
+SELECT citta
+FROM luogoAeroporto
+GROUP BY citta
+HAVING count(citta) >= 2;
 
  citta 
 -------
@@ -171,18 +170,16 @@ having count(a.codice) >= 2;
 
 -- 11. Qual è il nome delle compagnie i cui voli hanno una durata media maggiore di 6 ore?
 
-select c.nome
-from compagnia c, volo v
-where c.nome = v.comp
-group by c.nome
-having avg(v.durataMinuti) > 6*60;
+SELECT comp
+FROM volo
+GROUP BY comp
+HAVING avg(durataMinuti) > 360;
 
-   nome   
+   comp   
 ----------
- Apitalia
  MagicFly
+ Apitalia
 (2 rows)
-
 
 ############################################################
 
