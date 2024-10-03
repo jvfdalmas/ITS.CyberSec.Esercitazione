@@ -28,7 +28,7 @@ CREATE TABLE Sede(
     nazione varchar not null,
     foreign key (citta, regione, nazione) 
         references Cita(nome, regione, nazione)
-);
+); -- v.incl id occore in Sala
 
 CREATE TABLE Sala(
     nome varchar not null,
@@ -62,7 +62,7 @@ CREATE TABLE Artista(
     nome varchar not null,
     cognome varchar not null,
     nome_arte varchar
-);
+); -- v.incl id occore in Spettacolo
 
 CREATE TABLE TipologiaSpettacolo(
     nome varchar primary key not null,
@@ -82,7 +82,7 @@ CREATE TABLE Spettacolo(
         references TipologiaSpettacolo(nome),
     foreign key genere
         references Genere(nome)
-);
+); 
 
 CREATE TABLE partecipa(
     spettacolo integer not null,
@@ -92,15 +92,14 @@ CREATE TABLE partecipa(
         references Spettacolo(id),
     foreign key artista
         references Artista(id)
-); --come rappresentare che ogni spettacolo devere avere al meno un'artista?
+); 
 
 CREATE TABLE Evento(
     id serial primary key not null,
     data date not null,
     orario time not null,
     spettacolo integer not null,
-    sede varchar not null,    primary key
-
+    sede varchar not null, 
     sala varchar not null,
     foreign key spettacolo
         references Spettacolo(id),
@@ -123,7 +122,7 @@ CREATE TABLE Prenotazione(
         references Evento(id),
     foreign key utente
         references Utente(cf)
-);
+); -- v.incl id occore in pre_posto(prenotazione)
 
 CREATE TABLE TipoTariffa(
     nome varchar primary key not null,
@@ -140,16 +139,16 @@ CREATE TABLE Tariffa(
 );
 
 CREATE TABLE pre_posto(
-    id serial primary key not null,
     prenotazione integer not null,
     fila integer not null,
     colomna integer not null,
     settore integer not null,
     tipotariffa varchar not null,
+    primary key (prenotazione, fila, colomna, settore)
     foreign key prenotazione
         references Prenotazione(id),
     foreign key (fila, colomna, settore)
         references Posto(fila, colomna, settore),
     foreign key tipotariffa
         references TipoTariffa(nome)
-);
+); 
