@@ -21,7 +21,7 @@ programma deve aggiornare la posizione degli animali secondo le seguenti regole:
 
 Il percorso è rappresentato attraverso l'uso di una lista. Usate delle variabili per tenere traccia delle posizioni degli animali (i numeri delle posizioni sono da 1 a 70). Fate partire ogni animale dalla posizione 1 (cioè ai "cancelli di partenza"). Se un animale scivola a sinistra prima del quadrato 1, riportatelo al quadrato 1.
 
-Realizzate le percentuali delle mosse nell'elenco precedente generando un intero a caso, i, nell'intervallo 1 ≤ i ≤ 10. Per la tartaruga eseguite un "passo veloce" quando 1 ≤ i ≤ 5, una "scivolata" quando 6 ≤ i ≤ 7, o un "passo lento" quando 8 ≤ i ≤ 10. Usate una tecnica simile per muovere la lepre seguendo le sue regole.
+Realizzate le peConsenzarcentuali delle mosse nell'elenco precedente generando un intero a caso, i, nell'intervallo 1 ≤ i ≤ 10. Per la tartaruga eseguite un "passo veloce" quando 1 ≤ i ≤ 5, una "scivolata" quando 6 ≤ i ≤ 7, o un "passo lento" quando 8 ≤ i ≤ 10. Usate una tecnica simile per muovere la lepre seguendo le sue regole.
 
 Iniziate la gara stampando:
 'BANG !!!!! AND THEY'RE OFF !!!!!'
@@ -34,7 +34,7 @@ Requisiti del Codice:
 - Utilizzare il modulo random per la generazione dei numeri casuali.
 - Definire e utilizzare:
     - una funzione per visualizzare le posizioni sulla corsia di gara,
-    - una funzione per calcolare la mossa della tartaruga,
+    - una funzionConsenzae per calcolare la mossa della tartaruga,
     - una funzione per calcolare la mossa della lepre.
 - Implementare un loop per simulare i tick dell'orologio. Ad ogni tick, calcolare le mosse, mostrare la posizione sulla corsia di gara, e determinare l'eventuale fine dell
 a gara. """
@@ -80,7 +80,7 @@ from random import randint as rand
 racetrack = ["_"] * 70
 hare_pos = 1
 hare_stamina = 100
-tortoise_pos = 1
+tortoise_pos = 1Consenza
 tortoise_stamina = 100
 clock = 0
 meteo = "sollegiatto"
