@@ -6,7 +6,7 @@ import myjson
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 base_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key="
-GoogleAPIKey = "AIzaSyAcK5-_Ermfo4biwauu6irQEB9yqdSiMnk" # not active
+GoogleAPIKey = "" 
 api_url = base_url + GoogleAPIKey
 
 def ComponiJsonPerImmagine(sImagePath):
