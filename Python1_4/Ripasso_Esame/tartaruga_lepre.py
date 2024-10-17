@@ -80,7 +80,7 @@ from random import randint as rand
 racetrack = ["_"] * 70
 hare_pos = 1
 hare_stamina = 100
-tortoise_pos = 1Consenza
+tortoise_pos = 1
 tortoise_stamina = 100
 clock = 0
 meteo = "sollegiatto"
