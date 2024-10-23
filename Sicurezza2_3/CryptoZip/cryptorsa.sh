@@ -1,5 +1,10 @@
-if [ "$1" == "1" ]
-then
+# Se uno degli argomenti è vuoto (-z controlla se len(str) == 0), lo script mostra un messaggio di utilizzo.
+if [ -z "$3" ] || [ -z "$2" ] || [ -z "$1" ]; then
+    echo "Usage: cmnd file pub/privkey"
+    exit
+fi
+
+if [ "$1" == "1" ]; then
     echo "Commando crypta file lungo"
     # Genera una password casuale (32 byte) e la salva in 'password.dat'
     openssl rand -out password.dat 32
@@ -13,8 +18,7 @@ then
     rm $2.enc $2 password.dat.enc password.dat 
 fi
 
-if [ "$1" == "2" ]
-then
+if [ "$1" == "2" ]; then
     echo "Commando decrypta file lungo"
     # Estrai i file dall'archivio zip specificato ($2)
     unzip $2
