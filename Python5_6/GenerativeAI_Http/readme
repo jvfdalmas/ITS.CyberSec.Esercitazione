@@ -1,0 +1,1 @@
+Partendo dal programma che abbiamo fatto (client di Google Gemini) scrivere una form html attraverso la quale l'utente via browser interroga un server Flask che a sua volta gira la chiamata a Google Gemini, ottiene la risposta e la manda al client in formato html.
