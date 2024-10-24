@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo Scelte</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="file"],
+        textarea {
+            display: block;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            padding: 10px 15px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function showHideFileUpload() {
+            const taskType = document.querySelector('input[name="task"]:checked').value;
+            const fileUploadField = document.getElementById("fileUploadField");
+
+            // Mostra il campo immagine solo se viene selezionata l'opzione "domandaImg"
+            if (taskType === "domandaImg") {
+                fileUploadField.classList.remove("hidden");
+            } else {
+                fileUploadField.classList.add("hidden");
+            }
+        }
+
+        function exitForm() {
+            window.location.href = "about:blank"; // Simula un'uscita dal form
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Form Google Gemini</h1>
+
+        <form action="sendform" method="post" enctype="multipart/form-data">
+            <label>Seleziona un'opzione:</label>
+            <label>
+                <input type="radio" name="task" value="favola" onchange="showHideFileUpload()" required>
+                Creare una favola
+            </label>
+            <label>
+                <input type="radio" name="task" value="domanda" onchange="showHideFileUpload()">
+                Rispondere a una domanda
+            </label>
+            <label>
+                <input type="radio" name="task" value="domandaImg" onchange="showHideFileUpload()">
+                Rispondere a una domanda con un'immagine
+            </label>
+
+            <!-- Spazio per la domanda (sempre visibile) -->
+            <div id="questionField">
+                <label for="question">Inserisci la tua domanda:</label>
+                <textarea name="question" id="question" rows="4" placeholder="Scrivi qui la tua domanda"></textarea>
+            </div>
+
+            <!-- Campo per il caricamento di un file immagine (visibile solo se si seleziona l'opzione corrispondente) -->
+            <div id="fileUploadField" class="hidden">
+                <label for="imageFile">Carica un'immagine:</label>
+                <input type="file" name="imageFile" id="imageFile" accept="image/*">
+            </div>
+
+            <button type="submit">Invia</button>
+            <button type="button" onclick="exitForm()">Esci</button>
+        </form>
+    </div>
+</body>
+</html>
