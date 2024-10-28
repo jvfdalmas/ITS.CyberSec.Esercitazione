@@ -70,4 +70,4 @@ def sendform():
         else:
             return "<HTML><BODY> Ti sei dimenticato di inserire il file! </BODY></HTML>"
 
-api.run(host="0.0.0.0",port=8085)
+api.run(host="0.0.0.0",port=8085, ssl_context=("./certificates/01.pem", "./certificates/testkey.pem"))
