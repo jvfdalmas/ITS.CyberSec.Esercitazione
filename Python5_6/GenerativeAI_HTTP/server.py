@@ -6,7 +6,8 @@ import myjson
 
 api = Flask(__name__)
 
-base_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key="
+sModel = "gemini-1.5-flash-latest"
+base_url = "https://generativelanguage.googleapis.com/v1beta/models/" + sModel + ":generateContent?key="
 with open("GoogleAPIKey.txt","r") as file:
     GoogleAPIKey = file.read() 
 api_url = base_url + GoogleAPIKey
@@ -15,7 +16,6 @@ def ComponiJsonPerImmagine(sImagePath):
   subprocess.run(["rm", "./request.json"])
   subprocess.run(["bash", "./creajsonpersf.sh"])
   subprocess.run(["rm", "./filericevuti/image.jpg"])
-
 
 @api.route('/', methods=['GET'])
 def index():
@@ -29,7 +29,7 @@ def sendform():
         if request.form.get("question"):
             sArgomento = request.form.get("question")
             jsonDataRequest = {"contents": [{"parts": [{"text": "voglio una favola che parla di " + sArgomento}]}]}
-            response = requests.post(api_url,json=jsonDataRequest,verify=False)
+            response = requests.post(api_url,json=jsonDataRequest)
             if response.status_code==200:
                 dResponse = response.json()
                 dListaContenuti = dResponse["candidates"][0]["content"]["parts"][0]["text"]
@@ -41,7 +41,7 @@ def sendform():
         if request.form.get("question"):
             sArgomento = request.form.get("question")
             jsonDataRequest = {"contents": [{"parts": [{"text": sArgomento}]}]}
-            response = requests.post(api_url,json=jsonDataRequest,verify=False)
+            response = requests.post(api_url,json=jsonDataRequest)
             if response.status_code==200:
                 dResponse = response.json()
                 dListaContenuti = dResponse["candidates"][0]["content"]["parts"][0]["text"]
@@ -58,7 +58,7 @@ def sendform():
                 dJsonRequest = myjson.JsonDeserialize("request.json")
                 sArgomento = request.form.get("question")
                 dJsonRequest["contents"][0]["parts"][0]["text"] = sArgomento
-                response = requests.post(api_url,json=dJsonRequest,verify=False)
+                response = requests.post(api_url,json=dJsonRequest)
                 if response.status_code==200:
                     dResponse = response.json()
                     dListaContenuti = dResponse["candidates"][0]["content"]["parts"][0]["text"]
