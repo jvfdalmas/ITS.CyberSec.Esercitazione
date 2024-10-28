@@ -1,1 +1,0 @@
-V	251028103425Z		01	unknown	/CN=CyberSecurity CA/C=EU/ST=Italy/O=Root Cert Authority/emailAddress=cybersec@mycert.it

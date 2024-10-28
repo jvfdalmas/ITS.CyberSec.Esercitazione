@@ -23,9 +23,9 @@ policy					= exampleca_policy
 x509_extensions         = certificate_extensions
  
 [ exampleca_policy ]
-commonName				= supplied
-countryName				= supplied
-stateOrProvinceName		= supplied
+commonName				= localhost
+countryName				= IT
+stateOrProvinceName		= Rome
 organizationName		= match
 organizationalUnitName	= optional
 emailAddress			= optional
