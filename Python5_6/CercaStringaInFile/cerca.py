@@ -1,6 +1,9 @@
 import os
 import mmap
 import PyPDF2
+import textract
+import googlegemini
+import subprocess
 
 # IMISSIONE DEI PARAMETRI
 
@@ -8,6 +11,7 @@ sRoot = input("Inserisci la root directory: ")
 sStringaDaCercare = input("Inserisci la stringa da cercare: ")
 SOutDir = input("Inserici la directory di output: ")
 iNumFileTrovati = 0
+res = []
 
 # METODI
 
@@ -23,7 +27,6 @@ def CercaStringaInFileName(sFile, sStringToSearch):
 
 def CercaStringaInFileContent(sFile, sString):
     sString = sString.lower()
-    iLen = len(sString)
     try:
         with open(sFile) as f:
             s = mmap.mmap(f.fileno(), 0, access = mmap.ACCESS_READ)
@@ -48,6 +51,13 @@ def CercaInFilePdf(sFile,sString):
            return True
     return False
 
+def CercaInFileDoc(sFile,sString):
+    text = textract.process(sFile)
+    text = text.lower()
+    if(text.find(sString.encode())!=-1):
+        return True
+    return False
+
 #NAVIGA NEL FILE SYSTEM
 
 for root, dirs, files in os.walk(sRoot):
@@ -60,12 +70,36 @@ for root, dirs, files in os.walk(sRoot):
         if iRet == True:
             print("Trovato file: ", filename)
             iNumFileTrovati += 1
+            res.append(pathCompleto)
         else:
             pathCompleto = os.path.join(root,filename)
             iRet = CercaStringaInFileName(pathCompleto, sStringaDaCercare)
         
-        sOutFileName,sOutFileExt = os.path.splitext(filename)
-        if sOutFileExt.lower()==".pdf":
-            print(CercaInFilePdf(pathCompleto,sStringaDaCercare))
-        else:
-            print(CercaStringaInFileContent(pathCompleto,sStringaDaCercare))
+            sOutFileName,sOutFileExt = os.path.splitext(filename)
+
+            if sOutFileExt.lower()==".pdf":
+                iRet = CercaInFilePdf(pathCompleto,sStringaDaCercare)
+                if iRet == True:
+                    print("Trovato file: ", filename)
+                    iNumFileTrovati += 1
+                    res.append(pathCompleto)
+
+            elif sOutFileExt.lower()==".doc":
+                print(CercaInFileDoc(pathCompleto,sStringaDaCercare))
+                if iRet == True:
+                    print("Trovato file: ", filename)
+                    iNumFileTrovati += 1
+                    res.append(pathCompleto)
+
+            elif sOutFileExt.lower() in [".jpg", ".gif"]:
+                iRet = googlegemini.CercaIMGGemini(pathCompleto,sStringaDaCercare)
+                subprocess.run(["rm", "./temp_img/image.jpg"])
+                subprocess.run(["rm", "./request.json"])
+                if iRet == True:
+                    print("Trovato file: ", filename)
+                    iNumFileTrovati += 1
+                    res.append(pathCompleto)
+            else:
+                print(CercaStringaInFileContent(pathCompleto,sStringaDaCercare))
+
+print(iNumFileTrovati, res)
