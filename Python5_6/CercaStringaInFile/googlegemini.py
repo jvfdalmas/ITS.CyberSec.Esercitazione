@@ -18,12 +18,12 @@ def ComponiJsonPerImmagine(sImagePath):
 def CercaIMGGemini(sFile, sArgomento):
     ComponiJsonPerImmagine(sFile)
     dJsonRequest = myjson.JsonDeserialize("request.json")
-    dJsonRequest["contents"][0]["parts"][0]["text"] = f"Rispondere soltanto 'True.' o 'False.'. Quest'immagine centra qualcosa con {sArgomento}?"
+    dJsonRequest["contents"][0]["parts"][0]["text"] = f"Rispondere soltanto 'True' o 'False'. Niente altro. Quest'immagine centra qualcosa con {sArgomento}?"
     response = requests.post(api_url,json=dJsonRequest, verify=False)
     if response.status_code==200:
         dResponse = response.json()
         dListaContenuti = dResponse["candidates"][0]["content"]["parts"][0]["text"].strip(".")
-        if dListaContenuti == "True":
+        if dListaContenuti in ["True", "true" ,"True."]:
             return True
         else:
             return False
