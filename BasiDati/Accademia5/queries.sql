@@ -4,9 +4,9 @@
 
 -- 1. Quali sono il nome, la data di inizio e la data di fine dei WP del progetto di nome ‘Pegasus’ ?
 
-SELECT DISTINCT wp.nome, wp.inizio, wp.fine
-FROM wp, progetto p
-WHERE wp.progetto = p.id and p.nome = 'Pegasus'
+select wp.nome, wp.inizio, wp.fine
+from wp, progetto p
+where wp.progetto = p.id and p.nome = 'Pegasus';
 
  id | nome |   inizio   |    fine    
 ----+------+------------+------------
