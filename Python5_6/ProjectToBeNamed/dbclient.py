@@ -24,7 +24,7 @@ conn = None
 def connect():
     """ Connect to the PostgreSQL database server """
     print('Connecting to the PostgreSQL database 0...')
-    global conn
+    global connparams
     conn = None
     try:
         # read connection parameters
