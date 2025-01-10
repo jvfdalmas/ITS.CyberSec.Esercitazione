@@ -1,0 +1,16 @@
+{
+    "1": {
+        "catastale": "AB003",
+        "data_vendita": "2025-01-01",
+        "filiale_proponente": "Filiale 1",
+        "filiale_venditrice": "Filiale 2",
+        "prezzo_vendita": 150000.0
+    },
+    "2": {
+        "catastale": "CD006",
+        "data_vendita": "2025-02-15",
+        "filiale_proponente": "Filiale 3",
+        "filiale_venditrice": "Filiale 3",
+        "prezzo_vendita": 200000.0
+    }
+}

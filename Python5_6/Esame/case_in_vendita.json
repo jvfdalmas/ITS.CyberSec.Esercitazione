@@ -1,0 +1,35 @@
+{
+    "1": {
+        "catastale": "AB123",
+        "indirizzo": "Via Roma",
+        "numero_civico": "10",
+        "piano": 1,
+        "metri": 80,
+        "vani": 3,
+        "prezzo": 120000.0,
+        "stato": "LIBERO",
+        "filiale_proponente": "Filiale 1"
+    },
+    "2": {
+        "catastale": "CD456",
+        "indirizzo": "Via Milano",
+        "numero_civico": "22",
+        "piano": 2,
+        "metri": 100,
+        "vani": 4,
+        "prezzo": 150000.0,
+        "stato": "OCCUPATO",
+        "filiale_proponente": "Filiale 2"
+    },
+    "3": {
+        "catastale": "EF789",
+        "indirizzo": "Via Napoli",
+        "numero_civico": "5",
+        "piano": 3,
+        "metri": 120,
+        "vani": 5,
+        "prezzo": 200000.0,
+        "stato": "LIBERO",
+        "filiale_proponente": "Filiale 3"
+    }
+}

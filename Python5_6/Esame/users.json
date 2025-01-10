@@ -1,0 +1,18 @@
+{
+    "marketing_staff": {
+        "password": "marketing123",
+        "role": "marketing"
+    },
+    "agent_staff": {
+        "password": "agent123",
+        "role": "agent"
+    },
+    "john_doe": {
+        "password": "password1",
+        "role": "agent"
+    },
+    "jane_marketing": {
+        "password": "password2",
+        "role": "marketing"
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "1": {
+        "catastale": "EF789",
+        "data_affitto": "2025-01-10",
+        "filiale_proponente": "Filiale 2",
+        "filiale_venditrice": "Filiale 1",
+        "prezzo_affitto": 800.0,
+        "durata_contratto": 12
+    },
+    "2": {
+        "catastale": "GH012",
+        "data_affitto": "2025-03-01",
+        "filiale_proponente": "Filiale 4",
+        "filiale_venditrice": "Filiale 4",
+        "prezzo_affitto": 1000.0,
+        "durata_contratto": 24
+    }
+}

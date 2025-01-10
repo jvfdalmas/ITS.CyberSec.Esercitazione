@@ -1,0 +1,30 @@
+{
+    "1": {
+        "partita_iva": "IT12345678901",
+        "nome": "Filiale 1",
+        "indirizzo_sede": "Via Roma",
+        "civico": "10",
+        "telefono": "+390612345678"
+    },
+    "2": {
+        "partita_iva": "IT12345678902",
+        "nome": "Filiale 2",
+        "indirizzo_sede": "Via Milano",
+        "civico": "22",
+        "telefono": "+390612345679"
+    },
+    "3": {
+        "partita_iva": "IT12345678903",
+        "nome": "Filiale 3",
+        "indirizzo_sede": "Via Napoli",
+        "civico": "5",
+        "telefono": "+390612345680"
+    },
+    "4": {
+        "partita_iva": "IT12345678904",
+        "nome": "Filiale 4",
+        "indirizzo_sede": "Via Firenze",
+        "civico": "8",
+        "telefono": "+390612345681"
+    }
+}

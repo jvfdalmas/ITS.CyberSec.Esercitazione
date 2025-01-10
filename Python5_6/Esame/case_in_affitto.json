@@ -1,0 +1,29 @@
+{
+    "1": {
+        "catastale": "GH123",
+        "indirizzo": "Via Venezia",
+        "civico": "12",
+        "tipo_affitto": "TOTALE",
+        "bagno_personale": true,
+        "prezzo_mensile": 800.0,
+        "filiale_proponente": "Filiale 1"
+    },
+    "2": {
+        "catastale": "IJ456",
+        "indirizzo": "Via Firenze",
+        "civico": "8",
+        "tipo_affitto": "PARZIALE",
+        "bagno_personale": false,
+        "prezzo_mensile": 500.0,
+        "filiale_proponente": "Filiale 2"
+    },
+    "3": {
+        "catastale": "KL789",
+        "indirizzo": "Via Torino",
+        "civico": "20",
+        "tipo_affitto": "TOTALE",
+        "bagno_personale": true,
+        "prezzo_mensile": 1000.0,
+        "filiale_proponente": "Filiale 3"
+    }
+}
