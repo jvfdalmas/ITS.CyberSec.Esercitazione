@@ -2,8 +2,11 @@ __pycache__/
 .venv/
 filericevuti/
 res/
+MySqlData/
 *.pdf
 *.dat
 *.pem
 *.txt
 a.out
+AppPostgres/
+NASA_access_log_Aug95

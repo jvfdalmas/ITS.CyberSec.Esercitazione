@@ -1,0 +1,56 @@
+CAT{Client->Server
+Net.Sesid: 10492070730031881192
+obs.obsid: InternalObservation
+Time  : 1738921212
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /api?add1=10&add2=20&username=user02
+Query : add1=10&add2=20&username=user02
+
+}|
+
+CAT{Server->Client
+Net.Sesid: 10492070730031881192
+obs.obsid: InternalObservation
+Code: 
+Data: {"risposta":"2010"}
+
+}|
+
+CAT{Client->Server
+Net.Sesid: 8943666335525126423
+obs.obsid: InternalObservation
+Time  : 1738921247
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /api?add1=10&add2=20&username=user02
+Query : add1=10&add2=20&username=user02
+
+}|
+
+CAT{Server->Client
+Net.Sesid: 8943666335525126423
+obs.obsid: InternalObservation
+Code: 
+Data: {"risposta":"2010"}
+
+}|
+
+CAT{Client->Server
+Net.Sesid: 3614003887915874759
+Time Richiesta: 1738921260
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /api?add1=10&add2=20&username=user02
+Query : add1=10&add2=20&username=user02
+
+}|
+
+CAT{Server->Client
+Net.Sesid: 3614003887915874759
+obs.obsid: InternalObservation
+Code: 
+Data: {"risposta":"2010"}
+
+}|
+

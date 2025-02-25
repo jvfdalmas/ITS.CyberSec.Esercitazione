@@ -1,0 +1,252 @@
+CAT{
+Client->Server
+Net.Sesid: 6570172557649474852
+TimeRichiesta  : 1738926527
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /abilita?admin=dimitri&utente=arcieri
+Query : admin=dimitri&utente=arcieri
+
+
+Server->Client
+Net.Sesid: 6570172557649474852
+TimeRisposta  : 1738926527
+Code: 
+Data: OK
+
+}|
+
+CAT{
+Client->Server
+Net.Sesid: 9884819977556849791
+TimeRichiesta  : 1738927224
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /api?add1=10i&add2=20&username=arcieri
+Query : add1=10i&add2=20&username=arcieri
+
+
+Server->Client
+Net.Sesid: 9884819977556849791
+TimeRisposta  : 1738927224
+Code: 
+Data: 
+
+}|
+
+CAT{
+Client->Server
+Net.Sesid: 17482382383546727586
+TimeRichiesta  : 1738927237
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /abilita?admin=dimitri&utente=arcieri
+Query : admin=dimitri&utente=arcieri
+
+
+Server->Client
+Net.Sesid: 17482382383546727586
+TimeRisposta  : 1738927237
+Code: 
+Data: OK
+
+}|
+
+CAT{
+Client->Server
+Net.Sesid: 7147725934047578057
+TimeRichiesta  : 1738927246
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /api?add1=10i&add2=20&username=arcieri
+Query : add1=10i&add2=20&username=arcieri
+
+
+Server->Client
+Net.Sesid: 7147725934047578057
+TimeRisposta  : 1738927246
+Code: 
+Data: 
+
+}|
+
+CAT{
+Client->Server
+Net.Sesid: 13745416892689176228
+TimeRichiesta  : 1738927251
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /api?add1=10i&add2=20&username=arcieri
+Query : add1=10i&add2=20&username=arcieri
+
+
+Server->Client
+Net.Sesid: 13745416892689176228
+TimeRisposta  : 1738927251
+Code: 
+Data: 
+
+}|
+
+CAT{
+Client->Server
+Net.Sesid: 8496880631835924515
+TimeRichiesta  : 1738927254
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /api?add1=10i&add2=20&username=arcieri
+Query : add1=10i&add2=20&username=arcieri
+
+
+Server->Client
+Net.Sesid: 8496880631835924515
+TimeRisposta  : 1738927254
+Code: 
+Data: 
+
+}|
+
+CAT{
+Client->Server
+Net.Sesid: 16570287057796471926
+TimeRichiesta  : 1738927305
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /api?add1=10i&add2=20&username=arcieri
+Query : add1=10i&add2=20&username=arcieri
+
+
+Server->Client
+Net.Sesid: 16570287057796471926
+TimeRisposta  : 1738927305
+Code: 
+Data: 
+
+}|
+
+CAT{
+Client->Server
+Net.Sesid: 5931353912701815821
+TimeRichiesta  : 1738927316
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /abilita?admin=dimitri&utente=arcieri
+Query : admin=dimitri&utente=arcieri
+
+
+Server->Client
+Net.Sesid: 5931353912701815821
+TimeRisposta  : 1738927316
+Code: 
+Data: OK
+
+}|
+
+CAT{
+Client->Server
+Net.Sesid: 7527723488797266584
+TimeRichiesta  : 1738927327
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /api?add1=10i&add2=20&username=arcieri
+Query : add1=10i&add2=20&username=arcieri
+
+
+Server->Client
+Net.Sesid: 7527723488797266584
+TimeRisposta  : 1738927327
+Code: 
+Data: 
+
+}|
+
+CAT{
+Client->Server
+Net.Sesid: 13475824594616174155
+TimeRichiesta  : 1738927348
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /api?add1=10i&add2=20&username=arcieri
+Query : add1=10i&add2=20&username=arcieri
+
+
+Server->Client
+Net.Sesid: 13475824594616174155
+TimeRisposta  : 1738927348
+Code: 
+Data: 
+
+}|
+
+CAT{
+Client->Server
+Net.Sesid: 1381164944477307162
+TimeRichiesta  : 1738927361
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /api?add1=10i&add2=20&username=arcieri
+Query : add1=10i&add2=20&username=arcieri
+
+
+Server->Client
+Net.Sesid: 1381164944477307162
+TimeRisposta  : 1738927361
+Code: 
+Data: 
+
+}|
+
+CAT{
+Client->Server
+Net.Sesid: 8755751117360027873
+TimeRichiesta  : 1738927364
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /abilita?admin=dimitri&utente=arcieri
+Query : admin=dimitri&utente=arcieri
+
+
+Server->Client
+Net.Sesid: 8755751117360027873
+TimeRisposta  : 1738927364
+Code: 
+Data: OK
+
+}|
+
+CAT{
+Client->Server
+Net.Sesid: 1588595870155718620
+TimeRichiesta  : 1738927371
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /api?add1=10i&add2=20&username=arcieri
+Query : add1=10i&add2=20&username=arcieri
+
+
+Server->Client
+Net.Sesid: 1588595870155718620
+TimeRisposta  : 1738927371
+Code: 
+Data: 2010i
+
+}|
+
+CAT{
+Client->Server
+Net.Sesid: 11267670233641082619
+TimeRichiesta  : 1738927376
+Host  : 10.46.8.128:8888
+Method: GET
+Uri   : /api?add1=10i&add2=20&username=arcieri
+Query : add1=10i&add2=20&username=arcieri
+
+
+Server->Client
+Net.Sesid: 11267670233641082619
+TimeRisposta  : 1738927376
+Code: 
+Data: 2010i
+
+}|
+
