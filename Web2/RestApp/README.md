@@ -44,7 +44,7 @@ Il progetto è suddiviso in due parti principali: Backend (Flask) e Frontend (Re
 
 1. Clona il repository:
    ```
-   git clone https://github.com/jvfdalmas/ITS.CyberSec.Esercitazione/tree/main/Web2/RestApp
+   git clone https://github.com/jvfdalmas/EsameWeb2CyberSec2325.git
    cd RestApp
    ```
 
