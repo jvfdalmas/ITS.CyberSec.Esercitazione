@@ -45,7 +45,7 @@ Il progetto è suddiviso in due parti principali: Backend (Flask) e Frontend (Re
 1. Clona il repository:
    ```
    git clone https://github.com/jvfdalmas/EsameWeb2CyberSec2325.git
-   cd RestApp
+   cd EsameWeb2CyberSec2325/RestApp
    ```
 
 2. Crea un ambiente virtuale e attivalo:
