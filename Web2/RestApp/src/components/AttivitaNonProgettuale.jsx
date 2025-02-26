@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Table, Form, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
+import './CustomTable.css'; 
 
 const AttivitaNonProgettuale = () => {
   const [attivita, setAttivita] = useState([]);
@@ -10,6 +11,7 @@ const AttivitaNonProgettuale = () => {
   
   // Per memorizzare informazioni correlate sulle persone
   const [persone, setPersone] = useState({});
+  const [personeFull, setPersoneFull] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +28,7 @@ const AttivitaNonProgettuale = () => {
           personeMap[persona.id] = `${persona.nome} ${persona.cognome}`;
         });
         setPersone(personeMap);
+        setPersoneFull(personeResponse.data);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -36,7 +39,7 @@ const AttivitaNonProgettuale = () => {
 
   useEffect(() => {
     filtrarAttivita();
-  }, [tipoFiltro, valoreFiltro, attivita]);
+  }, [tipoFiltro, valoreFiltro, attivita, persone]);
 
   const filtrarAttivita = () => {
     if (tipoFiltro === 'all' || valoreFiltro === '') {
@@ -45,14 +48,20 @@ const AttivitaNonProgettuale = () => {
     }
 
     const filtered = attivita.filter(item => {
-      const value = item[tipoFiltro];
-      
-      if (typeof value === 'number') {
-        // Per campi numerici (id, persona, oreDurata)
-        return value.toString().includes(valoreFiltro);
+      if (tipoFiltro === 'persona') {
+        // Cerca nel nome della persona invece che nell'ID
+        const nomePersona = persone[item.persona] || "";
+        return nomePersona.toLowerCase().includes(valoreFiltro.toLowerCase());
       } else {
-        // Per campi di testo (tipo, giorno)
-        return value.toLowerCase().includes(valoreFiltro.toLowerCase());
+        const value = item[tipoFiltro];
+        
+        if (typeof value === 'number') {
+          // Per campi numerici (id, oreDurata)
+          return value.toString().includes(valoreFiltro);
+        } else {
+          // Per campi di testo (tipo, giorno)
+          return value.toLowerCase().includes(valoreFiltro.toLowerCase());
+        }
       }
     });
     
@@ -71,8 +80,24 @@ const AttivitaNonProgettuale = () => {
     return tipi;
   };
 
+  // Funzione per raggruppare le attività per persona
+  const getAttivitaPerPersona = () => {
+    const attivitaPersona = {};
+    attivita.forEach(item => {
+      const personaId = item.persona;
+      const personaNome = persone[personaId] || `Persona ID: ${personaId}`;
+      
+      if (!attivitaPersona[personaNome]) {
+        attivitaPersona[personaNome] = 0;
+      }
+      attivitaPersona[personaNome] += item.oreDurata;
+    });
+    return attivitaPersona;
+  };
+
   // Calcolo delle statistiche
   const tipiAttivita = getTipiAttivita();
+  const attivitaPerPersona = getAttivitaPerPersona();
 
   return (
     <Container className="mt-4">
@@ -88,7 +113,7 @@ const AttivitaNonProgettuale = () => {
             >
               <option value="all">Tutti i campi</option>
               <option value="id">ID</option>
-              <option value="persona">ID Persona</option>
+              <option value="persona">Persona</option>
               <option value="tipo">Tipo Attività</option>
               <option value="giorno">Data</option>
               <option value="oreDurata">Ore</option>
@@ -133,25 +158,55 @@ const AttivitaNonProgettuale = () => {
       </Table>
       
       <p>Totale attività visualizzate: {attivitaFiltrate.length} su {attivita.length}</p>
+      <p>Totale ore visualizzate: {attivitaFiltrate.reduce((sum, item) => sum + item.oreDurata, 0)}</p>
 
-      {/* Statistiche dei tipi di attività */}
-      <h3 className="mt-4">Riepilogo per Tipo di Attività</h3>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Tipo di Attività</th>
-            <th>Ore Totali</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.entries(tipiAttivita).map(([tipo, ore], index) => (
-            <tr key={index}>
-              <td>{tipo}</td>
-              <td>{ore}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <Row className="mt-4">
+        <Col md={6}>
+          {/* Statistiche dei tipi di attività */}
+          <h3>Riepilogo per Tipo di Attività</h3>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Tipo di Attività</th>
+                <th>Ore Totali</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(tipiAttivita)
+                .sort((a, b) => b[1] - a[1]) // Ordina per ore (decrescente)
+                .map(([tipo, ore], index) => (
+                  <tr key={index}>
+                    <td>{tipo}</td>
+                    <td>{ore}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </Table>
+        </Col>
+
+        <Col md={6}>
+          {/* Statistiche per persona */}
+          <h3>Riepilogo per Persona</h3>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Persona</th>
+                <th>Ore Totali</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(attivitaPerPersona)
+                .sort((a, b) => b[1] - a[1]) // Ordina per ore (decrescente)
+                .map(([persona, ore], index) => (
+                  <tr key={index}>
+                    <td>{persona}</td>
+                    <td>{ore}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
     </Container>
   );
 };

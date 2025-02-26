@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import HomeAlert from './HomeAlert';
 
 const Home = () => {
+  
   const [stats, setStats] = useState({
     persone: 0,
     progetti: 0,
@@ -51,7 +53,7 @@ const Home = () => {
 
   return (
     <Container fluid className="py-5 px-4" style={{ backgroundColor: '#f8f9fa' }}>
-      <Row className="justify-content-center mb-5">
+      <Row className="justify-content-center mb-2">
         <Col md={10} lg={8}>
           <div className="text-center mb-5">
             <h1 className="display-4 mb-3" style={{ color: '#2c3e50' }}>Accademia</h1>
@@ -59,11 +61,12 @@ const Home = () => {
               Benvenuti nella dashboard di Accademia.
               Esplora i nostri dati e scopri le statistiche del nostro sistema.
             </p>
-            <hr className="my-4" />
-            <p>Questo progetto è stato sviluppato per l'esame di Web 2.</p>
           </div>
         </Col>
       </Row>
+
+      {/* HomeAlert come toast indipendente */}
+      <HomeAlert />
 
       {error && (
         <Row className="justify-content-center mb-4">
@@ -84,8 +87,6 @@ const Home = () => {
       ) : (
         <Row className="justify-content-center">
           <Col md={12}>
-            <h2 className="text-center mb-4" style={{ color: '#2c3e50' }}>Panoramica del Sistema</h2>
-            
             <Row>
               <Col md={4} className="mb-4">
                 <Card className="h-100 shadow-sm" style={{ borderRadius: '15px', borderColor: '#e0e0e0' }}>
@@ -153,7 +154,19 @@ const Home = () => {
                         <span className="ms-2">Totali</span>
                       </div>
                       <Link to="/wps">
-                        <Button variant="outline-purple" className="rounded-pill px-4" style={{ borderColor: '#9b59b6', color: '#9b59b6' }}>
+                      <Button 
+                        variant="outline-info" 
+                        className="rounded-pill px-4" 
+                        style={{ borderColor: '#9b59b6', color: '#9b59b6' }}
+                        onMouseOver={(e) => {
+                          e.currentTarget.style.backgroundColor = '#9b59b6';
+                          e.currentTarget.style.color = 'white';
+                        }}
+                        onMouseOut={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                          e.currentTarget.style.color = '#9b59b6';
+                        }}
+                        >
                           Esplora WPs
                         </Button>
                       </Link>
@@ -243,7 +256,6 @@ const Home = () => {
         </Row>
       )}
       
-
     </Container>
   );
 };

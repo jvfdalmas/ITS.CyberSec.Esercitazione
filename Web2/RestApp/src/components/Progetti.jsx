@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Table, Form, Row, Col, Card } from 'react-bootstrap';
 import axios from 'axios';
+import './CustomTable.css'; 
 
 const Progetti = () => {
   const [progetti, setProgetti] = useState([]);

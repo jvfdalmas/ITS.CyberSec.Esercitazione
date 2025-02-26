@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Table, Form, Row, Col, Card } from 'react-bootstrap';
 import axios from 'axios';
+import './CustomTable.css'; 
 
 const Assenze = () => {
   const [assenze, setAssenze] = useState([]);
@@ -10,6 +11,8 @@ const Assenze = () => {
   
   // Per memorizzare informazioni correlate sulle persone
   const [persone, setPersone] = useState({});
+  // Aggiungiamo un array con tutte le persone
+  const [personeFull, setPersoneFull] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +29,7 @@ const Assenze = () => {
           personeMap[persona.id] = `${persona.nome} ${persona.cognome}`;
         });
         setPersone(personeMap);
+        setPersoneFull(personeResponse.data);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -36,7 +40,7 @@ const Assenze = () => {
 
   useEffect(() => {
     filtrarAssenze();
-  }, [tipoFiltro, valoreFiltro, assenze]);
+  }, [tipoFiltro, valoreFiltro, assenze, persone]);
 
   const filtrarAssenze = () => {
     if (tipoFiltro === 'all' || valoreFiltro === '') {
@@ -45,14 +49,20 @@ const Assenze = () => {
     }
 
     const filtered = assenze.filter(item => {
-      const value = item[tipoFiltro];
-      
-      if (typeof value === 'number') {
-        // Per campi numerici (id, persona)
-        return value.toString().includes(valoreFiltro);
+      if (tipoFiltro === 'persona') {
+        // Cerca nel nome della persona invece che nell'ID
+        const nomePersona = persone[item.persona] || "";
+        return nomePersona.toLowerCase().includes(valoreFiltro.toLowerCase());
       } else {
-        // Per campi di testo (tipo, giorno)
-        return value.toLowerCase().includes(valoreFiltro.toLowerCase());
+        const value = item[tipoFiltro];
+        
+        if (typeof value === 'number') {
+          // Per campi numerici (id)
+          return value.toString().includes(valoreFiltro);
+        } else {
+          // Per campi di testo (tipo, giorno)
+          return value.toLowerCase().includes(valoreFiltro.toLowerCase());
+        }
       }
     });
     
@@ -92,7 +102,7 @@ const Assenze = () => {
 
   return (
     <Container className="mt-4">
-      <h1>Registro Assenze</h1>
+      <h1>Tabella Assenze</h1>
       
       <Row className="mb-3">
         <Col md={4}>
@@ -104,7 +114,7 @@ const Assenze = () => {
             >
               <option value="all">Tutti i campi</option>
               <option value="id">ID</option>
-              <option value="persona">ID Persona</option>
+              <option value="persona">Persona</option>
               <option value="tipo">Tipo Assenza</option>
               <option value="giorno">Data</option>
             </Form.Select>

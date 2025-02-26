@@ -10,6 +10,7 @@ const WPs = () => {
   
   // Per memorizzare i nomi dei progetti da mostrare nella tabella
   const [progetti, setProgetti] = useState({});
+  const [progettiFull, setProgettiFull] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +28,7 @@ const WPs = () => {
           progettiMap[progetto.id] = progetto.nome;
         });
         setProgetti(progettiMap);
+        setProgettiFull(progettiResponse.data);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -37,7 +39,7 @@ const WPs = () => {
 
   useEffect(() => {
     filtrarWPs();
-  }, [tipoFiltro, valoreFiltro, wps]);
+  }, [tipoFiltro, valoreFiltro, wps, progetti]);
 
   const filtrarWPs = () => {
     if (tipoFiltro === 'all' || valoreFiltro === '') {
@@ -46,14 +48,19 @@ const WPs = () => {
     }
 
     const filtered = wps.filter(wp => {
-      const value = wp[tipoFiltro];
-      
-      if (typeof value === 'number') {
-        // Per campi numerici (id, progetto)
-        return value.toString().includes(valoreFiltro);
+      if (tipoFiltro === 'progetto') {
+        // Cerca nel nome del progetto invece che nell'ID
+        const nomeProgetto = progetti[wp.progetto] || "";
+        return nomeProgetto.toLowerCase().includes(valoreFiltro.toLowerCase());
       } else {
-        // Per campi di testo (nome, inizio, fine)
-        return value.toLowerCase().includes(valoreFiltro.toLowerCase());
+        const value = wp[tipoFiltro];
+        if (typeof value === 'number') {
+          // Per campi numerici (id)
+          return value.toString().includes(valoreFiltro);
+        } else {
+          // Per campi di testo (nome, inizio, fine)
+          return value.toLowerCase().includes(valoreFiltro.toLowerCase());
+        }
       }
     });
     
@@ -74,7 +81,7 @@ const WPs = () => {
             >
               <option value="all">Tutti i campi</option>
               <option value="id">ID</option>
-              <option value="progetto">ID Progetto</option>
+              <option value="progetto">Progetto</option>
               <option value="nome">Nome WP</option>
               <option value="inizio">Data Inizio</option>
               <option value="fine">Data Fine</option>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Table, Form, Row, Col, Card } from 'react-bootstrap';
 import axios from 'axios';
+import './CustomTable.css'; 
 
 const AttivitaProgetto = () => {
   const [attivita, setAttivita] = useState([]);
@@ -66,7 +67,7 @@ const AttivitaProgetto = () => {
 
   useEffect(() => {
     filtrarAttivita();
-  }, [tipoFiltro, valoreFiltro, attivita]);
+  }, [tipoFiltro, valoreFiltro, attivita, persone, progetti, wps]);
 
   const filtrarAttivita = () => {
     if (tipoFiltro === 'all' || valoreFiltro === '') {
@@ -75,14 +76,28 @@ const AttivitaProgetto = () => {
     }
 
     const filtered = attivita.filter(item => {
-      const value = item[tipoFiltro];
-      
-      if (typeof value === 'number') {
-        // Per campi numerici (id, persona, progetto, wp, oreDurata)
-        return value.toString().includes(valoreFiltro);
+      if (tipoFiltro === 'persona') {
+        // Cerca nel nome della persona invece che nell'ID
+        const nomePersona = persone[item.persona] || "";
+        return nomePersona.toLowerCase().includes(valoreFiltro.toLowerCase());
+      } else if (tipoFiltro === 'progetto') {
+        // Cerca nel nome del progetto invece che nell'ID
+        const nomeProgetto = progetti[item.progetto] || "";
+        return nomeProgetto.toLowerCase().includes(valoreFiltro.toLowerCase());
+      } else if (tipoFiltro === 'wp') {
+        // Cerca nel nome del work package invece che nell'ID
+        const nomeWP = wps[item.wp] || "";
+        return nomeWP.toLowerCase().includes(valoreFiltro.toLowerCase());
       } else {
-        // Per campi di testo (giorno, tipo)
-        return value.toLowerCase().includes(valoreFiltro.toLowerCase());
+        const value = item[tipoFiltro];
+        
+        if (typeof value === 'number') {
+          // Per campi numerici (id, oreDurata)
+          return value.toString().includes(valoreFiltro);
+        } else {
+          // Per campi di testo (giorno, tipo)
+          return value.toLowerCase().includes(valoreFiltro.toLowerCase());
+        }
       }
     });
     
@@ -199,9 +214,9 @@ const AttivitaProgetto = () => {
             >
               <option value="all">Tutti i campi</option>
               <option value="id">ID</option>
-              <option value="persona">ID Persona</option>
-              <option value="progetto">ID Progetto</option>
-              <option value="wp">ID Work Package</option>
+              <option value="persona">Persona</option>
+              <option value="progetto">Progetto</option>
+              <option value="wp">Work Package</option>
               <option value="giorno">Data</option>
               <option value="tipo">Tipo Attività</option>
               <option value="oreDurata">Ore</option>

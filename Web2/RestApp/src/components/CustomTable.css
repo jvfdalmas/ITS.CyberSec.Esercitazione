@@ -1,0 +1,14 @@
+  .table thead th {
+    background-color: #343a40;
+    color: white;
+    border-color: #454d55;
+  }
+  
+  .table {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
