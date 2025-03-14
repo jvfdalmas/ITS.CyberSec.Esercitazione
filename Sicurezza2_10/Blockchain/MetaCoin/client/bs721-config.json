@@ -1,0 +1,27 @@
+{
+    "network": "development",
+    "development": {
+        "network_name": "development",
+        "description": "new contract, with burn",
+        "infura": "http://127.0.0.1:7545/",
+        "contract_owner": "0x5c96b9D1d62Aa8bF3F8919cfcc21461d9368F069",
+        "contractAddress": "0x0453F4B9b2a4603b6a4C0B523612A563F4356eFD",
+        "contract_owner_pk": "05cdef72beb93325d2bf6e8a36a6fab263256d4540f28e06e66287438977535c"
+    },
+    "ropsten_extended": {
+        "network_name": "ropsten",
+        "description": "new contract, with burn",
+        "infura": "https://ropsten.infura.io/efddd08639904c929c6c074d7b5d09b7",
+        "contract_owner": "0x9938b093954c0F8Cb69B0a930318300f2d454ab2",
+        "contractAddress": "0xe578f082b8B3Cf0709CDDC4D70472607d005591F",
+        "contract_owner_pk": "f862cf5e663085bc2aa8b3be2158ada30c2d1d535d12561390223898c99e9908"
+    },
+    "ropsten_certified": {
+        "network_name": "ropsten",
+        "description": "contract ok, certified",
+        "infura": "https://ropsten.infura.io/efddd08639904c929c6c074d7b5d09b7",
+        "contract_owner": "0xf53d15Ca271bBe0a02528D6F930bBb5d12DeB53a",
+        "contractAddress": "0x198B9A24F23Bc41EF23835509F6533da241b3728",
+        "contract_owner_pk": "74a37f5614d8e093e9e66443acce626f50f32525c58d667987e6824a863f9373"
+    }
+}
