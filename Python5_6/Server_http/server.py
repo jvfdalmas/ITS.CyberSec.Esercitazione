@@ -22,5 +22,5 @@ def handle_data():
         return render_template('regiKO.html')
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8085)
+    app.run(host="192.168.0.200", port=8085)
 
